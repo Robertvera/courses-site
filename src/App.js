@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import HelloWorld from "./js/components/HelloWorld"
-
-
+import CoursesGrid from './js/components/CoursesGrid'
 
 class App extends Component {
   constructor() {
@@ -13,7 +12,8 @@ class App extends Component {
   render() {
     return (
       <div>
-          <HelloWorld/>
+          <HelloWorld />
+          <CoursesGrid />
       </div>
     );
   }
