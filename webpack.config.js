@@ -18,6 +18,14 @@ module.exports = {
         ]
       },
       {
+        test: /\.css$/,
+        use: [
+          {
+            loader: "css-loader"
+          }
+        ]
+      },
+      {
         test: /\.scss$/,
         use: [
           "style-loader",

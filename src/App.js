@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import HelloWorld from "./js/components/HelloWorld"
+import TopBar from "./js/components/TopBar/TopBar";
+import Home from "./js/components/Home/Home";
 
 
 
@@ -13,7 +14,8 @@ class App extends Component {
   render() {
     return (
       <div>
-          <HelloWorld/>
+      <TopBar/>
+      <Home/>
       </div>
     );
   }
