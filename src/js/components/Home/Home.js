@@ -11,7 +11,7 @@ class Home extends Component {
   render() {
     return (
         <div className="wrapper">    
-            <section className="module-cover parallax fullscreen text-center" id="home" data-background="assets/images/adult-application-asian-733856.jpg" data-overlay="0.5">
+            <section className="module-cover parallax fullscreen text-center" id="home" data-background="../../../../public/images/adult-application-asian-733856.jpg" data-overlay="0.5">
                 <div className="container">
                 <div className="row">
                     <div className="col-md-12">
@@ -32,7 +32,7 @@ class Home extends Component {
                 <div className="container">
                 <div className="row align-items-center">
                     <div className="col-lg-6">
-                    <img src="assets/images/notebook-vmb.png" alt />
+                    <img src="../../../../public/images/notebook-vmb.png" alt />
                     </div>
                     <div className="col-lg-5 offset-lg-1">
                     <h2>VMB FORMACIÓN</h2>
@@ -110,7 +110,7 @@ class Home extends Component {
                     <div className="col-lg-4 col-md-6">
                     <div className="team-item">
                         <div className="team-image">
-                        <img src="assets/images/team/1.jpg" alt />
+                        <img src="../../../../public/images/team/1.jpg" alt />
                         <div className="team-wrap">
                             <div className="team-content">
                             <h6 className="team-name">Albert Giménez</h6>
@@ -137,7 +137,7 @@ class Home extends Component {
                     <div className="col-lg-4 col-md-6">
                     <div className="team-item">
                         <div className="team-image">
-                        <img src="assets/images/team/2.jpg" alt />
+                        <img src="../../../../public/images/team/2.jpg" alt />
                         <div className="team-wrap">
                             <div className="team-content">
                             <h6 className="team-name">Facundo Caloggero</h6>
@@ -164,7 +164,7 @@ class Home extends Component {
                     <div className="col-lg-4 col-md-6">
                     <div className="team-item">
                         <div className="team-image">
-                        <img src="assets/images/team/3.jpg" alt />
+                        <img src="../../../../public/images/team/3.jpg" alt />
                         <div className="team-wrap">
                             <div className="team-content">
                             <h6 className="team-name">Patricia Murciego</h6>
@@ -191,7 +191,7 @@ class Home extends Component {
                     <div className="col-lg-4 col-md-6">
                     <div className="team-item">
                         <div className="team-image">
-                        <img src="assets/images/team/4.jpg" alt />
+                        <img src="../../../../public/images/team/4.jpg" alt />
                         <div className="team-wrap">
                             <div className="team-content">
                             <h6 className="team-name">Laia Sallés</h6>
@@ -218,7 +218,7 @@ class Home extends Component {
                     <div className="col-lg-4 col-md-6">
                     <div className="team-item">
                         <div className="team-image">
-                        <img src="assets/images/team/5.jpg" alt />
+                        <img src="../../../../public/images/team/5.jpg" alt />
                         <div className="team-wrap">
                             <div className="team-content">
                             <h6 className="team-name">María González</h6>
@@ -245,7 +245,7 @@ class Home extends Component {
                     <div className="col-lg-4 col-md-6">
                     <div className="team-item">
                         <div className="team-image">
-                        <img src="assets/images/team/6.jpg" alt />
+                        <img src="../../../../public/images/team/6.jpg" alt />
                         <div className="team-wrap">
                             <div className="team-content">
                             <h6 className="team-name">Armando Rodríguez</h6>
@@ -303,7 +303,7 @@ class Home extends Component {
                     <article className="post">
                         <div className="post-preview">
                         <a href="#">
-                            <img src="assets/images/blog/1.jpg" alt />
+                            <img src="../../../../public/images/blog/1.jpg" alt />
                         </a>
                         </div>
                         <div className="post-wrapper">
@@ -340,7 +340,7 @@ class Home extends Component {
                     <article className="post">
                         <div className="post-preview">
                         <a href="#">
-                            <img src="assets/images/blog/3.jpg" alt />
+                            <img src="../../../../public/images/blog/3.jpg" alt />
                         </a>
                         </div>
                         <div className="post-wrapper">
@@ -377,7 +377,7 @@ class Home extends Component {
                     <article className="post">
                         <div className="post-preview">
                         <a href="#">
-                            <img src="assets/images/blog/5.jpg" alt />
+                            <img src="../../../../public/images/blog/5.jpg" alt />
                         </a>
                         </div>
                         <div className="post-wrapper">
@@ -412,7 +412,7 @@ class Home extends Component {
                 </div>
             </section>
 
-            <section className="module parallax" data-background="assets/images/classroom.jpg" data-overlay="0.5">
+            <section className="module parallax" data-background="../../../../public/images/classroom.jpg" data-overlay="0.5">
                 <div className="container">
                 <div className="row">
                     <div className="col-md-12">
@@ -427,7 +427,7 @@ class Home extends Component {
                         </div>
                         <div className="review-card-author">
                         <div className="review-card-author-photo">
-                            <img src="assets/images/avatar/1.jpg" alt />
+                            <img src="../../../../public/images/avatar/1.jpg" alt />
                         </div>
                         <div className="review-card-author-info">
                             <h6 className="review-card-author-title">Emma Connor</h6>
@@ -443,7 +443,7 @@ class Home extends Component {
                         </div>
                         <div className="review-card-author">
                         <div className="review-card-author-photo">
-                            <img src="assets/images/avatar/1.jpg" alt />
+                            <img src="../../../../public/images/avatar/1.jpg" alt />
                         </div>
                         <div className="review-card-author-info">
                             <h6 className="review-card-author-title">Emma Connor</h6>
@@ -459,7 +459,7 @@ class Home extends Component {
                         </div>
                         <div className="review-card-author">
                         <div className="review-card-author-photo">
-                            <img src="assets/images/avatar/1.jpg" alt />
+                            <img src="../../../../public/images/avatar/1.jpg" alt />
                         </div>
                         <div className="review-card-author-info">
                             <h6 className="review-card-author-title">Emma Connor</h6>
@@ -497,22 +497,22 @@ class Home extends Component {
                     <div className="col-md-10 m-auto">
                     <div className="owl-carousel clients-carousel">
                         <div className="client">
-                        <img src="assets/images/partners/apato-ico2.png" alt />
+                        <img src="../../../../public/images/partners/apato-ico2.png" alt />
                         </div>
                         <div className="client">
-                        <img src="assets/images/partners/aptoca-ico2.png" alt />
+                        <img src="../../../../public/images/partners/aptoca-ico2.png" alt />
                         </div>
                         <div className="client">
-                        <img src="assets/images/partners/coptoa-ico2.png" alt />
+                        <img src="../../../../public/images/partners/coptoa-ico2.png" alt />
                         </div>
                         <div className="client">
-                        <img src="assets/images/partners/coptocyl-ico2.png" alt />
+                        <img src="../../../../public/images/partners/coptocyl-ico2.png" alt />
                         </div>
                         <div className="client">
-                        <img src="assets/images/partners/coptoex-ico2.png" alt />
+                        <img src="../../../../public/images/partners/coptoex-ico2.png" alt />
                         </div>
                         <div className="client">
-                        <img src="assets/images/partners/coptopa-ico2.png" alt />
+                        <img src="../../../../public/images/partners/coptopa-ico2.png" alt />
                         </div>
                     </div>
                     </div>
@@ -520,90 +520,7 @@ class Home extends Component {
                 </div>
             </section>
 
-            <footer className="footer">
-                <div className="footer-widgets">
-                <div className="container">
-                    <div className="row">
-                    <div className="col-md-3">
-
-                        <aside className="widget widget-text">
-                        <div className="widget-title">
-                            <h6>VMB FORMACIÓN</h6>
-                        </div>
-                        <div className="textwidget">
-                            <p>Formación para terapeutas ocupacionales, fisioterapeutas y logopedas
-                            </p>
-                            <p>
-                            Dirección: Barcelona ...
-                            <br /> E-mail: info@vmbformacion.com
-                            <br /> Teléfono: 6xx xx xx xx
-                            <br />
-                            </p>
-                            <ul className="social-icons">
-                            <li>
-                                <a href="#">
-                                <i className="fab fa-twitter" />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                <i className="fab fa-instagram" />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                <i className="fab fa-facebook-f" />
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                <i className="fab fa-linkedin" />
-                                </a>
-                            </li>
-                            </ul>
-                        </div>
-                        </aside>
-                    </div>
-                    <div className="col-md-3">
-
-                        <aside className="widget widget-recent-entries">
-                        <div className="widget-title">
-                            <h6>ÚLTIMOS CURSOS</h6>
-                        </div>
-                        <ul>
-                            <li>
-                            <a href="#">Curso 1</a>
-                            <span className="post-date">20 y 21 Mayo 2018, Barcelona</span>
-                            </li>
-                            <li>
-                            <a href="#">Curso 1</a>
-                            <span className="post-date">20 y 21 Mayo 2018, Barcelona</span>
-                            </li>
-                            <li>
-                            <a href="#">Curso 1</a>
-                            <span className="post-date">20 y 21 Mayo 2018, Barcelona</span>
-                            </li>
-                        </ul>
-                        </aside>
-                    </div>
-                    <div className="col-md-6">
-                        <img src="assets/images/logo-white-white.png" alt />
-                    </div>                        
-                    </div>
-                </div>
-                </div>
-                <div className="footer-bar">
-                <div className="container">
-                    <div className="row">
-                    <div className="col-md-12">
-                        <div className="copyright">
-                        <p>© 2018 VMB Formación, Todos los derechos reservados.</p>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </footer>
+            
     </div>
     );
   }

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
+import { Route, HashRouter } from 'react-router-dom';
 import ReactDOM from "react-dom";
 import TopBar from "./js/components/TopBar/TopBar";
 import Home from "./js/components/Home/Home";
-import HelloWorld from "./js/components/HelloWorld"
-import CoursesGrid from './js/components/CoursesGrid'
+import Footer from "./js/components/Footer/Footer"
 
 class App extends Component {
   constructor() {
@@ -13,12 +13,15 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-        <TopBar/>
-        <Home/>
-        <HelloWorld />
-        <CoursesGrid />
-      </div>
+        <HashRouter>
+          <div>
+            <TopBar/>
+            <Route exact path="/" render={() => (
+                  <Home />
+                )} />
+            <Footer/>
+            </div>
+        </HashRouter>
     );
   }
 }
