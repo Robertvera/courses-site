@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import TopBar from "./js/components/TopBar/TopBar";
 import Home from "./js/components/Home/Home";
 import Footer from "./js/components/Footer/Footer"
+import Contact from "./js/components/Contact/Contact"
 
 class App extends Component {
   constructor() {
@@ -18,6 +19,9 @@ class App extends Component {
             <TopBar/>
             <Route exact path="/" render={() => (
                   <Home />
+                )} />
+            <Route exact path="/contacto" render={() => (
+                  <Contact />
                 )} />
             <Footer/>
             </div>
