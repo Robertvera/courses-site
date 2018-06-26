@@ -6,6 +6,7 @@ import Home from "./js/components/Home/Home";
 import Footer from "./js/components/Footer/Footer"
 import Contact from "./js/components/Contact/Contact"
 import CoursesGridView from "./js/components/CoursesGridView/index"
+import CourseDetails from "./js/components/CourseView/index"
 
 class App extends Component {
   constructor() {
@@ -26,6 +27,9 @@ class App extends Component {
                 )} />
             <Route exact path="/cursos" render={() => (
               <CoursesGridView />
+            )} />
+            <Route exact path="/detalles-curso" render={() => (
+              <CourseDetails />
             )} />
             <Footer/>
             </div>

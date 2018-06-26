@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import './CourseView.scss'
+import CourseViewHeader from './CourseViewHeader/CourseViewHeader'
+import CourseViewMain from './CourseViewMain/CourseViewMain'
+import CourseViewTabs from './CourseViewTabs/CourseViewTabs'
 
 class CourseView extends Component {
   constructor() {
@@ -11,7 +13,9 @@ class CourseView extends Component {
   render() {
     return (
       <div className='container'>
-          Course View!!!!
+          <CourseViewHeader />
+          <CourseViewMain />
+          <CourseViewTabs />
       </div>
     );
   }

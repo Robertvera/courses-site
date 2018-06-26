@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+//import CourseDetails from './../../CourseView/index'
 import './CoursesGrid.scss'
+
 
 class CoursesGrid extends Component {
   constructor() {
@@ -16,11 +18,11 @@ class CoursesGrid extends Component {
               <div className="col-md-4">
                 <div className="shop-grid-item">
                   <div className="shop-item-thumb">
-                    <a href="#">
+                    <a href="#/detalles-curso">
                       <img src="https://vmbformacion.files.wordpress.com/2017/02/cartel-bcn1.png?w=505&h=388" alt />
                     </a>
                     <div className="shop-item-hidden">
-                      <a className="btn btn-new-white" href="#">Ver más información</a>
+                      <a className="btn btn-new-white" href="#/detalles-curso">Ver más información</a>
                     </div>
                   </div>
                   <div className="shop-item-captions">
