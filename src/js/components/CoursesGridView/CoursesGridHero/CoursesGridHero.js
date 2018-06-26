@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import './CoursesGridHero.scss'
+//import Header from './../../../../../public/images/cursos.jpg'
 
 class CoursesGridHero extends Component {
     constructor() {
@@ -10,7 +11,7 @@ class CoursesGridHero extends Component {
     }
     render() {
         return (
-            <section className="module-page-title parallax" data-background="vendor/boomerang/images/main/services-1.jpg" data-overlay="0.1">
+            <section className="module-page-title parallax courses-header" data-background="" data-overlay="0.1">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
