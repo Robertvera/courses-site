@@ -7,6 +7,7 @@ import Footer from "./js/components/Footer/Footer"
 import Contact from "./js/components/Contact/Contact"
 import CoursesGridView from "./js/components/CoursesGridView/index"
 import CourseDetails from "./js/components/CourseView/index"
+import Checkout from './js/components/Checkout/index'
 
 class App extends Component {
   constructor() {
@@ -30,6 +31,9 @@ class App extends Component {
             )} />
             <Route exact path="/detalles-curso" render={() => (
               <CourseDetails />
+            )} />
+            <Route exact path="/checkout" render={() => (
+            <Checkout />
             )} />
             <Footer/>
             </div>
