@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import './main.scss'
+import './CoursesGrid.scss'
 
 class CoursesGrid extends Component {
   constructor() {
