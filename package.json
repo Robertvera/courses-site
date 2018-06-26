@@ -30,10 +30,12 @@
     "node-sass": "^4.9.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
+    "react-router-dom": "^4.3.1",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "webpack": "^4.10.2",
     "webpack-cli": "^2.1.4",
     "webpack-dev-server": "^3.1.4"
-  }
+  },
+  "dependencies": {}
 }

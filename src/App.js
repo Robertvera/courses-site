@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import { Route, HashRouter } from 'react-router-dom';
 import ReactDOM from "react-dom";
-import HelloWorld from "./js/components/HelloWorld"
-import CoursesGrid from './js/components/CoursesGrid'
+import TopBar from "./js/components/TopBar/TopBar";
+import Home from "./js/components/Home/Home";
+import Footer from "./js/components/Footer/Footer"
+import Contact from "./js/components/Contact/Contact"
 
 class App extends Component {
   constructor() {
@@ -11,10 +14,18 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-          <HelloWorld />
-          <CoursesGrid />
-      </div>
+        <HashRouter>
+          <div>
+            <TopBar/>
+            <Route exact path="/" render={() => (
+                  <Home />
+                )} />
+            <Route exact path="/contacto" render={() => (
+                  <Contact />
+                )} />
+            <Footer/>
+            </div>
+        </HashRouter>
     );
   }
 }
