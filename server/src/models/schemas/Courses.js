@@ -45,5 +45,12 @@ module.exports = new Schema({
             ref: 'Students',
             required: true
         }
+    ],
+
+    capacity: [
+        {
+            type: Number,
+            requiere: true
+        }
     ]
 })
