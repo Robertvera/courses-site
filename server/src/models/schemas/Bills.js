@@ -5,16 +5,14 @@ module.exports = new Schema({
     students: [
         {
             type: ObjectId,
-            ref: 'Students',
-            required: true
+            ref: 'Students'
         }
     ],
 
     courses: [
         {
             type: ObjectId,
-            ref: 'Courses',
-            required: true
+            ref: 'Courses'
         }
     ]
 })
