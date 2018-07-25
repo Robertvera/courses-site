@@ -7,50 +7,42 @@ module.exports = new Schema({
     },
 
     description: {
-        type: String,
-        required: true
+        type: String
     },
 
     excerpt: {
-        type: String,
-        required: true,        
+        type: String      
     },
 
     price: {
-        type: Number,
-        required: true,
+        type: Number
     },
 
     image: {
-        type: String,
-        required: true,
+        type: String
     },    
 
     pdf: {
-        type: String,
-        required: true
+        type: String
     },
 
     teachers: [
         {
             type: ObjectId,
-            ref: 'Teachers',
-            required: true
+            ref: 'Teachers'
         }
     ],
 
     students: [
         {
             type: ObjectId,
-            ref: 'Students',
-            required: true
+            ref: 'Students'
         }
     ],
 
     capacity: [
         {
-            type: Number,
-            requiere: true
+            type: Number
         }
     ]
 })

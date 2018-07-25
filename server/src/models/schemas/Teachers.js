@@ -7,8 +7,7 @@ module.exports = new Schema({
     },
 
     surname: {
-        type: String,
-        required: true
+        type: String
     },
 
     documentId: {
@@ -18,13 +17,11 @@ module.exports = new Schema({
     },
 
     occupation: {
-        type: String,
-        required: true,
+        type: String
     },
 
     titles: {
-        type: String,
-        required: true,
+        type: String
     },    
 
     email: {
@@ -33,13 +30,11 @@ module.exports = new Schema({
     },
 
     twitter: {
-        type: String,
-        required: true
+        type: String
     },
 
     linkedin: {
-        type: String,
-        required: true
+        type: String
     },
 
     phoneNumber: {
