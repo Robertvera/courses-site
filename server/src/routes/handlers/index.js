@@ -1,5 +1,5 @@
 const { createCourse, editCourse, removeCourse, retrieveCourse } = require('./coursesHandlers')
-const { createStudent, editStudent, removeStudent, retrieveStudent } = require('./studentsHandlers')
+const { createStudent, editStudent, removeStudent,retrieveStudent, listStudents } = require('./studentsHandlers')
 const { createTeacher, editTeacher, removeTeacher, retrieveTeacher, listTeachers } = require('./teachersHandlers')
 
 module.exports = {
@@ -11,6 +11,7 @@ module.exports = {
     editStudent,
     removeStudent,
     retrieveStudent,
+    listStudents,
     createTeacher,
     editTeacher,
     removeTeacher,
