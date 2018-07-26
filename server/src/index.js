@@ -7,13 +7,13 @@ const cors = require('cors')
 
 const mongo = {
 
-    rentManagerDB: process.env.MONGO_HOST
+    vmbFormacionDB: process.env.MONGO_HOST
 
 }
 
 with(mongo) {
     // mongoose.connect(`mongodb://${host}:${port}/${database}`)
-    mongoose.connect(`mongodb://${rentManagerDB}`)
+    mongoose.connect(`mongodb://${vmbFormacionDB}`)
 }
 
 const app = express()
@@ -24,4 +24,4 @@ app.use('/api', routes)
 
 const port = process.env.PORT
 
-app.listen(port, () => console.log(`rent-manager api running on port ${port}`))
+app.listen(port, () => console.log(`courses api running on port ${port}`))

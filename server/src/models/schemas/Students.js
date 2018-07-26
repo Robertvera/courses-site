@@ -38,7 +38,8 @@ module.exports = new Schema({
     },
 
     phoneNumber: {
-        type: String        
+        type: String,
+        required: true      
     },
 
     courses: [

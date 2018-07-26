@@ -11,7 +11,59 @@ module.exports = {
     },
 
     /////////////////////////////// STUDENTS METHODS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    createStudent(name, surname, documentId, address, cp, city, email, phoneNumber, courses) {
+        return Promise.resolve()
+            .then(()=> {
+                return Students.findOne({documentId})
+            })
+            .then((student)=> {
+                if (student) throw Error('Student already exists')
 
+                return Students.create({ name, surname, documentId, address, cp, city, email, phoneNumber, courses })
+                    .then(() => documentId)
+            })
+    },
+
+    listStudents() {
+        return Students.find({}, { __v: 0 })
+    },
+
+    updateStudent(name, surname, documentId, address, cp, city, email, phoneNumber, courses) {
+        return Promise.resolve()
+            .then(() => {
+                return Students.findOne({ documentId })
+            })
+            .then(student => {
+                if (!student) throw Error('The student does not exist')
+
+                return Students.updateOne({ documentId }, { name, surname, address, cp, city, email, phoneNumber, courses})
+            })
+    },
+
+    retrieveStudent(documentId) {
+        return Promise.resolve()
+            .then(() => {
+                return Students.findOne({ documentId }, { __v: 0 })
+            })
+            .then(student => {
+                if (!student) throw Error('student does not exist')
+
+                return student
+            })
+    },
+
+    removeStudent(documentId) {
+        return Promise.resolve()
+            .then(() => {
+                return Students.findOne({ documentId })
+            })
+            .then(student => {
+                if (!student) throw Error('student does not exist')
+
+                return Students.deleteOne({ documentId })
+                    .then(() => documentId)
+            })
+    },
     /////////////////////////////// TEACHERS METHODS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
     createTeacher(name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses) {
@@ -22,7 +74,7 @@ module.exports = {
             .then((teacher)=> {
                 if (teacher) throw Error('Teacher already exists')
 
-                return Teacher.create({ name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses })
+                return Teachers.create({ name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses })
                     .then(() => documentId)
             })
     },

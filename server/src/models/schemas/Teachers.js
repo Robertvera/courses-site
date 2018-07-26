@@ -45,7 +45,6 @@ module.exports = new Schema({
         {
             type: ObjectId,
             ref: 'Courses',
-            required: true
         }
     ]
 })
