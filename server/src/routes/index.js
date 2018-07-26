@@ -31,4 +31,15 @@ router.get('/student/:documentId', retrieveStudent)
 
 router.delete('/student/:documentId', removeStudent)
 
+
+// COURSES ROUTES
+
+router.post('/course', jsonBodyParser, createCourse)
+
+router.put('/course/:name', jsonBodyParser, editCourse)
+
+router.get('/course/:name', retrieveCourse)
+
+router.delete('/course/:name', removeCourse)
+
 module.exports = router

@@ -44,5 +44,11 @@ module.exports = new Schema({
         {
             type: Number
         }
+    ],
+
+    location: [
+        {
+            type: String
+        }
     ]
 })
