@@ -9,6 +9,8 @@ import AdminFrame from "./js/components/Admin/AdminFrame/AdminFrame"
 import Students from "./js/components/Admin/Students/Students"
 import Teachers from "./js/components/Admin/Teachers/Teachers"
 import Courses from "./js/components/Admin/Courses/Courses"
+import ManageCourses from "./js/components/Admin/Courses/ManageCourses/ManageCourses"
+import ManageStudents from "./js/components/Admin/Students/ManageStudents/ManageStudents"
 
 class App extends Component {
   constructor() {
@@ -43,6 +45,12 @@ class App extends Component {
             )} />
             <Route exact path="/admin/courses" render={() => (
               <Courses />
+            )} />
+            <Route exact path="/admin/courses/manage" render={() => (
+              <ManageCourses />
+            )} />
+            <Route exact path="/admin/students/manage" render={() => (
+              <ManageStudents />
             )} />
                          
             </div>   
