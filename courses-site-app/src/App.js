@@ -11,6 +11,9 @@ import Teachers from "./js/components/Admin/Teachers/Teachers"
 import Courses from "./js/components/Admin/Courses/Courses"
 import ManageCourses from "./js/components/Admin/Courses/ManageCourses/ManageCourses"
 import ManageStudents from "./js/components/Admin/Students/ManageStudents/ManageStudents"
+import CoursesGridView from "./js/components/CoursesGridView/index"
+import CourseDetails from "./js/components/CourseView/index"
+import Checkout from './js/components/Checkout/index'
 
 class App extends Component {
   constructor() {
@@ -30,6 +33,15 @@ class App extends Component {
             )} />
             <Route exact path="/es/contacto" render={() => (
               <Contact />
+            )} />
+            <Route exact path="/es/cursos" render={() => (
+              <CoursesGridView />
+            )} />
+            <Route exact path="/es/detalles-curso" render={() => (
+              <CourseDetails />
+            )} />
+            <Route exact path="/es/checkout" render={() => (
+            <Checkout />
             )} />
             <Route path="/es" render={()=> (
               <Footer/>              
