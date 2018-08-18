@@ -26,7 +26,7 @@
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
     "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.2.0",    
+    "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.9.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
@@ -37,5 +37,7 @@
     "webpack-cli": "^2.1.4",
     "webpack-dev-server": "^3.1.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "api-client": "^1.1.3"
+  }
 }
