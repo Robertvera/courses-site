@@ -6,14 +6,19 @@ const { Teachers } = require('../models/index')
 module.exports = {
     /////////////////////////////// COURSES METHODS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    createCourse(name, description, excerpt, price, image, pdf, teachers, students, capacity, location) {
+    createCourse(name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students) {
         return Promise.resolve()
-        .then(() => {
-            return Courses.create({ name, description, excerpt, price, image, pdf, teachers, students, capacity, location })
+        .then(()=> {
+            return Courses.findOne({name})
+        })
+        .then((course)=> {
+            if (course) throw Error('Course already exists')
+
+            return Courses.create({ name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students })
         })
     },
 
-    editCourse(name, description, excerpt, price, image, pdf, teachers, students, capacity, location) {
+    editCourse(name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students) {
         return Promise.resolve()
             .then(() => {
                 return Courses.findOne({ name })
@@ -21,7 +26,7 @@ module.exports = {
             .then(course => {
                 if (!course) throw Error('The course does not exist')
 
-                return Courses.updateOne({ name }, { description, excerpt, price, image, pdf, teachers, students, capacity, location })
+                return Courses.updateOne({ name }, { description, excerpt, price, image, pdf, capacity, location, date, teachers, students })
             })
     },
 

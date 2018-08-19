@@ -36,7 +36,7 @@ module.exports = new Schema({
     
     date: {
         type: String
-    },
+    }/* ,
 
     teachers: [
         {
@@ -50,6 +50,6 @@ module.exports = new Schema({
             type: ObjectId,
             ref: 'Students'
         }
-    ]
+    ] */
 
 })

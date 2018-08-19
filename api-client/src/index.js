@@ -4,7 +4,7 @@ const vmApi = {
 
     _url() {
         //return `https://aqueous-tundra-90892.herokuapp.com/api`
-        return 'http://localhost:5555/api'
+        return 'http://localhost:5000/api'
     },
 
     // TEACHERS ROUTES
@@ -53,12 +53,12 @@ const vmApi = {
 
     // COURSES ROUTES
 
-    createCourse: function(name, description, excerpt, price, image, pdf, teachers, students, capacity, location) {
-        return axios.post(`${this._url()}/create-course`, { name, description, excerpt, price, image, pdf, teachers, students, capacity, location })
+    createCourse: function(name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students) {
+        return axios.post(`${this._url()}/create-course`, { name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students })
     },
 
-    editCourse: function(name, description, excerpt, price, image, pdf, teachers, students, capacity, location) {
-        return axios.put(`${this._url()}/create-course/${name}`, { name, description, excerpt, price, image, pdf, teachers, students, capacity, location })
+    editCourse: function(name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students) {
+        return axios.put(`${this._url()}/course/${name}`, { name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students })
     },
 
     retrieveCourse: function(name) {

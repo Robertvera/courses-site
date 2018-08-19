@@ -1,6 +1,7 @@
 const { Router } = require('express')
 const bodyParser = require('body-parser')
-const { createCourse, editCourse, removeCourse, retrieveCourse, createStudent, editStudent, removeStudent, retrieveStudent, listStudents, createTeacher, editTeacher, removeTeacher, retrieveTeacher, listTeachers } = require('./handlers')
+const { createCourse, editCourse, removeCourse, retrieveCourse, createTeacher, editTeacher, removeTeacher, retrieveTeacher, listTeachers } = require('./handlers')
+const { createStudent, editStudent, removeStudent, retrieveStudent, listStudents } = require('./handlers/studentsHandlers')
 
 const router = Router()
 
@@ -11,9 +12,9 @@ const jsonBodyParser = bodyParser.json()
 
 router.get('/teachers', listTeachers)
 
-router.post('/teacher', jsonBodyParser, createTeacher)
+router.post('/create-teacher', jsonBodyParser, createTeacher)
 
-router.put('/teacher/:documentId', jsonBodyParser, editTeacher)
+router.put('/edit-teacher/:documentId', jsonBodyParser, editTeacher)
 
 router.get('/teacher/:documentId', retrieveTeacher)
 
@@ -23,9 +24,9 @@ router.delete('/teacher/:documentId', removeTeacher)
 
 router.get('/students', listStudents)
 
-router.post('/student', jsonBodyParser, createStudent)
+router.post('/create-student', jsonBodyParser, createStudent)
 
-router.put('/student/:documentId', jsonBodyParser, editStudent)
+router.put('/edit-student/:documentId', jsonBodyParser, editStudent)
 
 router.get('/student/:documentId', retrieveStudent)
 
@@ -34,7 +35,7 @@ router.delete('/student/:documentId', removeStudent)
 
 // COURSES ROUTES
 
-router.post('/course', jsonBodyParser, createCourse)
+router.post('/create-course`', jsonBodyParser, createCourse)
 
 router.put('/course/:name', jsonBodyParser, editCourse)
 
