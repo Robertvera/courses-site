@@ -1955,8 +1955,18 @@ pre code {
 .table th,
 .table td {
     padding: .75rem;
-    vertical-align: top;
+    vertical-align: middle;
+    text-align: center;    
     border-top: 1px solid #dee2e6;
+}
+
+.table td button {
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    font-size: 14px;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+    cursor: pointer;
 }
 
 .table thead th {

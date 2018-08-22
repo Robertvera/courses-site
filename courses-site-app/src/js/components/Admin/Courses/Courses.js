@@ -11,7 +11,7 @@ class Courses extends Component {
     return (
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
   <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 className="h2">Dashboard</h1>
+    <h1 className="h2">Cursos</h1>
     <div className="btn-toolbar mb-2 mb-md-0">
       <div className="btn-group mr-2">
         <button className="btn btn-sm btn-outline-secondary">Share</button>
@@ -22,17 +22,18 @@ class Courses extends Component {
         This week
       </button>
     </div>
-  </div>
-  <h2>Courses</h2>
+  </div>  
   <div className="table-responsive">
-    <table className="table table-striped table-sm">
+  <table className="table table-striped table-sm">
       <thead>
         <tr>
-          <th>#</th>
-          <th>Header</th>
-          <th>Header</th>
-          <th>Header</th>
-          <th>Header</th>
+          <th>Nombre</th>
+          <th>Fecha</th>
+          <th>Sede</th>
+          <th>Apuntados</th>
+          <th>Límite</th>
+          <th>Precio</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -41,112 +42,192 @@ class Courses extends Component {
           <td>Lorem</td>
           <td>ipsum</td>
           <td>dolor</td>
-          <td>sit</td>
+          <td>ipsum</td>
+          <td>dolor</td>
+          <td>
+          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
+          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
+          </td>
         </tr>
         <tr>
           <td>1,002</td>
           <td>amet</td>
           <td>consectetur</td>
           <td>adipiscing</td>
-          <td>elit</td>
+          <td>ipsum</td>
+          <td>dolor</td>
+          <td>
+          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
+          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
+          </td>
         </tr>
         <tr>
           <td>1,003</td>
           <td>Integer</td>
           <td>nec</td>
           <td>odio</td>
-          <td>Praesent</td>
+          <td>ipsum</td>
+          <td>dolor</td>
+          <td>
+          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
+          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
+          </td>
         </tr>
         <tr>
           <td>1,003</td>
           <td>libero</td>
           <td>Sed</td>
           <td>cursus</td>
-          <td>ante</td>
+          <td>ipsum</td>
+          <td>dolor</td>
+          <td>
+          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
+          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
+          </td>
         </tr>
         <tr>
           <td>1,004</td>
           <td>dapibus</td>
           <td>diam</td>
           <td>Sed</td>
-          <td>nisi</td>
+          <td>ipsum</td>
+          <td>dolor</td>
+          <td>
+          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
+          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
+          </td>
         </tr>
         <tr>
           <td>1,005</td>
           <td>Nulla</td>
           <td>quis</td>
           <td>sem</td>
-          <td>at</td>
+          <td>ipsum</td>
+          <td>dolor</td>
+          <td>
+          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
+          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
+          </td>
         </tr>
         <tr>
           <td>1,006</td>
           <td>nibh</td>
           <td>elementum</td>
           <td>imperdiet</td>
-          <td>Duis</td>
+          <td>ipsum</td>
+          <td>dolor</td>
+          <td>
+          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
+          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
+          </td>
         </tr>
         <tr>
           <td>1,007</td>
           <td>sagittis</td>
           <td>ipsum</td>
           <td>Praesent</td>
-          <td>mauris</td>
+          <td>ipsum</td>
+          <td>dolor</td>
+          <td>
+          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
+          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
+          </td>
         </tr>
         <tr>
           <td>1,008</td>
           <td>Fusce</td>
           <td>nec</td>
           <td>tellus</td>
-          <td>sed</td>
+          <td>ipsum</td>
+          <td>dolor</td>
+          <td>
+          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
+          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
+          </td>
         </tr>
         <tr>
           <td>1,009</td>
           <td>augue</td>
           <td>semper</td>
           <td>porta</td>
-          <td>Mauris</td>
+          <td>ipsum</td>
+          <td>dolor</td>
+          <td>
+          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
+          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
+          </td>
         </tr>
         <tr>
           <td>1,010</td>
           <td>massa</td>
           <td>Vestibulum</td>
           <td>lacinia</td>
-          <td>arcu</td>
+          <td>ipsum</td>
+          <td>dolor</td>
+          <td>
+          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
+          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
+          </td>
         </tr>
         <tr>
           <td>1,011</td>
           <td>eget</td>
           <td>nulla</td>
           <td>Class</td>
-          <td>aptent</td>
+          <td>ipsum</td>
+          <td>dolor</td>
+          <td>
+          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
+          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
+          </td>
         </tr>
         <tr>
           <td>1,012</td>
           <td>taciti</td>
           <td>sociosqu</td>
           <td>ad</td>
-          <td>litora</td>
+          <td>ipsum</td>
+          <td>dolor</td>
+          <td>
+          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
+          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
+          </td>
         </tr>
         <tr>
           <td>1,013</td>
           <td>torquent</td>
           <td>per</td>
           <td>conubia</td>
-          <td>nostra</td>
+          <td>ipsum</td>
+          <td>dolor</td>
+          <td>
+          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
+          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
+          </td>
         </tr>
         <tr>
           <td>1,014</td>
           <td>per</td>
           <td>inceptos</td>
           <td>himenaeos</td>
-          <td>Curabitur</td>
+          <td>ipsum</td>
+          <td>dolor</td>
+          <td>
+          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
+          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
+          </td>
         </tr>
         <tr>
           <td>1,015</td>
           <td>sodales</td>
           <td>ligula</td>
           <td>in</td>
-          <td>libero</td>
+          <td>ipsum</td>
+          <td>dolor</td>
+          <td>
+          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
+          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
+          </td>
         </tr>
       </tbody>
     </table>
