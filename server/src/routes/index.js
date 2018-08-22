@@ -35,7 +35,7 @@ router.delete('/student/:documentId', removeStudent)
 
 // COURSES ROUTES
 
-router.post('/create-course`', jsonBodyParser, createCourse)
+router.post('/create-course', jsonBodyParser, createCourse)
 
 router.put('/course/:name', jsonBodyParser, editCourse)
 
