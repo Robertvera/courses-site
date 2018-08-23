@@ -1,6 +1,12 @@
 
 # Created by https://www.gitignore.io/api/macos
 
+.env
+
+node_modules
+
+package-lock.json
+
 ### macOS ###
 *.DS_Store
 .AppleDouble
