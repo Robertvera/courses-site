@@ -5,7 +5,7 @@ var axios = require('axios');
 var vmApi = {
     _url: function _url() {
         //return `https://aqueous-tundra-90892.herokuapp.com/api`
-        return 'http://localhost:5555/api';
+        return 'http://localhost:5000/api';
     },
 
 
