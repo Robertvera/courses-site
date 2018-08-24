@@ -55,12 +55,12 @@ var vmApi = {
 
     // COURSES ROUTES
 
-    createCourse: function createCourse(name, description, excerpt, price, image, pdf, teachers, students, capacity, location) {
-        return axios.post(this._url() + '/create-course', { name: name, description: description, excerpt: excerpt, price: price, image: image, pdf: pdf, teachers: teachers, students: students, capacity: capacity, location: location });
+    createCourse: function createCourse(name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students) {
+        return axios.post(this._url() + '/create-course', { name: name, description: description, excerpt: excerpt, price: price, image: image, pdf: pdf, capacity: capacity, location: location, date: date, teachers: teachers, students: students });
     },
 
-    editCourse: function editCourse(name, description, excerpt, price, image, pdf, teachers, students, capacity, location) {
-        return axios.put(this._url() + '/create-course/' + name, { name: name, description: description, excerpt: excerpt, price: price, image: image, pdf: pdf, teachers: teachers, students: students, capacity: capacity, location: location });
+    editCourse: function editCourse(name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students) {
+        return axios.put(this._url() + '/course/' + name, { name: name, description: description, excerpt: excerpt, price: price, image: image, pdf: pdf, capacity: capacity, location: location, date: date, teachers: teachers, students: students });
     },
 
     retrieveCourse: function retrieveCourse(name) {
