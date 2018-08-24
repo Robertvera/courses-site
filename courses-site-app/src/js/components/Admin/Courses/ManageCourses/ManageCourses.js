@@ -7,17 +7,20 @@ class ManageCourses extends Component {
   constructor() {
     super();
     this.state = {
-      name: "",
-      description: "",
-      excerpt: "",
-      price: "",
-      image: "",
-      pdf: "",
-      capacity: "",
-      location: "",
-      date: ""
+      name: '',
+      description: '',
+      excerpt: '',
+      price: '',
+      image: '',
+      pdf: '',
+      capacity: '',
+      location: '',
+      date: '',
+      teacher: '',
+
     };
   }
+
   handleSubmit = e => {
     e.preventDefault()
     const { name, description, excerpt, price, image, pdf, capacity, location, date }  = this.state
@@ -41,26 +44,23 @@ class ManageCourses extends Component {
       )
       .then(
         this.setState({
-          name: "",
-          description: "",
-          excerpt: "",
-          price: "",
-          image: "",
-          pdf: "",
-          capacity: "",
-          location: "",
-          date: ""
+          name: '',
+          description: '',
+          excerpt: '',
+          price: '',
+          image: '',
+          pdf: '',
+          capacity: '',
+          location: '',
+          date: '',
+          teacher: ''
         })
       )
   }  
 
 
-    handleName = e => {
-      const _name = e.target.value
-
-      this.setState({
-          name: _name
-      })
+    handleOnChange = e => {
+      this.setState({ [e.target.name]: e.target.value })
   }
 
 
@@ -83,7 +83,7 @@ class ManageCourses extends Component {
                 <div className="col-md-8">
                   <div className="form-group">
                     <input
-                    onChange={e => this.handleName(e)} 
+                    onChange={e => this.handleOnChange(e)} 
                     className="form-control" 
                     type="text" 
                     name="name" 
@@ -95,42 +95,85 @@ class ManageCourses extends Component {
                 </div>
                 <div className="col-md-4">
                   <div className="form-group">
-                    <input className="form-control" type="date" name="date" placeholder="Fecha"  />
+                    <input 
+                    onChange={e => this.handleOnChange(e)}
+                    className="form-control" 
+                    type="date" 
+                    name="date" 
+                    placeholder="Fecha"  
+                    />
                     <p className="help-block text-danger" />
                   </div>
                 </div>
                 <div className="col-md-12">
                   <div className="form-group">
-                    <textarea className="form-control" name="description" placeholder="Descripción curso" rows={12}  defaultValue={""} />
+                    <textarea 
+                    onChange={e => this.handleOnChange(e)}
+                    className="form-control" 
+                    name="description" 
+                    placeholder="Descripción curso" 
+                    rows={12}  
+                    defaultValue={""} 
+                    />
                   </div>
                 </div>
                 <div className="col-md-10">
                   <div className="form-group">
-                    <input className="form-control" type="text" name="excerpt" placeholder="Resumen"  />
+                    <input
+                    onChange={e => this.handleOnChange(e)}
+                    className="form-control" 
+                    type="text" 
+                    name="excerpt" 
+                    placeholder="Resumen"  
+                    />
                     <p className="help-block text-danger" />
                   </div>
                 </div>
                 <div className="col-md-2">
                   <div className="form-group">
-                    <input className="form-control" type="number" name="price" placeholder="Precio"  />
+                    <input
+                    onChange={e => this.handleOnChange(e)} 
+                    className="form-control" 
+                    type="number" 
+                    name="price" 
+                    placeholder="Precio"  
+                    />
                     <p className="help-block text-danger" />
                   </div>
                 </div>
                 <div className="col-md-2">
                   <div className="form-group">
-                    <input className="form-control" type="number" name="capacity" placeholder="Capacidad"  />
+                    <input
+                    onChange={e => this.handleOnChange(e)} 
+                    className="form-control" 
+                    type="number" 
+                    name="capacity" 
+                    placeholder="Capacidad"  
+                    />
                     <p className="help-block text-danger" />
                   </div>
                 </div>
                 <div className="col-md-10">
                   <div className="form-group">
-                    <input className="form-control" type="text" name="location" placeholder="Localización"  />
+                    <input
+                    onChange={e => this.handleOnChange(e)} 
+                    className="form-control" 
+                    type="text" 
+                    name="location" 
+                    placeholder="Localización"  
+                    />
                     <p className="help-block text-danger" />
                   </div>
                 </div>
                 <div className="col-md-6">
                   <div className="form-group">
-                    <input className="form-control" type="text" name="teacher" placeholder="Profesor"  />
+                    <input 
+                    onChange={e => this.handleOnChange(e)}
+                    className="form-control" 
+                    type="text" 
+                    name="teacher" 
+                    placeholder="Profesor"  
+                    />
                     <p className="help-block text-danger" />
                   </div>
                 </div>
