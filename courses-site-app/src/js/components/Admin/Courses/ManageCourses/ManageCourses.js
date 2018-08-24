@@ -18,30 +18,40 @@ class ManageCourses extends Component {
       date: ""
     };
   }
-
   handleSubmit = e => {
     e.preventDefault()
     const { name, description, excerpt, price, image, pdf, capacity, location, date }  = this.state
     
     Api.createCourse(name.trim().toLowerCase(), description, excerpt, price, image, pdf, capacity, location, date)
-    
-    this.setState({ 
-      name: "",
-      description: "",
-      excerpt: "",
-      price: "",
-      image: "",
-      pdf: "",
-      capacity: "",
-      location: "",
-      date: ""
-    })
-
-    swal({
-        title: '¡Curso creado!',
-        showConfirmButton: true,
-        timer: 1500
-    })
+      .then(course => {
+        course.data.status === 'OK' ?
+          swal({
+            title: '¡Curso creado!',
+            showConfirmButton: true,
+            timer: 1500
+          })
+          :
+          swal({
+            type: 'error',
+            title: 'Error creando el curso',
+            showConfirmButton: true,
+            timer: 2000
+          })
+      }
+      )
+      .then(
+        this.setState({
+          name: "",
+          description: "",
+          excerpt: "",
+          price: "",
+          image: "",
+          pdf: "",
+          capacity: "",
+          location: "",
+          date: ""
+        })
+      )
   }  
 
 
