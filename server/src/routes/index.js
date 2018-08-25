@@ -1,7 +1,12 @@
 const { Router } = require('express')
 const bodyParser = require('body-parser')
-const { createCourse, editCourse, removeCourse, retrieveCourse, createTeacher, editTeacher, removeTeacher, retrieveTeacher, listTeachers } = require('./handlers')
-const { createStudent, editStudent, removeStudent, retrieveStudent, listStudents } = require('./handlers/studentsHandlers')
+const { 
+    listCourses, createCourse, editCourse, removeCourse, retrieveCourse, 
+    createStudent, editStudent, removeStudent, retrieveStudent, listStudents, 
+    createTeacher, editTeacher, removeTeacher, retrieveTeacher, listTeachers 
+} = require('./handlers')
+
+
 
 const router = Router()
 
@@ -34,6 +39,9 @@ router.delete('/student/:documentId', removeStudent)
 
 
 // COURSES ROUTES
+
+
+router.get('/courses', listCourses)
 
 router.post('/create-course', jsonBodyParser, createCourse)
 
