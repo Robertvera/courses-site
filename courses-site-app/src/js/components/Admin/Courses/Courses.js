@@ -27,9 +27,7 @@ class Courses extends Component {
 
   render() {
     const { courses } = this.state
-    debugger
-    console.log(courses)
-
+    
     return (
       <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -61,8 +59,7 @@ class Courses extends Component {
             <tbody>
               {
                 courses.length ?
-                  courses.map( course => {
-                     
+                  courses.map( course => {             
                     return <tr key={course._id}>
                       <td>{course.name}</td>
                       <td>{course.date}</td>
@@ -82,9 +79,6 @@ class Courses extends Component {
           </table>
         </div>
       </main>
-
-
-
     );
   }
 }
