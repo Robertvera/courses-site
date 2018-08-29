@@ -53,6 +53,10 @@ const vmApi = {
 
     // COURSES ROUTES
 
+    listCourses: function () {
+        return axios.get(`${this._url()}/courses`)
+    },
+
     createCourse: function(name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students) {
         return axios.post(`${this._url()}/create-course`, { name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students })
     },

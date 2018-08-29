@@ -42,6 +42,10 @@ module.exports = {
             })
     },
 
+    listCourses() {
+        return Courses.find({})
+    },
+
     removeCourse(name) {
         return Promise.resolve()
             .then(() => {
