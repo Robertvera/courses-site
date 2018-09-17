@@ -9,7 +9,7 @@ class ManageCourses extends Component {
     super();
     this.state = {
       name: '',
-      description: '',
+      description: 'hello',
       excerpt: '',
       price: '',
       image: '',
@@ -20,6 +20,10 @@ class ManageCourses extends Component {
       teacher: '',
       uploadValue: ''
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
   }
 
   handleUpload = (e) => {
@@ -135,7 +139,7 @@ class ManageCourses extends Component {
                     name="description" 
                     placeholder="Descripción curso" 
                     rows={12}  
-                    defaultValue={""} 
+                    defaultValue={this.state.description || ""} 
                     />
                   </div>
                 </div>

@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import DeleteButton from "../../Buttons/deleteButton"
-import EditButton from "../../Buttons/editButton"
 import Api from '../../../../api/vmApi'
+import { withRouter } from "react-router-dom"
+import swal from 'sweetalert2'
+
 
 
 class Courses extends Component {
   constructor() {
     super();
     this.state = {
-      courses: ''
+      courses: '',
+      courseToEdit: ''
     };
   }
 
@@ -23,6 +25,23 @@ class Courses extends Component {
         courses: courses.data.data
       })
     })
+  }
+
+  editCourse = (e,course)=> {
+    e.preventDefault()
+    Api.retrieveCourse(course).then(_course => {
+      if (_course.data.status === 'OK') {
+        console.log(_course.data.data[0])
+      } else {
+        swal({
+          type: 'error',
+          title: 'Error al editar el curso',
+          showConfirmButton: true,
+          timer: 2000
+        })
+      }
+    })
+    // this.props.history.push(`/admin/courses/manage/${course}`)
   }
 
   render() {
@@ -68,8 +87,19 @@ class Courses extends Component {
                       <td>{course.capacity}</td>
                       <td>{course.price}</td>
                       <td>
-                        <DeleteButton />
-                        <EditButton />
+                        <button 
+                        type="button" 
+                        class="btn-sm btn-outline-danger"
+                        >
+                        Borrar
+                        </button>
+                        <button
+                        onClick={e =>{this.editCourse(e, course.name)}} 
+                        type="button" 
+                        class="btn-sm btn-outline-warning"
+                        >
+                          Editar
+                        </button>                       
                       </td>
                     </tr>
                   })
@@ -82,4 +112,4 @@ class Courses extends Component {
     );
   }
 }
-export default Courses;
+export default withRouter(Courses);
