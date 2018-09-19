@@ -79,7 +79,7 @@ class CheckoutForm extends Component {
                     name="name"
                     className="form-control" 
                     type="text" 
-                    placeholder="Nombre" 
+                    placeholder="Nombre"
                     required />
                   </div>
                   <div className="col-md-6 form-group">
@@ -175,7 +175,13 @@ class CheckoutForm extends Component {
                 </tbody>
               </table>
               <div className="text-right">
-                <a className="btn btn-brand" href="#">Realizar Pedido</a>
+                <a 
+                className="btn btn-brand" 
+                href="#"
+                onClick={e => this.handleSubmit(e)}
+                >
+                Realizar Pedido
+                </a>
               </div>
             </div>
           </div>

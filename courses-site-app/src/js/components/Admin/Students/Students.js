@@ -1,12 +1,66 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import { withRouter } from "react-router-dom"
+import Api from "../../../../api/vmApi"
+import swal from 'sweetalert2'
 
 class Students extends Component {
   constructor() {
     super();
     this.state = {
+      students: []
     };
   }
+
+  componentDidMount = () => {
+    Api.listStudents('')
+    .then(students=> {
+      this.setState({
+        students: students.data.data
+      })
+    })
+  }
+
+  handleDelete = (documentId, name, surname) => {
+    swal({
+      title: `¿Estás seguro de que quieres eliminar a ${name} ${surname}?`,
+      text: "Una vez eliminado, no podrás volver atrás",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, lo quiero eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+          Api.deleteStudent(documentId)
+              .then(() => {
+                  swal({
+                      title: '¡Estudiante eliminado!',
+                      type: 'success',
+                      showConfirmButton: false,
+                      timer: 1500,
+                      onOpen: () => {
+                          swal.showLoading()
+                      }
+                  })
+                  .then(() => {
+                    Api.listStudents('')
+                    .then(students => {
+                      this.setState({
+                        students: students.data.data
+                      })
+                    })
+                  })
+              })
+      }
+    })
+  }
+
+  handleEdit = (documentId) => {
+    this.props.history.push(`/admin/students/manage/${documentId}`)
+  }
+
   render() {
     return (
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -34,175 +88,38 @@ class Students extends Component {
           <th></th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>1,001</td>
-          <td>Lorem</td>
-          <td>ipsum</td>
-          <td>dolor</td>
-          <td>
-          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
-          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1,002</td>
-          <td>amet</td>
-          <td>consectetur</td>
-          <td>adipiscing</td>
-          <td>
-          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
-          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1,003</td>
-          <td>Integer</td>
-          <td>nec</td>
-          <td>odio</td>
-          <td>
-          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
-          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1,003</td>
-          <td>libero</td>
-          <td>Sed</td>
-          <td>cursus</td>
-          <td>
-          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
-          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1,004</td>
-          <td>dapibus</td>
-          <td>diam</td>
-          <td>Sed</td>
-          <td>
-          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
-          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1,005</td>
-          <td>Nulla</td>
-          <td>quis</td>
-          <td>sem</td>
-          <td>
-          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
-          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1,006</td>
-          <td>nibh</td>
-          <td>elementum</td>
-          <td>imperdiet</td>
-          <td>
-          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
-          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1,007</td>
-          <td>sagittis</td>
-          <td>ipsum</td>
-          <td>Praesent</td>
-          <td>
-          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
-          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1,008</td>
-          <td>Fusce</td>
-          <td>nec</td>
-          <td>tellus</td>
-          <td>
-          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
-          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1,009</td>
-          <td>augue</td>
-          <td>semper</td>
-          <td>porta</td>
-          <td>
-          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
-          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1,010</td>
-          <td>massa</td>
-          <td>Vestibulum</td>
-          <td>lacinia</td>
-          <td>
-          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
-          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1,011</td>
-          <td>eget</td>
-          <td>nulla</td>
-          <td>Class</td>
-          <td>
-          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
-          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1,012</td>
-          <td>taciti</td>
-          <td>sociosqu</td>
-          <td>ad</td>
-          <td>
-          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
-          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1,013</td>
-          <td>torquent</td>
-          <td>per</td>
-          <td>conubia</td>
-          <td>
-          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
-          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1,014</td>
-          <td>per</td>
-          <td>inceptos</td>
-          <td>himenaeos</td>
-          <td>
-          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
-          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>1,015</td>
-          <td>sodales</td>
-          <td>ligula</td>
-          <td>in</td>
-          <td>
-          <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
-          <button type="button" class="btn-sm btn-outline-warning">Editar</button>
-          </td>
-        </tr>
-      </tbody>
+      {this.state.students ? 
+        <tbody>
+        {this.state.students.map(student => {
+          return  <tr key={student.documentId}>
+                    <td>{student.name} {student.surname}</td>
+                    <td>{student.phoneNumber}</td>
+                    <td>{student.email}</td>
+                    <td>{student.documentId}</td>
+                    <td>
+                      <button 
+                      type="button" 
+                      class="btn-sm btn-outline-danger"
+                      onClick={() => this.handleDelete(student.documentId, student.name, student.surname)}
+                      >
+                      Borrar
+                      </button>
+                      <button
+                      type="button"
+                      class="btn-sm btn-outline-warning"
+                      onClick={() => this.handleEdit(student.documentId)}
+                      >
+                      Editar
+                      </button>
+                    </td>
+                  </tr>
+        })}
+        </tbody>
+        : undefined}
     </table>
   </div>
 </main>
-
-
-
     );
   }
 }
-export default Students;
+export default withRouter(Students);
