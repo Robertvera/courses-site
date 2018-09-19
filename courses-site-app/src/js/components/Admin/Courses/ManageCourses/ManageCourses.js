@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import { withRouter} from "react-router-dom"
 import Api from "../../../../../api/vmApi"
 import swal from 'sweetalert2'
 import firebase from 'firebase'
 
 class ManageCourses extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       name: '',
-      description: 'hello',
+      description: '',
       excerpt: '',
       price: '',
       image: '',
@@ -18,12 +19,66 @@ class ManageCourses extends Component {
       location: '',
       date: '',
       teacher: '',
-      uploadValue: ''
+      uploadValue: '',
+      editingCourse: false
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
+  defaultState = () => {
+    this.setState({
+      name: '',
+      description: '',
+      excerpt: '',
+      price: '',
+      image: '',
+      pdf: '',
+      capacity: '',
+      location: '',
+      date: '',
+      teacher: '',
+      uploadValue: '',
+      editingCourse: false
+    })
+  }
+
+  componentDidMount() {
+    this.props ? console.log("props didmount ", this.props) : console.log('nada')
+    
+    
+    if(this.props.match) {
+      
+      const course = this.props.match.params.course
+
+      Api.retrieveCourse(course).then(_course => {
+        if (_course.data.status === 'OK') {
+          this.editCourse(_course.data.data[0])
+          console.log("data ", _course.data.data[0])
+        } else {
+          swal({
+            type: 'error',
+            title: 'Error al editar el curso',
+            showConfirmButton: true,
+            timer: 2000
+          })
+        }
+      })
+    }
+  }
+
+  editCourse(courseToEdit) {
+    this.setState({
+      name: courseToEdit.name || '',
+      description: courseToEdit.description || '',
+      excerpt: courseToEdit.excerpt || '',
+      price: courseToEdit.price || '',
+      image: courseToEdit.image || '',
+      pdf: courseToEdit.pdf || '',
+      capacity: courseToEdit.capacity || '',
+      location: courseToEdit.location || '',
+      date: courseToEdit.date || '',
+      teacher: courseToEdit.teacher || '',
+      editingCourse: true
+    })
   }
 
   handleUpload = (e) => {
@@ -46,10 +101,36 @@ class ManageCourses extends Component {
     })
 }
 
-  handleSubmit = e => {
+  handleEdit = e => {
     e.preventDefault()
+    console.log('editing mode')
     const { name, description, excerpt, price, image, pdf, capacity, location, date }  = this.state
-    
+
+    Api.editCourse(name.trim().toLowerCase(), description, excerpt, price, image, pdf, capacity, location, date)
+      .then(course => {
+        course.data.status === 'OK' ?
+          swal({
+            title: '¡Curso editado!',
+            showConfirmButton: true,
+            timer: 1500
+          })
+          :
+          swal({
+            type: 'error',
+            title: 'Error editando el curso',
+            showConfirmButton: true,
+            timer: 2000
+          })
+      })
+      .then(this.defaultState())
+      .then(this.props.history.push('/admin/courses'))
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('submiting mode')
+    const { name, description, excerpt, price, image, pdf, capacity, location, date }  = this.state
+   
     Api.createCourse(name.trim().toLowerCase(), description, excerpt, price, image, pdf, capacity, location, date)
       .then(course => {
         course.data.status === 'OK' ?
@@ -65,23 +146,9 @@ class ManageCourses extends Component {
             showConfirmButton: true,
             timer: 2000
           })
-      }
-      )
-      .then(
-        this.setState({
-          name: '',
-          description: '',
-          excerpt: '',
-          price: '',
-          image: '',
-          pdf: '',
-          capacity: '',
-          location: '',
-          date: '',
-          teacher: '',
-          uploadValue: ''
-        })
-      )
+      })
+      .then(this.defaultState())
+      .then(this.props.history.push('/admin/courses'))
   }  
 
 
@@ -102,7 +169,7 @@ class ManageCourses extends Component {
         <div className="row">
           <div className="col-md-12 pt-5">
             <form 
-            onSubmit={e => this.handleSubmit(e)}
+            onSubmit={e =>  !this.state.editingCourse ? this.handleSubmit(e) : this.handleEdit(e)}
             id="courses-form" method="post" noValidate
             >
               <div className="row">
@@ -113,7 +180,8 @@ class ManageCourses extends Component {
                     className="form-control" 
                     type="text" 
                     name="name" 
-                    placeholder="Nombre curso" 
+                    placeholder="Nombre curso"
+                    defaultValue={this.state.name || ""}  
                     required
                     />
                     <p className="help-block text-danger" />
@@ -126,7 +194,8 @@ class ManageCourses extends Component {
                     className="form-control" 
                     type="date" 
                     name="date" 
-                    placeholder="Fecha"  
+                    placeholder="Fecha"
+                    defaultValue={this.state.date || ""}   
                     />
                     <p className="help-block text-danger" />
                   </div>
@@ -135,11 +204,11 @@ class ManageCourses extends Component {
                   <div className="form-group">
                     <textarea 
                     onChange={e => this.handleOnChange(e)}
-                    className="form-control" 
+                    className="form-control"
                     name="description" 
                     placeholder="Descripción curso" 
+                    value={this.state.description || ""} 
                     rows={12}  
-                    defaultValue={this.state.description || ""} 
                     />
                   </div>
                 </div>
@@ -150,7 +219,8 @@ class ManageCourses extends Component {
                     className="form-control" 
                     type="text" 
                     name="excerpt" 
-                    placeholder="Resumen"  
+                    placeholder="Resumen"
+                    defaultValue={this.state.excerpt || ""}   
                     />
                     <p className="help-block text-danger" />
                   </div>
@@ -162,7 +232,8 @@ class ManageCourses extends Component {
                     className="form-control" 
                     type="number" 
                     name="price" 
-                    placeholder="Precio"  
+                    placeholder="Precio"
+                    defaultValue={this.state.price || ""}    
                     />
                     <p className="help-block text-danger" />
                   </div>
@@ -174,7 +245,8 @@ class ManageCourses extends Component {
                     className="form-control" 
                     type="number" 
                     name="capacity" 
-                    placeholder="Capacidad"  
+                    placeholder="Capacidad"
+                    defaultValue={this.state.capacity || ""}    
                     />
                     <p className="help-block text-danger" />
                   </div>
@@ -186,7 +258,8 @@ class ManageCourses extends Component {
                     className="form-control" 
                     type="text" 
                     name="location" 
-                    placeholder="Localización"  
+                    placeholder="Localización"
+                    defaultValue={this.state.location || ""}    
                     />
                     <p className="help-block text-danger" />
                   </div>
@@ -240,4 +313,4 @@ class ManageCourses extends Component {
     );
   }
 }
-export default ManageCourses;
+export default withRouter(ManageCourses);

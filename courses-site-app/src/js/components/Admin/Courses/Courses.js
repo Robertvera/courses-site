@@ -29,19 +29,7 @@ class Courses extends Component {
 
   editCourse = (e,course)=> {
     e.preventDefault()
-    Api.retrieveCourse(course).then(_course => {
-      if (_course.data.status === 'OK') {
-        console.log(_course.data.data[0])
-      } else {
-        swal({
-          type: 'error',
-          title: 'Error al editar el curso',
-          showConfirmButton: true,
-          timer: 2000
-        })
-      }
-    })
-    // this.props.history.push(`/admin/courses/manage/${course}`)
+    this.props.history.push(`/admin/courses/manage/${course}`)
   }
 
   render() {
