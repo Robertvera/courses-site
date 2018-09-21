@@ -1,12 +1,49 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import { withRouter } from "react-router-dom"
+import Api from "../../../../../api/vmApi"
+import swal from 'sweetalert2'
 
 class ManageTeachers extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      name: '',
+      surname: '',
+      documentId: '',
+      occupation: '',
+      titles: '',
+      email: '',
+      twitter: '',
+      linkedin: '',
+      phoneNumber: '',
+      courses: ''
     };
   }
+
+  componentDidMount = () => {
+    Api.retrieveTeacher(this.props.match.params.teacher)
+    .then(teacher => {
+      const {name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses} = teacher.data.data
+      this.setState({
+        name,
+        surname,
+        documentId,
+        occupation,
+        titles,
+        email,
+        twitter,
+        linkedin,
+        phoneNumber,
+        courses
+      })
+    })
+  }
+
+  handleOnChange = e => {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
   render() {
     return (
 

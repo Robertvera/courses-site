@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 const editButton = () => {
   return (
-    <button type="button" class="btn-sm btn-outline-warning">Editar</button>
+    <button type="button" className="btn-sm btn-outline-warning">Editar</button>
   )
 }
 

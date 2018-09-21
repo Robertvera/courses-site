@@ -43,7 +43,7 @@ class CourseViewMain extends Component {
                                 </div>
                                 <div className="form-row">
                                     <div className="form-group col-md-6">
-                                        <a className="btn btn-block btn-dark" href="#">Añadir a la cesta</a>
+                                        <a className="btn btn-block btn-dark" href="#">Comprar Curso</a>
                                     </div>
                                 </div>
                                 <hr className="m-t-30 m-b-30" />

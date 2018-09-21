@@ -65,6 +65,7 @@ class Students extends Component {
     return (
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
   <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 className="h2">Estudiantes</h1>
     <div className="btn-toolbar mb-2 mb-md-0">
       <div className="btn-group mr-2">
         <button className="btn btn-sm btn-outline-secondary">Share</button>
@@ -76,7 +77,6 @@ class Students extends Component {
       </button>
     </div>
   </div>
-  <h2>Students</h2>
   <div className="table-responsive">
     <table className="table table-striped table-sm">
       <thead>
@@ -99,14 +99,14 @@ class Students extends Component {
                     <td>
                       <button 
                       type="button" 
-                      class="btn-sm btn-outline-danger"
+                      className="btn-sm btn-outline-danger"
                       onClick={() => this.handleDelete(student.documentId, student.name, student.surname)}
                       >
                       Borrar
                       </button>
                       <button
                       type="button"
-                      class="btn-sm btn-outline-warning"
+                      className="btn-sm btn-outline-warning"
                       onClick={() => this.handleEdit(student.documentId)}
                       >
                       Editar

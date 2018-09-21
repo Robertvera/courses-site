@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 const deleteButton = () => {
   return (
-    <button type="button" class="btn-sm btn-outline-danger">Borrar</button>
+    <button type="button" className="btn-sm btn-outline-danger">Borrar</button>
   )
 }
 
