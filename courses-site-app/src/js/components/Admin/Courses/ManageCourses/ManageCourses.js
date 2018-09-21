@@ -77,7 +77,8 @@ class ManageCourses extends Component {
       location: courseToEdit.location || '',
       date: courseToEdit.date || '',
       teacher: courseToEdit.teacher || '',
-      editingCourse: true
+      editingCourse: true,
+      uploadValue: courseToEdit.pdf.length ? 100 : ""
     })
   }
 
