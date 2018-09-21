@@ -27,6 +27,36 @@ class Courses extends Component {
     })
   }
 
+  deleteCourse = (e, course) => {
+    e.preventDefault()
+    swal({
+      title: `¿Estás seguro de que quieres eliminar ${course}?`,
+      text: "Una vez eliminado, no podrás volver atrás",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, lo quiero eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        Api.deleteCourse(course)
+          .then(() => {
+            swal({
+              title: '¡Curso eliminado!',
+              type: 'success',
+              showConfirmButton: false,
+              timer: 1500,
+              onOpen: () => {
+                swal.showLoading()
+              }
+            })
+              .then(this.getCourses())
+          })
+      }
+    })
+  }
+
   editCourse = (e,course)=> {
     e.preventDefault()
     this.props.history.push(`/admin/courses/manage/${course}`)
@@ -76,6 +106,7 @@ class Courses extends Component {
                       <td>{course.price}</td>
                       <td>
                         <button 
+                        onClick={e =>{this.deleteCourse(e, course.name)}} 
                         type="button" 
                         class="btn-sm btn-outline-danger"
                         >
