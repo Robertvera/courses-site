@@ -68,6 +68,9 @@ class App extends Component {
             <Route exact path="/admin/teachers/manage/:teacher" render={(routeProps) => (
               <ManageTeachers {...routeProps}/>
             )} />
+            <Route exact path="/admin/teachers/manage" render={() => (
+              <ManageTeachers />
+            )} />
                          
             </div>   
         </HashRouter>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { withRouter } from "react-router-dom"
+import { NavLink, withRouter } from "react-router-dom"
 import Api from "../../../../api/vmApi"
 import swal from 'sweetalert2'
 
@@ -24,6 +24,10 @@ class Teachers extends Component {
 
   componentDidMount = () => {
     this.listTeachers()
+  }
+
+  newTeacher = () => {
+    
   }
 
   handleDelete = (documentId, name, surname) => {
@@ -71,10 +75,13 @@ class Teachers extends Component {
               <button className="btn btn-sm btn-outline-secondary">Share</button>
               <button className="btn btn-sm btn-outline-secondary">Export</button>
             </div>
-            <button className="btn btn-sm btn-outline-secondary dropdown-toggle">
-              <span data-feather="calendar" />
-                This week
-            </button>
+            <NavLink to="/admin/teachers/manage">
+              <button 
+              className="btn btn-sm btn-outline-secondary"
+              >
+                  + Nuevo profesor
+              </button>
+            </NavLink>
           </div>
         </div>  
         <div className="table-responsive">
