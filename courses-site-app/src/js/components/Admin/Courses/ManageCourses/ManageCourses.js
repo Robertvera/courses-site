@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { withRouter} from "react-router-dom"
+import { withRouter } from "react-router-dom"
 import Api from "../../../../../api/vmApi"
 import swal from 'sweetalert2'
 import firebase from 'firebase'
@@ -19,7 +19,8 @@ class ManageCourses extends Component {
       location: '',
       date: '',
       teacher: '',
-      uploadValue: '',
+      uploadValuePDF: '',
+      uploadValueIMG: '',
       editingCourse: false
     };
   }
@@ -36,15 +37,16 @@ class ManageCourses extends Component {
       location: '',
       date: '',
       teacher: '',
-      uploadValue: '',
+      uploadValuePDF: '',
+      uploadValueIMG: '',
       editingCourse: false
     })
   }
 
   componentDidMount() {
-    
-    if(this.props.match) {
-      
+
+    if (this.props.match) {
+
       const course = this.props.match.params.course
 
       Api.retrieveCourse(course).then(_course => {
@@ -75,33 +77,54 @@ class ManageCourses extends Component {
       date: courseToEdit.date || '',
       teacher: courseToEdit.teacher || '',
       editingCourse: true,
-      uploadValue: courseToEdit.pdf.length ? 100 : ""
+      uploadValuePDF: courseToEdit.pdf.length ? 100 : "",
+      uploadValueIMG: courseToEdit.pdf.length ? 100 : "",
     })
   }
 
-  handleUpload = (e) => {
+  handleUploadPDF = (e) => {
     const file = e.target.files[0]
     const storageRef = firebase.storage().ref(`/PDF/${file.name}`)
     const task = storageRef.put(file)
 
     task.on('state_changed', snapshot => {
-        let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        this.setState({
-            uploadValue: percentage
-        })
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.setState({
+        uploadValuePDF: percentage
+      })
     }, error => {
-        console.log(error.message)
+      console.log(error.message)
     }, () => {
-        this.setState({
-            uploadValue: 100,
-            pdf: task.snapshot.metadata.fullPath
-        })
+      this.setState({
+        uploadValuePDF: 100,
+        pdf: task.snapshot.metadata.fullPath
+      })
     })
-}
+  }
+
+  handleUploadIMG = (e) => {
+    const file = e.target.files[0]
+    const storageRef = firebase.storage().ref(`/IMG/${file.name}`)
+    const task = storageRef.put(file)
+
+    task.on('state_changed', snapshot => {
+      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      this.setState({
+        uploadValueIMG: percentage
+      })
+    }, error => {
+      console.log(error.message)
+    }, () => {
+      this.setState({
+        uploadValueIMG: 100,
+        image: task.snapshot.metadata.fullPath
+      })
+    })
+  }
 
   handleEdit = e => {
     e.preventDefault()
-    const { name, description, excerpt, price, image, pdf, capacity, location, date }  = this.state
+    const { name, description, excerpt, price, image, pdf, capacity, location, date } = this.state
 
     Api.editCourse(name.trim().toLowerCase(), description, excerpt, price, image, pdf, capacity, location, date)
       .then(course => {
@@ -125,8 +148,8 @@ class ManageCourses extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const { name, description, excerpt, price, image, pdf, capacity, location, date }  = this.state
-   
+    const { name, description, excerpt, price, image, pdf, capacity, location, date } = this.state
+
     Api.createCourse(name.trim().toLowerCase(), description, excerpt, price, image, pdf, capacity, location, date)
       .then(course => {
         course.data.status === 'OK' ?
@@ -145,11 +168,11 @@ class ManageCourses extends Component {
       })
       .then(this.defaultState())
       .then(this.props.history.push('/admin/courses'))
-  }  
+  }
 
 
-    handleOnChange = e => {
-      this.setState({ [e.target.name]: e.target.value })
+  handleOnChange = e => {
+    this.setState({ [e.target.name]: e.target.value })
   }
 
 
@@ -164,59 +187,59 @@ class ManageCourses extends Component {
         </div>
         <div className="row">
           <div className="col-md-12 pt-5">
-            <form 
-            onSubmit={e =>  !this.state.editingCourse ? this.handleSubmit(e) : this.handleEdit(e)}
-            id="courses-form" method="post" noValidate
+            <form
+              onSubmit={e => !this.state.editingCourse ? this.handleSubmit(e) : this.handleEdit(e)}
+              id="courses-form" method="post" noValidate
             >
               <div className="row">
                 <div className="col-md-8">
                   <div className="form-group">
                     <input
-                    onChange={e => this.handleOnChange(e)} 
-                    className="form-control" 
-                    type="text" 
-                    name="name" 
-                    placeholder="Nombre curso"
-                    defaultValue={this.state.name || ""}  
-                    required
+                      onChange={e => this.handleOnChange(e)}
+                      className="form-control"
+                      type="text"
+                      name="name"
+                      placeholder="Nombre curso"
+                      defaultValue={this.state.name || ""}
+                      required
                     />
                     <p className="help-block text-danger" />
                   </div>
                 </div>
                 <div className="col-md-4">
                   <div className="form-group">
-                    <input 
-                    onChange={e => this.handleOnChange(e)}
-                    className="form-control" 
-                    type="date" 
-                    name="date" 
-                    placeholder="Fecha"
-                    defaultValue={this.state.date || ""}   
+                    <input
+                      onChange={e => this.handleOnChange(e)}
+                      className="form-control"
+                      type="date"
+                      name="date"
+                      placeholder="Fecha"
+                      defaultValue={this.state.date || ""}
                     />
                     <p className="help-block text-danger" />
                   </div>
                 </div>
                 <div className="col-md-12">
                   <div className="form-group">
-                    <textarea 
-                    onChange={e => this.handleOnChange(e)}
-                    className="form-control"
-                    name="description" 
-                    placeholder="Descripción curso" 
-                    value={this.state.description || ""} 
-                    rows={12}  
+                    <textarea
+                      onChange={e => this.handleOnChange(e)}
+                      className="form-control"
+                      name="description"
+                      placeholder="Descripción curso"
+                      value={this.state.description || ""}
+                      rows={12}
                     />
                   </div>
                 </div>
                 <div className="col-md-10">
                   <div className="form-group">
                     <input
-                    onChange={e => this.handleOnChange(e)}
-                    className="form-control" 
-                    type="text" 
-                    name="excerpt" 
-                    placeholder="Resumen"
-                    defaultValue={this.state.excerpt || ""}   
+                      onChange={e => this.handleOnChange(e)}
+                      className="form-control"
+                      type="text"
+                      name="excerpt"
+                      placeholder="Resumen"
+                      defaultValue={this.state.excerpt || ""}
                     />
                     <p className="help-block text-danger" />
                   </div>
@@ -224,12 +247,12 @@ class ManageCourses extends Component {
                 <div className="col-md-2">
                   <div className="form-group">
                     <input
-                    onChange={e => this.handleOnChange(e)} 
-                    className="form-control" 
-                    type="number" 
-                    name="price" 
-                    placeholder="Precio"
-                    defaultValue={this.state.price || ""}    
+                      onChange={e => this.handleOnChange(e)}
+                      className="form-control"
+                      type="number"
+                      name="price"
+                      placeholder="Precio"
+                      defaultValue={this.state.price || ""}
                     />
                     <p className="help-block text-danger" />
                   </div>
@@ -237,12 +260,12 @@ class ManageCourses extends Component {
                 <div className="col-md-2">
                   <div className="form-group">
                     <input
-                    onChange={e => this.handleOnChange(e)} 
-                    className="form-control" 
-                    type="number" 
-                    name="capacity" 
-                    placeholder="Capacidad"
-                    defaultValue={this.state.capacity || ""}    
+                      onChange={e => this.handleOnChange(e)}
+                      className="form-control"
+                      type="number"
+                      name="capacity"
+                      placeholder="Capacidad"
+                      defaultValue={this.state.capacity || ""}
                     />
                     <p className="help-block text-danger" />
                   </div>
@@ -250,24 +273,24 @@ class ManageCourses extends Component {
                 <div className="col-md-10">
                   <div className="form-group">
                     <input
-                    onChange={e => this.handleOnChange(e)} 
-                    className="form-control" 
-                    type="text" 
-                    name="location" 
-                    placeholder="Localización"
-                    defaultValue={this.state.location || ""}    
+                      onChange={e => this.handleOnChange(e)}
+                      className="form-control"
+                      type="text"
+                      name="location"
+                      placeholder="Localización"
+                      defaultValue={this.state.location || ""}
                     />
                     <p className="help-block text-danger" />
                   </div>
                 </div>
                 <div className="col-md-6">
                   <div className="form-group">
-                    <input 
-                    onChange={e => this.handleOnChange(e)}
-                    className="form-control" 
-                    type="text" 
-                    name="teacher" 
-                    placeholder="Profesor"  
+                    <input
+                      onChange={e => this.handleOnChange(e)}
+                      className="form-control"
+                      type="text"
+                      name="teacher"
+                      placeholder="Profesor"
                     />
                     <p className="help-block text-danger" />
                   </div>
@@ -275,19 +298,23 @@ class ManageCourses extends Component {
                 <div className="col-md-6">
                   <div className="row">
                     <div className="col-md-6">
-                      <progress value={this.state.uploadValue} mx="100"></progress>
+                      <progress value={this.state.uploadValuePDF} mx="100"></progress>
                       <br />
                       <span>Añadir PDF</span>
-                      <input 
-                      type="file" 
-                      onChange={e => this.handleUpload(e)} 
+                      <input
+                        type="file"
+                        onChange={e => this.handleUploadPDF(e)}
                       />
-                      {/* <img src="https://michilot.com/wp-content/uploads/2017/12/pdficon.png" width="50" height="50" /> */}
                     </div>
-                    {/* <div className="col-md-6">
-                      <img src="http://cdn.onlinewebfonts.com/svg/img_148071.png" width="50" height="37" />
-                      <span>imagendeprueba.jpg</span>
-                    </div> */}
+                    <div className="col-md-6">
+                    <progress value={this.state.uploadValueIMG} mx="100"></progress>
+                      <br />
+                      <span>Añadir Imagen</span>
+                      <input
+                        type="file"
+                        onChange={e => this.handleUploadIMG(e)}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div className="col-md-12 mt-4">
