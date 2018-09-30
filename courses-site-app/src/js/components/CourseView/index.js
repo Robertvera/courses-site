@@ -66,7 +66,7 @@ render() {
             <div className="row">
               <div className="col-lg-7">
                 <div className="shop-single-item-photos">
-                  <img src="https://vmbformacion.files.wordpress.com/2017/02/cartel-bcn1.png?w=505&h=388" alt />
+                  <img src={image} alt />
                 </div>
               </div>
               <div className="col-lg-5">
@@ -88,7 +88,7 @@ render() {
                   </div>
                   <div className="form-row">
                     <div className="form-group col-md-6">
-                      <a className="btn btn-block btn-dark" href="#">Añadir a la cesta</a>
+                      <a className="btn btn-block btn-dark" href="#">Comprar curso</a>
                     </div>
                   </div>
                   <hr className="m-t-30 m-b-30" />
