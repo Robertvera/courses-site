@@ -42,8 +42,6 @@ class ManageCourses extends Component {
   }
 
   componentDidMount() {
-    this.props ? console.log("props didmount ", this.props) : console.log('nada')
-    
     
     if(this.props.match) {
       
@@ -52,7 +50,6 @@ class ManageCourses extends Component {
       Api.retrieveCourse(course).then(_course => {
         if (_course.data.status === 'OK') {
           this.editCourse(_course.data.data[0])
-          console.log("data ", _course.data.data[0])
         } else {
           swal({
             type: 'error',
@@ -104,7 +101,6 @@ class ManageCourses extends Component {
 
   handleEdit = e => {
     e.preventDefault()
-    console.log('editing mode')
     const { name, description, excerpt, price, image, pdf, capacity, location, date }  = this.state
 
     Api.editCourse(name.trim().toLowerCase(), description, excerpt, price, image, pdf, capacity, location, date)
@@ -129,7 +125,6 @@ class ManageCourses extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log('submiting mode')
     const { name, description, excerpt, price, image, pdf, capacity, location, date }  = this.state
    
     Api.createCourse(name.trim().toLowerCase(), description, excerpt, price, image, pdf, capacity, location, date)
