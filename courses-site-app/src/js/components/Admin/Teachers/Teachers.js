@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import { NavLink, withRouter } from "react-router-dom"
 import Api from "../../../../api/vmApi"
 import swal from 'sweetalert2'
+import EditButton from '../../Buttons/editButton'
+import DeleteButton from '../../Buttons/deleteButton'
 
 class Teachers extends Component {
   constructor() {
@@ -104,20 +106,11 @@ class Teachers extends Component {
                       <td>{teacher.email}</td>
                       <td>{teacher.phoneNumber}</td>
                       <td>
-                      <button 
-                      type="button" 
-                      className="btn-sm btn-outline-danger"
-                      onClick={() => this.handleDelete(teacher.documentId, teacher.name, teacher.surname)}
-                      >
-                      Borrar
-                      </button>
-                      <button
-                      type="button"
-                      className="btn-sm btn-outline-warning"
-                      onClick={() => this.handleEdit(teacher.documentId)}
-                      >
-                      Editar
-                      </button>
+                      <DeleteButton 
+                      onClick={() => this.handleDelete(teacher.documentId, teacher.name, teacher.surname)}/>                      
+                      <EditButton
+                      onClick={()=> this.handleEdit(teacher.documentId)}
+                       />
                       </td>
                     </tr>
               })}
