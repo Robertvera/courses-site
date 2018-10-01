@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const bodyParser = require('body-parser')
 const { 
-    listCourses, createCourse, editCourse, removeCourse, retrieveCourse, 
+    listCourses, createCourse, editCourse, removeCourse, retrieveCourseQuery, retrieveCourse, 
     createStudent, editStudent, removeStudent, retrieveStudent, listStudents, 
     createTeacher, editTeacher, removeTeacher, retrieveTeacher, listTeachers 
 } = require('./handlers')
@@ -50,5 +50,7 @@ router.put('/course/:name', jsonBodyParser, editCourse)
 router.get('/course/:name', retrieveCourse)
 
 router.delete('/course/:name', removeCourse)
+
+router.get('/courses/:query', retrieveCourseQuery)
 
 module.exports = router

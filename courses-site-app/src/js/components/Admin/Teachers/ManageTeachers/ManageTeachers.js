@@ -18,13 +18,15 @@ class ManageTeachers extends Component {
       linkedin: '',
       phoneNumber: '',
       courses: '',
-      modeEdition: true
+      modeEdition: false,
+      allCourses: [],
+      query: ''
     };
   }
 
   componentDidMount = () => {
 
-    if (this.props.match) {
+    if (this.props.match.params.teacher) {
       Api.retrieveTeacher(this.props.match.params.teacher)
       .then(teacher => {
         const {name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses} = teacher.data.data
@@ -38,19 +40,80 @@ class ManageTeachers extends Component {
           twitter,
           linkedin,
           phoneNumber,
-          courses
+          courses,
+          modeEdition: true
         })
       })
-    } else {
-      this.setState({
-        modeEdition: false
-      })
     }
+
+    Api.listCourses()
+    .then(courses => {
+      const allCourses = courses.data.data
+      this.setState({
+        allCourses
+      })
+    })
+  }
+
+  handleEdit = e => {
+    e.preventDefault()
+    const { name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses }  = this.state
+
+    Api.editTeacher(name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses)
+    .then(teacher => {
+      teacher.data.status === 'OK' ?
+        swal({
+          title: 'Profesor modificado!',
+          showConfirmButton: true,
+          timer: 1500
+        })
+        .then(this.props.history.push(`/admin/teachers/`))
+        :
+        swal({
+          type: 'error',
+          title: 'Error modificando el profesor',
+          showConfirmButton: true,
+          timer: 2000
+        })
+    }
+    )    
+  }
+
+  handleSubmit = e => {
+    e.preventDefault()
+    const { name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses }  = this.state
+
+    Api.createTeacher(name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber)
+    .then(teacher => {
+      console.log(teacher)
+      teacher.data.status === 'OK' ?
+      swal({
+        title: 'Profesor creado!',
+        showConfirmButton: true,
+        timer: 1500
+      })
+      .then(this.props.history.push(`/admin/teachers/`))
+      :
+      swal({
+        type: 'error',
+        title: 'Error creando el profesor',
+        showConfirmButton: true,
+        timer: 2000
+      })
+    })
 
   }
 
   handleOnChange = e => {
     this.setState({ [e.target.name]: e.target.value })
+  }
+
+  handleQuery = e => {
+    this.setState({ query: e.target.value })
+    Api.retrieveCourseQuery(this.state.query)
+    .then((courses)=>{
+      console.log(courses)
+    })
   }
 
   render() {
@@ -105,7 +168,7 @@ class ManageTeachers extends Component {
                 <input 
                 className="form-control" 
                 type="text" 
-                name="id" 
+                name="documentId" 
                 placeholder="DNI" 
                 value={documentId}
                 onChange={e => this.handleOnChange(e)} 
@@ -193,22 +256,39 @@ class ManageTeachers extends Component {
           </div>
           <div className="col-md-4">
             <div className="form-group">
-              {/* <select multiple={true} className="form-control" name="courses" value={['saab', 'audi']}>
-                <option value="volvo">Volvo</option>
-                <option value="saab" >Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
-              </select> */}
+              <input 
+                className="form-control" 
+                type="text" 
+                name="query" 
+                placeholder="Introduce el nombre del curso para buscar" 
+                onChange={e => this.handleQuery(e)} 
+                required />
               <p className="help-block text-danger" />
             </div>
+          </div>
+          <div className="col-md-6">
+            <div className="table-responsive">
+                <table className="table table-striped table-sm">
+                  <thead>
+                    <tr>
+                      <th>Cursos que imparte</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  {this.state.courses ?
+                  <tbody>
+                    {this.state.courses.map(course => {
+                    return <tr key={course._id}>
+                            <td>{course.name}</td>
+                            <td>
+                            <DeleteButton />                           
+                            </td>
+                          </tr>
+                    })}
+                  </tbody>
+                  : undefined}
+                </table>
+              </div>
           </div>
           <div className="col-md-12 mt-4">
 
@@ -229,4 +309,4 @@ class ManageTeachers extends Component {
     );
   }
 }
-export default ManageTeachers;
+export default withRouter(ManageTeachers);

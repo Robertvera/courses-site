@@ -58,6 +58,10 @@ module.exports = {
             })
     },
 
+    retrieveCourseQuery(query) {
+        return Courses.find({  name: new RegExp(query, 'i') }, { __v: 0 })
+    },
+
     /////////////////////////////// STUDENTS METHODS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     createStudent(name, surname, documentId, address, cp, city, email, phoneNumber, courses) {
         return Promise.resolve()
