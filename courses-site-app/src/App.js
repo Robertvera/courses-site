@@ -38,8 +38,8 @@ class App extends Component {
             <Route exact path="/es/cursos" render={() => (
               <CoursesGridView />
             )} />
-            <Route exact path="/es/detalles-curso" render={() => (
-              <CourseDetails />
+            <Route exact path="/es/detalles/:course" render={(routeProps) => (
+              <CourseDetails {...routeProps} />
             )} />
             <Route exact path="/es/checkout" render={() => (
             <Checkout />
@@ -64,6 +64,11 @@ class App extends Component {
             )} />
             <Route exact path="/admin/students/manage/:student" render={(routeProps) => (
               <ManageStudents {...routeProps}/>
+            <Route exact path="/admin/courses/manage/:course" render={(routeProps) => 
+              <ManageCourses {...routeProps} /> 
+            } />
+            <Route exact path="/admin/students/manage" render={() => (
+              <ManageStudents />
             )} />
             <Route exact path="/admin/teachers/manage/:teacher" render={(routeProps) => (
               <ManageTeachers {...routeProps}/>
