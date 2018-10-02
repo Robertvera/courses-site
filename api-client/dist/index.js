@@ -71,6 +71,10 @@ var vmApi = {
         return axios.get(this._url() + '/course/' + name);
     },
 
+    retrieveCourseQuery: function retrieveCourseQuery(query) {
+        return axios.get(this._url() + '/courses/' + query);
+    },
+
     deleteCourse: function deleteCourse(name) {
         return axios.delete(this._url() + '/course/' + name);
     }

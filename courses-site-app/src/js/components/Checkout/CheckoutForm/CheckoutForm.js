@@ -1,13 +1,67 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import './CheckoutForm.scss'
+import Api from "../../../../api/vmApi"
+import swal from 'sweetalert2'
 
 class CheckoutForm extends Component {
   constructor() {
     super();
     this.state = {
+      name: '',
+      surname: '',
+      dni: '',
+      address: '',
+      cp: '',
+      city: '',
+      email: '',
+      phone: '',
+      course: ''
     };
   }
+
+  handleOnChange = e => {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
+  handleSubmit = e => {
+    e.preventDefault()
+    const { name, surname, dni, address, cp, city, email, phone }  = this.state
+
+    Api.createStudent(name, surname, dni, address, cp, city, email, phone)
+    .then(student => {
+      student.data.status === 'OK' ?
+        swal({
+          title: '¡Ya casi está!',
+          text: 'Espera mientras te redirigimos a un entorno seguro para realizar el pago.',
+          showConfirmButton: true,
+          timer: 1500
+        })
+        :
+        swal({
+          type: 'error',
+          title: '¡Error!',
+          text: 'Revisa los datos del formulario y vuelve a intentarlo',
+          showConfirmButton: true,
+          timer: 2000
+        })
+    }
+    )
+    .then(
+      this.setState({
+        name: '',
+        surname: '',
+        dni: '',
+        address: '',
+        cp: '',
+        city: '',
+        email: '',
+        phone: '',
+        course: ''
+      })
+    )
+  }
+
   render() {
     return (
       <section className="module">
@@ -20,29 +74,80 @@ class CheckoutForm extends Component {
               <form>
                 <div className="row form-row">
                   <div className="col-md-6 form-group">
-                    <input className="form-control" type="text" placeholder="Nombre" required />
+                    <input 
+                    onChange={e => this.handleOnChange(e)} 
+                    name="name"
+                    className="form-control" 
+                    type="text" 
+                    placeholder="Nombre"
+                    required />
                   </div>
                   <div className="col-md-6 form-group">
-                    <input className="form-control" type="text" placeholder="Apellidos" required />
+                    <input 
+                    onChange={e => this.handleOnChange(e)} 
+                    name="surname"
+                    className="form-control" 
+                    type="text" 
+                    placeholder="Apellidos" 
+                    required />
                   </div>
                 </div>
                 <div className="row form-row">
-                  <div className="col-md-6 form-group">
-                    <input className="form-control" type="text" placeholder="Teléfono" required />
+                  <div className="col-md-3 form-group">
+                    <input 
+                    onChange={e => this.handleOnChange(e)} 
+                    name="dni"
+                    className="form-control" 
+                    type="text" 
+                    placeholder="DNI" 
+                    required />
                   </div>
-                  <div className="col-md-6 form-group">
-                    <input className="form-control" type="text" placeholder="Correo Electrónico" required />
+                  <div className="col-md-4 form-group">
+                    <input 
+                    onChange={e => this.handleOnChange(e)} 
+                    name="phone"
+                    className="form-control" 
+                    type="text" 
+                    placeholder="Teléfono" 
+                    required />
+                  </div>
+                  <div className="col-md-5 form-group">
+                    <input 
+                    onChange={e => this.handleOnChange(e)} 
+                    name="email"
+                    className="form-control" 
+                    type="text" 
+                    placeholder="Correo Electrónico" 
+                    required />
                   </div>
                   <div className="col-md-12 form-group">
-                    <input className="form-control" type="text" placeholder="Dirección de Facturación" required />
+                    <input 
+                    onChange={e => this.handleOnChange(e)} 
+                    name="address"
+                    className="form-control" 
+                    type="text" 
+                    placeholder="Dirección de Facturación" 
+                    required />
                   </div>
                 </div>
                 <div className="row form-row">
                   <div className="col-md-6 form-group">
-                    <input className="form-control" type="text" placeholder="Población" required />
+                    <input 
+                    onChange={e => this.handleOnChange(e)} 
+                    name="city"
+                    className="form-control" 
+                    type="text" 
+                    placeholder="Población" 
+                    required />
                   </div>
                   <div className="col-md-6 form-group">
-                    <input className="form-control" type="text" placeholder="Código Postal" required />
+                    <input 
+                    onChange={e => this.handleOnChange(e)} 
+                    name="cp"
+                    className="form-control" 
+                    type="text" 
+                    placeholder="Código Postal" 
+                    required />
                   </div>
                 </div>
               </form>
@@ -70,7 +175,13 @@ class CheckoutForm extends Component {
                 </tbody>
               </table>
               <div className="text-right">
-                <a className="btn btn-brand" href="#">Realizar Pedido</a>
+                <a 
+                className="btn btn-brand" 
+                href="#"
+                onClick={e => this.handleSubmit(e)}
+                >
+                Realizar Pedido
+                </a>
               </div>
             </div>
           </div>
