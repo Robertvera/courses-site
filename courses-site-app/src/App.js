@@ -64,6 +64,7 @@ class App extends Component {
             )} />
             <Route exact path="/admin/students/manage/:student" render={(routeProps) => (
               <ManageStudents {...routeProps}/>
+            )} />  
             <Route exact path="/admin/courses/manage/:course" render={(routeProps) => 
               <ManageCourses {...routeProps} /> 
             } />
