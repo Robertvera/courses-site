@@ -42,6 +42,10 @@ module.exports = {
             })
     },
 
+    listCourses() {
+        return Courses.find({})
+    },
+
     removeCourse(name) {
         return Promise.resolve()
             .then(() => {
@@ -52,6 +56,10 @@ module.exports = {
 
                 return Courses.deleteOne({ name })
             })
+    },
+
+    retrieveCourseQuery(query) {
+        return Courses.find({  name: new RegExp(query, 'i') }, { __v: 0 })
     },
 
     /////////////////////////////// STUDENTS METHODS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
