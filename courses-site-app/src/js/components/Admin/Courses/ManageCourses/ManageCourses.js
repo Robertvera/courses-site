@@ -65,29 +65,36 @@ class ManageCourses extends Component {
   }
 
   editCourse(courseToEdit) {
-    this.setState({
-      name: courseToEdit.name || '',
-      description: courseToEdit.description || '',
-      excerpt: courseToEdit.excerpt || '',
-      price: courseToEdit.price || '',
-      image: courseToEdit.image || '',
-      pdf: courseToEdit.pdf || '',
-      capacity: courseToEdit.capacity || '',
-      location: courseToEdit.location || '',
-      date: courseToEdit.date || '',
-      teacher: courseToEdit.teacher || '',
-      editingCourse: true,
-      uploadValuePDF: courseToEdit.pdf.length ? 100 : "",
-      uploadValueIMG: courseToEdit.pdf.length ? 100 : "",
-    })
+    if (courseToEdit) {
+
+      this.setState({
+        name: courseToEdit.name || '',
+        description: courseToEdit.description || '',
+        excerpt: courseToEdit.excerpt || '',
+        price: courseToEdit.price || '',
+        image: courseToEdit.image || '',
+        pdf: courseToEdit.pdf || '',
+        capacity: courseToEdit.capacity || '',
+        location: courseToEdit.location || '',
+        date: courseToEdit.date || '',
+        teacher: courseToEdit.teacher || '',
+        editingCourse: true,
+        uploadValuePDF: courseToEdit.pdf.length ? 100 : "",
+        uploadValueIMG: courseToEdit.pdf.length ? 100 : "",
+      })
+    }
   }
 
   handleUploadPDF = (e) => {
     const file = e.target.files[0]
-    const storageRef = firebase.storage().ref(`/PDF/${file.name}`)
-    const task = storageRef.put(file)
+    const storageRef = firebase.storage().ref();
+    const pdfRef = storageRef.child(file.name);
+    const pdfRouteRef = storageRef.child(`/pdf/${file.name}`)
 
-    task.on('state_changed', snapshot => {
+    pdfRef.name === pdfRouteRef.name
+    pdfRef.fullPath === pdfRouteRef.fullPath
+    
+    pdfRouteRef.put(file).on( 'state_changed', snapshot => {
       let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       this.setState({
         uploadValuePDF: percentage
@@ -95,19 +102,25 @@ class ManageCourses extends Component {
     }, error => {
       console.log(error.message)
     }, () => {
-      this.setState({
-        uploadValuePDF: 100,
-        pdf: task.snapshot.metadata.fullPath
+      pdfRouteRef.getDownloadURL().then( url => {
+        this.setState({
+          uploadValuePDF: 100,
+          pdf: url
+        })
       })
     })
   }
 
   handleUploadIMG = (e) => {
     const file = e.target.files[0]
-    const storageRef = firebase.storage().ref(`/IMG/${file.name}`)
-    const task = storageRef.put(file)
+    const storageRef = firebase.storage().ref();
+    const imageRef = storageRef.child(file.name);
+    const imagesRouteRef = storageRef.child(`/image/${file.name}`)
 
-    task.on('state_changed', snapshot => {
+    imageRef.name === imagesRouteRef.name
+    imageRef.fullPath === imagesRouteRef.fullPath
+    
+    imagesRouteRef.put(file).on( 'state_changed', snapshot => {
       let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       this.setState({
         uploadValueIMG: percentage
@@ -115,9 +128,11 @@ class ManageCourses extends Component {
     }, error => {
       console.log(error.message)
     }, () => {
-      this.setState({
-        uploadValueIMG: 100,
-        image: task.snapshot.metadata.fullPath
+      imagesRouteRef.getDownloadURL().then( url => {
+        this.setState({
+          uploadValueIMG: 100,
+          image: url
+        })
       })
     })
   }
