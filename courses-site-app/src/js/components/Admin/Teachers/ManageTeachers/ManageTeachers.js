@@ -18,9 +18,7 @@ class ManageTeachers extends Component {
       linkedin: '',
       phoneNumber: '',
       courses: '',
-      modeEdition: false,
-      allCourses: [],
-      query: ''
+      modeEdition: false
     };
   }
 
@@ -45,14 +43,6 @@ class ManageTeachers extends Component {
         })
       })
     }
-
-    Api.listCourses()
-    .then(courses => {
-      const allCourses = courses.data.data
-      this.setState({
-        allCourses
-      })
-    })
   }
 
   handleEdit = e => {
@@ -106,14 +96,6 @@ class ManageTeachers extends Component {
 
   handleOnChange = e => {
     this.setState({ [e.target.name]: e.target.value })
-  }
-
-  handleQuery = e => {
-    this.setState({ query: e.target.value })
-    Api.retrieveCourseQuery(this.state.query)
-    .then((courses)=>{
-      console.log(courses)
-    })
   }
 
   render() {
@@ -251,18 +233,6 @@ class ManageTeachers extends Component {
               value={phoneNumber}
               onChange={e => this.handleOnChange(e)} 
               required />
-              <p className="help-block text-danger" />
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="form-group">
-              <input 
-                className="form-control" 
-                type="text" 
-                name="query" 
-                placeholder="Introduce el nombre del curso para buscar" 
-                onChange={e => this.handleQuery(e)} 
-                required />
               <p className="help-block text-danger" />
             </div>
           </div>

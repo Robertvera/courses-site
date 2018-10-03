@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import { NavLink } from 'react-router-dom'
 import './AdminFrame.scss'
 
 class AdminFrame extends Component {
@@ -26,22 +27,19 @@ class AdminFrame extends Component {
         <div className="sidebar-sticky">
           <ul className="nav flex-column">
             <li className="nav-item">
-              <a className="nav-link active" href="#">
-                <span data-feather="home" />
-                Cursos <span className="sr-only">(current)</span>
-              </a>
+              <NavLink className="nav-link" href="#" to="/admin/courses">
+                Cursos 
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                <span data-feather="file" />
-                Estudiantes
-              </a>
+              <NavLink className="nav-link" href="#" to="/admin/students">
+                Estudiantes 
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                <span data-feather="shopping-cart" />
+              <NavLink className="nav-link" href="#" to="/admin/teachers">
                 Profesores
-              </a>
+              </NavLink>
             </li>              
           </ul>
         </div>
