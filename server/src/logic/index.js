@@ -43,7 +43,7 @@ module.exports = {
     },
 
     listCourses() {
-        return Courses.find({})
+        return Courses.find({}).sort({date: -1})
     },
 
     removeCourse(name) {
