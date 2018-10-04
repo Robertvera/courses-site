@@ -86,9 +86,11 @@ class Courses extends Component {
               <button className="btn btn-sm btn-outline-secondary">Share</button>
               <button className="btn btn-sm btn-outline-secondary">Export</button>
             </div>
-            <button className="btn btn-sm btn-outline-secondary dropdown-toggle">
-              <span data-feather="calendar" />
-              This week
+            <button 
+            onClick={() => this.props.history.push(`/admin/courses/manage`)}
+            className="btn btn-sm btn-outline-secondary"
+            >
+              Crear curso
             </button>
           </div>
         </div>
