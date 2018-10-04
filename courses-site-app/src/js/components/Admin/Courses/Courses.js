@@ -105,13 +105,13 @@ class Courses extends Component {
             <div className="btn-group mr-2">
               <button className="btn btn-sm btn-outline-secondary">Share</button>
               <button className="btn btn-sm btn-outline-secondary">Export</button>
-            </div>
             <button 
             onClick={() => this.props.history.push(`/admin/courses/manage`)}
             className="btn btn-sm btn-outline-secondary"
             >
               Crear curso
             </button>
+            </div>
           </div>
         </div>
         <div className="table-responsive">
