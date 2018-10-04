@@ -21,8 +21,15 @@ class Courses extends Component {
 
   getCourses = () => {
     Api.listCourses().then(courses => {
+      let coursesListed = courses.data.data
+      coursesListed.forEach(course => {
+        if (course.date && course.date.length) {
+          course.date = new Date(course.date)
+          course.date = `${course.date.getDate()}/${course.date.getMonth()+1}/${course.date.getFullYear()}`;
+        }
+      });
       this.setState({
-        courses: courses.data.data
+        courses: coursesListed
       })
     })
   }
