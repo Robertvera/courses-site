@@ -19,6 +19,11 @@ class Courses extends Component {
     this.getCourses()
   }
 
+  componentDidUpdate() {
+    console.log("update")
+    this.getCourses()
+  }
+
   getCourses = () => {
     Api.listCourses().then(courses => {
       let coursesListed = courses.data.data
