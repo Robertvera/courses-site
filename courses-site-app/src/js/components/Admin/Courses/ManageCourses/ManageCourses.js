@@ -190,6 +190,14 @@ class ManageCourses extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  handleTeachers = e => {
+    this.setState({ teacher: e.target.value.trim() })
+    Api.listTeachers(this.state.teacher)
+    .then((_teacher) => {
+      console.log(_teacher)
+    })
+  }
+
 
   render() {
     return (
@@ -301,7 +309,7 @@ class ManageCourses extends Component {
                 <div className="col-md-6">
                   <div className="form-group">
                     <input
-                      onChange={e => this.handleOnChange(e)}
+                      onChange={e => this.handleTeachers(e)}
                       className="form-control"
                       type="text"
                       name="teacher"
