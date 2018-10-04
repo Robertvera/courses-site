@@ -17,6 +17,9 @@ const jsonBodyParser = bodyParser.json()
 
 router.get('/teachers', listTeachers)
 
+
+router.get('/teachers/:query', listTeachers)
+
 router.post('/create-teacher', jsonBodyParser, createTeacher)
 
 router.put('/edit-teacher/:documentId', jsonBodyParser, editTeacher)
