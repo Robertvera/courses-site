@@ -132,7 +132,6 @@ module.exports = {
     },
 
     listTeachers(query) {
-        console.log(query)
         if (query) {
             return Teachers.find({  name: new RegExp(query, 'i') }, { __v: 0 })
         }
