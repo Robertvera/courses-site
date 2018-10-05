@@ -21,7 +21,8 @@ class ManageCourses extends Component {
       teacher: '',
       uploadValuePDF: '',
       uploadValueIMG: '',
-      editingCourse: false
+      editingCourse: false,
+      teachersList: []
     };
   }
 
@@ -193,13 +194,15 @@ class ManageCourses extends Component {
   handleTeachers = e => {
     this.setState({ teacher: e.target.value.trim() })
     Api.listTeachers(this.state.teacher)
-    .then((_teacher) => {
-      console.log(_teacher)
+    .then((_teachers) => {
+      this.setState({ teachersList: _teachers.data.data })
+      //  console.log(_teachers.data.data)
     })
   }
 
 
   render() {
+    console.log(this.state.teachersList)
     return (
 
       <div className="container col-md-10 offset-md-2">
@@ -316,6 +319,12 @@ class ManageCourses extends Component {
                       placeholder="Profesor"
                     />
                     <p className="help-block text-danger" />
+                  </div>
+                  <div className="form-group">
+                    <ul className="list-group">
+                      <li className="list-group-item" >
+                      </li>
+                    </ul>
                   </div>
                 </div>
                 <div className="col-md-6">
