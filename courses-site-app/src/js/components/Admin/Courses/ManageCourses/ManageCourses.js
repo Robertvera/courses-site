@@ -19,10 +19,11 @@ class ManageCourses extends Component {
       location: '',
       date: '',
       teacher: '',
+      teacherToFind: '',
+      teachersList: [],
       uploadValuePDF: '',
       uploadValueIMG: '',
-      editingCourse: false,
-      teachersList: []
+      editingCourse: false
     };
   }
 
@@ -38,6 +39,8 @@ class ManageCourses extends Component {
       location: '',
       date: '',
       teacher: '',
+      teacherToFind: '',
+      teachersList: [],
       uploadValuePDF: '',
       uploadValueIMG: '',
       editingCourse: false
@@ -78,7 +81,7 @@ class ManageCourses extends Component {
         capacity: courseToEdit.capacity || '',
         location: courseToEdit.location || '',
         date: courseToEdit.date || '',
-        teacher: courseToEdit.teacher || '',
+        teacher: courseToEdit.teachers[0] || '',
         editingCourse: true,
         uploadValuePDF: courseToEdit.pdf.length ? 100 : "",
         uploadValueIMG: courseToEdit.pdf.length ? 100 : "",
@@ -140,9 +143,9 @@ class ManageCourses extends Component {
 
   handleEdit = e => {
     e.preventDefault()
-    const { name, description, excerpt, price, image, pdf, capacity, location, date } = this.state
+    const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher } = this.state
 
-    Api.editCourse(name.trim().toLowerCase(), description, excerpt, price, image, pdf, capacity, location, date)
+    Api.editCourse(name.trim().toLowerCase(), description, excerpt, price, image, pdf, capacity, location, date, teacher)
       .then(course => {
         course.data.status === 'OK' ?
           swal({
@@ -164,9 +167,9 @@ class ManageCourses extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const { name, description, excerpt, price, image, pdf, capacity, location, date } = this.state
+    const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher } = this.state
 
-    Api.createCourse(name.trim().toLowerCase(), description, excerpt, price, image, pdf, capacity, location, date)
+    Api.createCourse(name.trim().toLowerCase(), description, excerpt, price, image, pdf, capacity, location, date, teacher)
       .then(course => {
         course.data.status === 'OK' ?
           swal({
@@ -192,14 +195,25 @@ class ManageCourses extends Component {
   }
 
   handleTeachers = e => {
-    this.setState({ teacher: e.target.value.trim() })
-    Api.listTeachers(this.state.teacher)
-    .then((_teachers) => {
-      this.setState({ teachersList: _teachers.data.data })
-      //  console.log(_teachers.data.data)
-    })
+    this.setState({ teacherToFind: e.target.value.trim() })
+    if (this.state.teacherToFind.length >= 2) {
+      Api.listTeachers(this.state.teacherToFind)
+      .then((_teachers) => {
+        this.setState({ teachersList: _teachers.data.data })
+      })
+    }
   }
 
+  selectTeacherFromSuggested = (e, teacherId) => {
+    e.preventDefault()
+    this.setState({ teacher: teacherId})
+  }
+
+  findTeacherName = e => {
+    if (this.state.teacher.length) {
+      return "Hacer llamada buscando nombre profe"
+    }
+  }
 
   render() {
     console.log(this.state.teachersList)
@@ -317,13 +331,23 @@ class ManageCourses extends Component {
                       type="text"
                       name="teacher"
                       placeholder="Profesor"
+                      defaultValue={this.findTeacherName()}
                     />
                     <p className="help-block text-danger" />
                   </div>
                   <div className="form-group">
                     <ul className="list-group">
-                      <li className="list-group-item" >
-                      </li>
+                      {this.state.teachersList.length ? 
+                        this.state.teachersList.map(teacher => {
+                          return <button 
+                          className="list-group-item" 
+                          type="button"
+                          onClick={e => this.selectTeacherFromSuggested(e, teacher._id)}
+                          >
+                            {teacher.name}
+                          </button>
+                        })
+                      : ''}
                     </ul>
                   </div>
                 </div>
