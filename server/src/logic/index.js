@@ -150,10 +150,10 @@ module.exports = {
             })
     },
 
-    retrieveTeacher(documentId) {
+    retrieveTeacher(id) {
         return Promise.resolve()
             .then(() => {
-                return Teachers.findOne({ documentId }, { __v: 0 })
+                return Teachers.findOne({ _id: id }, { __v: 0 })
             })
             .then(teacher => {
                 if (!teacher) throw Error('teacher does not exist')
