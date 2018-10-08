@@ -161,7 +161,7 @@ render() {
                     <p>{teacher}</p>
                   </div>
                   <div className="tab-pane fade" id="shop-comment">
-                    <p>Comments? Nothing?</p>
+                  <object data={pdf} type="application/pdf" width="100%" height="100%"></object>
                   </div>
                 </div>
               </div>
