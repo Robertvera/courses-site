@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import { withRouter } from "react-router-dom"
 import './CheckoutForm.scss'
 import Api from "../../../../api/vmApi"
 import swal from 'sweetalert2'
 
 class CheckoutForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       name: '',
       surname: '',
@@ -16,8 +17,25 @@ class CheckoutForm extends Component {
       city: '',
       email: '',
       phone: '',
-      course: ''
+      course: '',
+      courseName: '',
+      coursePrice: ''
     };
+  }
+
+  componentDidMount = () => {
+    if (this.props.match.params.id) {
+      Api.retrieveCourseId(this.props.match.params.id)
+      .then(course=>{
+        console.log(course)
+        const {name, price, _id } = course.data.data[0]
+        this.setState ({
+          courseName: name,
+          coursePrice: price,
+          course: _id
+        })
+      })
+    }
   }
 
   handleOnChange = e => {
@@ -26,9 +44,9 @@ class CheckoutForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    const { name, surname, dni, address, cp, city, email, phone }  = this.state
+    const { name, surname, dni, address, cp, city, email, phone, course }  = this.state
 
-    Api.createStudent(name, surname, dni, address, cp, city, email, phone)
+    Api.createStudent(name, surname, dni, address, cp, city, email, phone, course)
     .then(student => {
       student.data.status === 'OK' ?
         swal({
@@ -63,6 +81,8 @@ class CheckoutForm extends Component {
   }
 
   render() {
+    const {courseName, coursePrice} = this.state
+
     return (
       <section className="module">
         <div className="container">
@@ -161,17 +181,9 @@ class CheckoutForm extends Component {
               <table className="table cart-table">
                 <tbody>
                   <tr>
-                    <td>Nombre del curso 1</td>
-                    <td className="text-right">21€</td>
-                  </tr>
-                  <tr>
-                    <td>Nombre del curso 2</td>
-                    <td className="text-right">31€</td>
-                  </tr>
-                  <tr>
-                    <td>Total</td>
-                    <td className="text-right">52€</td>
-                  </tr>
+                    <td>{courseName}</td>
+                    <td className="text-right">{coursePrice} €</td>
+                  </tr>                
                 </tbody>
               </table>
               <div className="text-right">
@@ -192,4 +204,4 @@ class CheckoutForm extends Component {
     );
   }
 }
-export default CheckoutForm;
+export default withRouter(CheckoutForm);

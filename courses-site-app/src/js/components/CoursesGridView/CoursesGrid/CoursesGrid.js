@@ -52,7 +52,7 @@ class CoursesGrid extends Component {
                         <div className="shop-item-hidden">
                           <a 
                           className="btn btn-new-white" 
-                          onClick={e =>{this.showCourse(e, course.name)}}
+                          onClick={e =>{this.showCourse(e, course.name, course_id)}}
                           >
                           Ver más información
                           </a>

@@ -4,6 +4,7 @@ const removeCourse = require('./removeCourse')
 const retrieveCourse = require('./retrieveCourse')
 const listCourses = require('./listCourses')
 const retrieveCourseQuery = require('./retrieveCourseQuery')
+const retrieveCourseId = require('./retrieveCourseId')
 
 module.exports = {
     createCourse,
@@ -11,5 +12,6 @@ module.exports = {
     removeCourse,
     retrieveCourse,
     listCourses,
-    retrieveCourseQuery
+    retrieveCourseQuery,
+    retrieveCourseId
 }

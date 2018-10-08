@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import CourseViewHeader from './CourseViewHeader/CourseViewHeader'
+import { withRouter } from "react-router-dom"
 import Api from '../../../api/vmApi'
 import swal from 'sweetalert2'
 
@@ -17,11 +18,12 @@ class CourseView extends Component {
         capacity: '',
         location: '',
         date: '',
-        teacher: ''
+        teacher: '',
+        id: ''
     };
 }
 
-componentDidMount() {
+componentDidMount = () => {
 
     if(this.props.match) {
       
@@ -41,7 +43,8 @@ componentDidMount() {
             capacity: courseToShow.capacity || '',
             location: courseToShow.location || '',
             date: courseToShow.date || '',
-            teacher: courseToShow.teacher || ''
+            teacher: courseToShow.teacher || '',
+            id: courseToShow._id || ''
           })
           console.log(this.state)
         } else {
@@ -55,9 +58,15 @@ componentDidMount() {
       })
     }
   }
+
+checkoutCourse = (e, id) => {
+  e.preventDefault()
+  this.props.history.push(`/es/checkout/${id}`)
+}
+
 render() {
-  const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher } = this.state
-  console.log({ name, description, excerpt, price, image, pdf, capacity, location, date, teacher })
+  const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher, id } = this.state
+  console.log({ name, description, excerpt, price, image, pdf, capacity, location, date, teacher, id })
     return (
       <div className='container'>
           <CourseViewHeader />
@@ -88,7 +97,12 @@ render() {
                   </div>
                   <div className="form-row">
                     <div className="form-group col-md-6">
-                      <a className="btn btn-block btn-dark" href="#">Comprar curso</a>
+                      <a 
+                      className="btn btn-block btn-dark" 
+                      href="#"
+                      onClick={ (e) => {this.checkoutCourse(e, id)} }>
+                      Comprar curso
+                      </a>
                     </div>
                   </div>
                   <hr className="m-t-30 m-b-30" />
@@ -170,4 +184,4 @@ render() {
     );
   }
 }
-export default CourseView;
+export default withRouter(CourseView);

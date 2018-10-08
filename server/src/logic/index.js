@@ -62,6 +62,18 @@ module.exports = {
         return Courses.find({  name: new RegExp(query, 'i') }, { __v: 0 })
     },
 
+    retrieveCourseId(id) {
+        return Promise.resolve()
+            .then(() => {
+                return Courses.find({ _id: id })
+            })
+            .then(courses => {
+                if (!courses) throw Error('course does not exist')
+
+                return courses
+            })
+    },
+
     /////////////////////////////// STUDENTS METHODS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     createStudent(name, surname, documentId, address, cp, city, email, phoneNumber, courses) {
         return Promise.resolve()

@@ -69,6 +69,10 @@ const vmApi = {
         return axios.get(`${this._url()}/course/${name}`)
     },
 
+    retrieveCourseId: function(id) {
+        return axios.get(`${this._url()}/course/id/${id}`)
+    },
+
     retrieveCourseQuery: function(query) {
         return axios.get(`${this._url()}/courses/${query}`)
     },
