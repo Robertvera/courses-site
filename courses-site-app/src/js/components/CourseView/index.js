@@ -17,7 +17,8 @@ class CourseView extends Component {
         capacity: '',
         location: '',
         date: '',
-        teacher: ''
+        teacher: '',
+        teacherData: {}
     };
 }
 
@@ -44,7 +45,7 @@ componentDidMount() {
             capacity: courseToShow.capacity || '',
             location: courseToShow.location || '',
             date: courseToShow.date || '',
-            teacher: courseToShow.teacher || ''
+            teacher: courseToShow.teachers[0] || ''
           })
           console.log(this.state)
         } else {
@@ -55,12 +56,20 @@ componentDidMount() {
             timer: 2000
           })
         }
+      }).then(() => {
+        Api.retrieveTeacher(this.state.teacher).then(_teacher => {
+          if(_teacher.data.data.status = 'OK') {
+            this.setState({teacherData: _teacher.data.data})
+          } else {
+            console.error()
+          }
+        })
       })
     }
   }
 render() {
-  const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher } = this.state
-  console.log({ name, description, excerpt, price, image, pdf, capacity, location, date, teacher })
+  const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher, teacherData } = this.state
+  console.log({ name, description, excerpt, price, image, pdf, capacity, location, date, teacher, teacherData })
     return (
       <div className='container'>
           <CourseViewHeader />
@@ -158,7 +167,11 @@ render() {
                     {description}
                   </div>
                   <div className="tab-pane fade" id="course-teacher">
-                    <p>{teacher}</p>
+                    <p>{teacherData.name} {teacherData.surname}</p>
+                    <p>{teacherData.email}</p>
+                    <p>{teacherData.phoneNumber}</p>
+                    <p>{teacherData.titles}</p>
+                    <p>{teacherData.linkedin} | {teacherData.twitter}</p>
                   </div>
                   <div className="tab-pane fade" id="shop-comment">
                   <object data={pdf} type="application/pdf" width="100%" height="100%"></object>

@@ -347,7 +347,7 @@ class ManageCourses extends Component {
                           type="button"
                           onClick={e => this.selectTeacherFromSuggested(e, teacher._id, teacher.name)}
                           >
-                            {teacher.name}
+                            {teacher.name} {teacher.surname}
                           </button>
                         })
                       : ''}
