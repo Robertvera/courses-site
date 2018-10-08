@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import CourseViewHeader from './CourseViewHeader/CourseViewHeader'
 import Api from '../../../api/vmApi'
 import swal from 'sweetalert2'
+import './index.scss'
 
 class CourseView extends Component {
   constructor() {
@@ -173,7 +174,7 @@ render() {
                     <p>{teacherData.linkedin} | {teacherData.twitter}</p>
                   </div>
                   <div className="tab-pane fade" id="shop-comment">
-                  <object data={pdf} type="application/pdf" width="100%" height="100%"></object>
+                  <object data={pdf} type="application/pdf" height="800" width="800"></object>
                   </div>
                 </div>
               </div>
