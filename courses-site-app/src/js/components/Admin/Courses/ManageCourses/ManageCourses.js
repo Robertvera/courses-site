@@ -204,9 +204,12 @@ class ManageCourses extends Component {
     }
   }
 
-  selectTeacherFromSuggested = (e, teacherId) => {
+  selectTeacherFromSuggested = (e, teacherId, teacherName) => {
     e.preventDefault()
-    this.setState({ teacher: teacherId})
+    this.setState({ 
+      teacher: teacherId,
+      teacherToFind: teacherName
+    })
   }
 
   findTeacherName = e => {
@@ -331,7 +334,7 @@ class ManageCourses extends Component {
                       type="text"
                       name="teacher"
                       placeholder="Profesor"
-                      defaultValue={this.findTeacherName()}
+                      value={this.state.teacherToFind}
                     />
                     <p className="help-block text-danger" />
                   </div>
@@ -342,7 +345,7 @@ class ManageCourses extends Component {
                           return <button 
                           className="list-group-item" 
                           type="button"
-                          onClick={e => this.selectTeacherFromSuggested(e, teacher._id)}
+                          onClick={e => this.selectTeacherFromSuggested(e, teacher._id, teacher.name)}
                           >
                             {teacher.name}
                           </button>
