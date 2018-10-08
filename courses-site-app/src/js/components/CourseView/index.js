@@ -30,10 +30,13 @@ componentDidMount() {
       Api.retrieveCourse(course).then(_course => {
         if (_course.data.status === 'OK') {
           const courseToShow = _course.data.data[0]
+          const descriptionFormated = courseToShow.description.split('\n').map((item, key) => {
+            return <p key={key}>{item}</p>
+          })
 
           this.setState({
             name: courseToShow.name || '',
-            description: courseToShow.description || '',
+            description: descriptionFormated || '',
             excerpt: courseToShow.excerpt || '',
             price: courseToShow.price || '',
             image: courseToShow.image || '',
@@ -152,7 +155,7 @@ render() {
               <div className="col-md-12">
                 <div className="shop-tab-content tab-content">
                   <div className="tab-pane fade show active" id="course-description">
-                    <p>{description}</p>
+                    {description}
                   </div>
                   <div className="tab-pane fade" id="course-teacher">
                     <p>{teacher}</p>
