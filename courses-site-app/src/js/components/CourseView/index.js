@@ -92,7 +92,6 @@ render() {
                       <i className="fas fa-star" />
                       <i className="far fa-star" />
                     </span>
-                    <a href="#">(2 customer reviews)</a>
                   </div>
                   <h2 className="shop-single-item-price">{price}€</h2>
                   <div className="shop-single-item-description">
@@ -107,7 +106,7 @@ render() {
                   <hr className="m-t-30 m-b-30" />
                   <div className="info-list">
                     <li>
-                      <span className="info-list-title">Share:</span>
+                      <span className="info-list-title">Siguenos en:</span>
                       <span>
                         <ul className="social-icons">
                           <li>
@@ -152,7 +151,7 @@ render() {
                   </li>
                   <li className="nav-item">
                     <a className="nav-link" data-toggle="tab" href="#shop-comment">
-                      <h6>Reviews (2)</h6>
+                      <h6>Más información</h6>
                     </a>
                   </li>
                 </ul>

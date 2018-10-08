@@ -64,6 +64,8 @@ class ManageCourses extends Component {
             timer: 2000
           })
         }
+      }).then(() => {
+        this.findTeacherName()
       })
     }
   }
@@ -204,17 +206,24 @@ class ManageCourses extends Component {
     }
   }
 
-  selectTeacherFromSuggested = (e, teacherId, teacherName) => {
+  selectTeacherFromSuggested = (e, teacher) => {
     e.preventDefault()
     this.setState({ 
-      teacher: teacherId,
-      teacherToFind: teacherName
+      teacher: teacher.teacher._id,
+      teacherToFind: `${teacher.teacher.name} ${teacher.teacher.surname}` 
     })
   }
 
-  findTeacherName = e => {
+  findTeacherName = () => {
     if (this.state.teacher.length) {
-      return "Hacer llamada buscando nombre profe"
+      Api.retrieveTeacher(this.state.teacher).then(_teacher => {
+        if(_teacher.data.data.status = 'OK') {
+          const teacherName = `${_teacher.data.data.name} ${_teacher.data.data.surname}`
+          this.setState({teacherToFind: teacherName})
+        } else {
+          console.error()
+        }
+      })
     }
   }
 
@@ -345,7 +354,7 @@ class ManageCourses extends Component {
                           return <button 
                           className="list-group-item" 
                           type="button"
-                          onClick={e => this.selectTeacherFromSuggested(e, teacher._id, teacher.name)}
+                          onClick={e => this.selectTeacherFromSuggested(e, { teacher })}
                           >
                             {teacher.name} {teacher.surname}
                           </button>
