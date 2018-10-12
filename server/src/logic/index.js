@@ -84,7 +84,7 @@ module.exports = {
                 if (student) throw Error('Student already exists')
 
                 return Students.create({ name, surname, documentId, address, cp, city, email, phoneNumber, courses })
-                    .then(() => documentId)
+                    .then((student) => student)
             })
     },
 

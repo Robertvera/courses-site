@@ -19,7 +19,8 @@ class CheckoutForm extends Component {
       phone: '',
       course: '',
       courseName: '',
-      coursePrice: ''
+      coursePrice: '',
+      courseStudents: []
     };
   }
 
@@ -27,12 +28,12 @@ class CheckoutForm extends Component {
     if (this.props.match.params.id) {
       Api.retrieveCourseId(this.props.match.params.id)
       .then(course=>{
-        console.log(course)
-        const {name, price, _id } = course.data.data[0]
+        const {name, price, _id, students } = course.data.data[0]       
         this.setState ({
           courseName: name,
           coursePrice: price,
-          course: _id
+          course: _id,
+          courseStudents: students
         })
       })
     }
@@ -44,18 +45,25 @@ class CheckoutForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    const { name, surname, dni, address, cp, city, email, phone, course }  = this.state
+    const { name, surname, dni, address, cp, city, email, phone, course, courseName }  = this.state
+    let { courseStudents } = this.state
 
     Api.createStudent(name, surname, dni, address, cp, city, email, phone, course)
     .then(student => {
-      student.data.status === 'OK' ?
-        swal({
-          title: '¡Ya casi está!',
-          text: 'Espera mientras te redirigimos a un entorno seguro para realizar el pago.',
-          showConfirmButton: true,
-          timer: 1500
+
+      if (student.data.status === 'OK') {
+        courseStudents ? courseStudents.push(student.data.data._id) : courseStudents = [student.data.data._id]
+        
+        Api.editCourse(courseName, null, null, null, null, null, null, null, null, null, courseStudents)
+        .then(() => {
+          swal({
+            title: '¡Ya casi está!',
+            text: 'Espera mientras te redirigimos a un entorno seguro para realizar el pago.',
+            showConfirmButton: true,
+            timer: 1500
+          })
         })
-        :
+      } else {
         swal({
           type: 'error',
           title: '¡Error!',
@@ -63,8 +71,8 @@ class CheckoutForm extends Component {
           showConfirmButton: true,
           timer: 2000
         })
-    }
-    )
+      }
+    })
     .then(
       this.setState({
         name: '',
