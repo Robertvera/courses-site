@@ -19,7 +19,8 @@ class CourseView extends Component {
         location: '',
         date: '',
         teacher: '',
-        id: ''
+        id: '',
+        students:''
     };
 }
 
@@ -44,7 +45,8 @@ componentDidMount = () => {
             location: courseToShow.location || '',
             date: courseToShow.date || '',
             teacher: courseToShow.teacher || '',
-            id: courseToShow._id || ''
+            id: courseToShow._id || '',
+            students: courseToShow.students.length || ''
           })
           console.log(this.state)
         } else {
@@ -64,9 +66,21 @@ checkoutCourse = (e, id) => {
   this.props.history.push(`/es/checkout/${id}`)
 }
 
+fullBooked = (e) => {
+  e.preventDefault()
+
+  swal({
+    type: 'error',
+    title: '¡Lo sentimos!',
+    text: 'ya no quedan plazas para este curso.'
+  })
+
+}
+
 render() {
-  const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher, id } = this.state
+  const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher, id, students } = this.state
   console.log({ name, description, excerpt, price, image, pdf, capacity, location, date, teacher, id })
+
     return (
       <div className='container'>
           <CourseViewHeader />
@@ -100,7 +114,7 @@ render() {
                       <a 
                       className="btn btn-block btn-dark" 
                       href="#"
-                      onClick={ (e) => {this.checkoutCourse(e, id)} }>
+                      onClick={ (e) => { Number(capacity) <= students.length ? this.checkoutCourse(e, id) : this.fullBooked(e)} }>
                       Comprar curso
                       </a>
                     </div>
