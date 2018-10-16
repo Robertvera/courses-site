@@ -41,8 +41,8 @@ class App extends Component {
             <Route exact path="/es/detalles/:course" render={(routeProps) => (
               <CourseDetails {...routeProps} />
             )} />
-            <Route exact path="/es/checkout" render={() => (
-            <Checkout />
+            <Route exact path="/es/checkout/:id" render={(routeProps) => (
+            <Checkout {...routeProps}/>
             )} />
             <Route path="/es" render={()=> (
               <Footer/>              

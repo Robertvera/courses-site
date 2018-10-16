@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import { NavLink } from 'react-router-dom'
 import './TopBar.scss'
 
 class TopBar extends Component {
@@ -22,22 +23,22 @@ class TopBar extends Component {
             <div className="inner-nav onepage-nav">
                 <ul>
                 <li>
-                    <a href="#home">
-                    <span className="menu-item-span">Home</span>
+                    <a href="/#/es/home">
+                        <span className="menu-item-span">Home</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#cursos">
+                    <a href="/#/es/cursos">
                     <span className="menu-item-span">Cursos</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#contacto">
+                    <a href="/#/es/contacto">
                     <span className="menu-item-span">Contacto</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#blog">
+                    <a href="/#/es/blog">
                     <span className="menu-item-span">Blog</span>
                     </a>
                 </li>

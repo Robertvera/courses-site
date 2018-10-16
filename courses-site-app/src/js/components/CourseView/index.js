@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import CourseViewHeader from './CourseViewHeader/CourseViewHeader'
+import { withRouter } from "react-router-dom"
 import Api from '../../../api/vmApi'
 import swal from 'sweetalert2'
+import './index.scss'
 
 class CourseView extends Component {
   constructor() {
@@ -17,11 +19,14 @@ class CourseView extends Component {
         capacity: '',
         location: '',
         date: '',
-        teacher: ''
+        teacher: '',
+        id: '',
+        students:'',
+        teacherData: {}
     };
 }
 
-componentDidMount() {
+componentDidMount = () => {
 
     if(this.props.match) {
       
@@ -30,10 +35,13 @@ componentDidMount() {
       Api.retrieveCourse(course).then(_course => {
         if (_course.data.status === 'OK') {
           const courseToShow = _course.data.data[0]
+          const descriptionFormated = courseToShow.description.split('\n').map((item, key) => {
+            return <p key={key}>{item}</p>
+          })
 
           this.setState({
             name: courseToShow.name || '',
-            description: courseToShow.description || '',
+            description: descriptionFormated || '',
             excerpt: courseToShow.excerpt || '',
             price: courseToShow.price || '',
             image: courseToShow.image || '',
@@ -41,7 +49,9 @@ componentDidMount() {
             capacity: courseToShow.capacity || '',
             location: courseToShow.location || '',
             date: courseToShow.date || '',
-            teacher: courseToShow.teacher || ''
+            id: courseToShow._id || '',
+            students: courseToShow.students.length || '',
+            teacher: courseToShow.teachers[0] || ''
           })
           console.log(this.state)
         } else {
@@ -52,12 +62,37 @@ componentDidMount() {
             timer: 2000
           })
         }
+      }).then(() => {
+        Api.retrieveTeacher(this.state.teacher).then(_teacher => {
+          if(_teacher.data.data.status = 'OK') {
+            this.setState({teacherData: _teacher.data.data})
+          } else {
+            console.error()
+          }
+        })
       })
     }
   }
+
+checkoutCourse = (e, id) => {
+  e.preventDefault()
+  this.props.history.push(`/es/checkout/${id}`)
+}
+
+fullBooked = (e) => {
+  e.preventDefault()
+
+  swal({
+    type: 'error',
+    title: '¡Lo sentimos!',
+    text: 'ya no quedan plazas para este curso.'
+  })
+
+}
+
 render() {
-  const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher } = this.state
-  console.log({ name, description, excerpt, price, image, pdf, capacity, location, date, teacher })
+  const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher, teacherData, id, students } = this.state
+
     return (
       <div className='container'>
           <CourseViewHeader />
@@ -80,7 +115,6 @@ render() {
                       <i className="fas fa-star" />
                       <i className="far fa-star" />
                     </span>
-                    <a href="#">(2 customer reviews)</a>
                   </div>
                   <h2 className="shop-single-item-price">{price}€</h2>
                   <div className="shop-single-item-description">
@@ -88,14 +122,19 @@ render() {
                   </div>
                   <div className="form-row">
                     <div className="form-group col-md-6">
-                      <a className="btn btn-block btn-dark" href="#">Comprar curso</a>
+                      <a 
+                      className="btn btn-block btn-dark" 
+                      href="#"
+                      onClick={ (e) => { Number(capacity) > students.length ? this.checkoutCourse(e, id) : this.fullBooked(e)} }>
+                      Comprar curso
+                      </a>
                     </div>
                   </div>
                   <hr className="m-t-30 m-b-30" />
                   <hr className="m-t-30 m-b-30" />
                   <div className="info-list">
                     <li>
-                      <span className="info-list-title">Share:</span>
+                      <span className="info-list-title">Siguenos en:</span>
                       <span>
                         <ul className="social-icons">
                           <li>
@@ -140,7 +179,7 @@ render() {
                   </li>
                   <li className="nav-item">
                     <a className="nav-link" data-toggle="tab" href="#shop-comment">
-                      <h6>Reviews (2)</h6>
+                      <h6>Más información</h6>
                     </a>
                   </li>
                 </ul>
@@ -152,13 +191,17 @@ render() {
               <div className="col-md-12">
                 <div className="shop-tab-content tab-content">
                   <div className="tab-pane fade show active" id="course-description">
-                    <p>{description}</p>
+                    {description}
                   </div>
                   <div className="tab-pane fade" id="course-teacher">
-                    <p>{teacher}</p>
+                    <p>{teacherData.name} {teacherData.surname}</p>
+                    <p>{teacherData.email}</p>
+                    <p>{teacherData.phoneNumber}</p>
+                    <p>{teacherData.titles}</p>
+                    <p>{teacherData.linkedin} | {teacherData.twitter}</p>
                   </div>
                   <div className="tab-pane fade" id="shop-comment">
-                    <p>Comments? Nothing?</p>
+                  <object data={pdf} type="application/pdf" height="800" width="800"></object>
                   </div>
                 </div>
               </div>
@@ -170,4 +213,4 @@ render() {
     );
   }
 }
-export default CourseView;
+export default withRouter(CourseView);

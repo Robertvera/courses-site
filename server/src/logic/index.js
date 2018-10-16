@@ -26,7 +26,9 @@ module.exports = {
             .then(course => {
                 if (!course) throw Error('The course does not exist')
 
-                return Courses.updateOne({ name }, { description, excerpt, price, image, pdf, capacity, location, date, teachers, students })
+                if (students) return Courses.updateOne({ name }, {students})
+
+                return Courses.updateOne({ name }, { description, excerpt, price, image, pdf, capacity, location, date, teachers })
             })
     },
 
@@ -43,7 +45,7 @@ module.exports = {
     },
 
     listCourses() {
-        return Courses.find({})
+        return Courses.find({}).sort({date: -1})
     },
 
     removeCourse(name) {
@@ -62,6 +64,18 @@ module.exports = {
         return Courses.find({  name: new RegExp(query, 'i') }, { __v: 0 })
     },
 
+    retrieveCourseId(id) {
+        return Promise.resolve()
+            .then(() => {
+                return Courses.find({ _id: id })
+            })
+            .then(courses => {
+                if (!courses) throw Error('course does not exist')
+
+                return courses
+            })
+    },
+
     /////////////////////////////// STUDENTS METHODS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     createStudent(name, surname, documentId, address, cp, city, email, phoneNumber, courses) {
         return Promise.resolve()
@@ -72,7 +86,8 @@ module.exports = {
                 if (student) throw Error('Student already exists')
 
                 return Students.create({ name, surname, documentId, address, cp, city, email, phoneNumber, courses })
-                    .then(() => documentId)
+                    .then((student) => student
+                    )
             })
     },
 
@@ -131,7 +146,10 @@ module.exports = {
             })
     },
 
-    listTeachers() {
+    listTeachers(query) {
+        if (query) {
+            return Teachers.find({  name: new RegExp(query, 'i') }, { __v: 0 })
+        }
         return Teachers.find({}, { __v: 0 })
     },
 
@@ -147,10 +165,10 @@ module.exports = {
             })
     },
 
-    retrieveTeacher(documentId) {
+    retrieveTeacher(id) {
         return Promise.resolve()
             .then(() => {
-                return Teachers.findOne({ documentId }, { __v: 0 })
+                return Teachers.findOne({ _id: id }, { __v: 0 })
             })
             .then(teacher => {
                 if (!teacher) throw Error('teacher does not exist')

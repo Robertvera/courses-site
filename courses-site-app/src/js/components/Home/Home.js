@@ -21,7 +21,7 @@ class Home extends Component {
                         <br /> logopedas</strong>
                     </h1>
                     <p>
-                        <a className="btn btn-circle btn-outline-new-white" href="#">Ver cursos</a>
+                        <a className="btn btn-circle btn-outline-new-white" href="/#/es/cursos">Ver cursos</a>
                     </p>
                     </div>
                 </div>
