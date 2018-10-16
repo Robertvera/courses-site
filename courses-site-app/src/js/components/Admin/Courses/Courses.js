@@ -11,7 +11,8 @@ class Courses extends Component {
     super();
     this.state = {
       courses: '',
-      courseToEdit: ''
+      courseToEdit: '',
+      query: ''
     };
   }
 
@@ -19,11 +20,35 @@ class Courses extends Component {
     this.getCourses()
   }
 
+  componentDidUpdate(props) {
+    console.log("props", props)
+    // this.getCourses()
+  }
+
+  refactorCoursesToShow = courses => {
+    let coursesListed = courses.data.data
+    coursesListed.forEach(course => {
+      if (course.date && course.date.length) {
+        course.date = new Date(course.date)
+        course.date = `${course.date.getDate()}/${course.date.getMonth()+1}/${course.date.getFullYear()}`;
+      }
+    });
+    this.setState({
+      courses: coursesListed
+    })
+  }
+
+  searchCoursesByQuery = e => {
+    this.setState({ query: e.target.value.trim() })
+    Api.retrieveCourseQuery(this.state.query)
+    .then((courses)=>{
+      this.refactorCoursesToShow(courses)
+    })
+  }
+
   getCourses = () => {
     Api.listCourses().then(courses => {
-      this.setState({
-        courses: courses.data.data
-      })
+      this.refactorCoursesToShow(courses)
     })
   }
 
@@ -69,15 +94,24 @@ class Courses extends Component {
       <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 className="h2">Cursos</h1>
+          <input 
+          onChange={e => this.searchCoursesByQuery(e)}
+          className="form-control form-control w-100" 
+          type="text" 
+          placeholder="Search" 
+          aria-label="Search" 
+          />
           <div className="btn-toolbar mb-2 mb-md-0">
             <div className="btn-group mr-2">
               <button className="btn btn-sm btn-outline-secondary">Share</button>
               <button className="btn btn-sm btn-outline-secondary">Export</button>
-            </div>
-            <button className="btn btn-sm btn-outline-secondary dropdown-toggle">
-              <span data-feather="calendar" />
-              This week
+            <button 
+            onClick={() => this.props.history.push(`/admin/courses/manage`)}
+            className="btn btn-sm btn-outline-secondary"
+            >
+              Crear curso
             </button>
+            </div>
           </div>
         </div>
         <div className="table-responsive">

@@ -19,6 +19,8 @@ class ManageCourses extends Component {
       location: '',
       date: '',
       teacher: '',
+      teacherToFind: '',
+      teachersList: [],
       uploadValuePDF: '',
       uploadValueIMG: '',
       editingCourse: false
@@ -37,6 +39,8 @@ class ManageCourses extends Component {
       location: '',
       date: '',
       teacher: '',
+      teacherToFind: '',
+      teachersList: [],
       uploadValuePDF: '',
       uploadValueIMG: '',
       editingCourse: false
@@ -60,34 +64,43 @@ class ManageCourses extends Component {
             timer: 2000
           })
         }
+      }).then(() => {
+        this.findTeacherName()
       })
     }
   }
 
   editCourse(courseToEdit) {
-    this.setState({
-      name: courseToEdit.name || '',
-      description: courseToEdit.description || '',
-      excerpt: courseToEdit.excerpt || '',
-      price: courseToEdit.price || '',
-      image: courseToEdit.image || '',
-      pdf: courseToEdit.pdf || '',
-      capacity: courseToEdit.capacity || '',
-      location: courseToEdit.location || '',
-      date: courseToEdit.date || '',
-      teacher: courseToEdit.teacher || '',
-      editingCourse: true,
-      uploadValuePDF: courseToEdit.pdf.length ? 100 : "",
-      uploadValueIMG: courseToEdit.pdf.length ? 100 : "",
-    })
+    if (courseToEdit) {
+
+      this.setState({
+        name: courseToEdit.name || '',
+        description: courseToEdit.description || '',
+        excerpt: courseToEdit.excerpt || '',
+        price: courseToEdit.price || '',
+        image: courseToEdit.image || '',
+        pdf: courseToEdit.pdf || '',
+        capacity: courseToEdit.capacity || '',
+        location: courseToEdit.location || '',
+        date: courseToEdit.date || '',
+        teacher: courseToEdit.teachers[0] || '',
+        editingCourse: true,
+        uploadValuePDF: courseToEdit.pdf.length ? 100 : "",
+        uploadValueIMG: courseToEdit.pdf.length ? 100 : "",
+      })
+    }
   }
 
   handleUploadPDF = (e) => {
     const file = e.target.files[0]
-    const storageRef = firebase.storage().ref(`/PDF/${file.name}`)
-    const task = storageRef.put(file)
+    const storageRef = firebase.storage().ref();
+    const pdfRef = storageRef.child(file.name);
+    const pdfRouteRef = storageRef.child(`/pdf/${file.name}`)
 
-    task.on('state_changed', snapshot => {
+    pdfRef.name === pdfRouteRef.name
+    pdfRef.fullPath === pdfRouteRef.fullPath
+    
+    pdfRouteRef.put(file).on( 'state_changed', snapshot => {
       let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       this.setState({
         uploadValuePDF: percentage
@@ -95,19 +108,25 @@ class ManageCourses extends Component {
     }, error => {
       console.log(error.message)
     }, () => {
-      this.setState({
-        uploadValuePDF: 100,
-        pdf: task.snapshot.metadata.fullPath
+      pdfRouteRef.getDownloadURL().then( url => {
+        this.setState({
+          uploadValuePDF: 100,
+          pdf: url
+        })
       })
     })
   }
 
   handleUploadIMG = (e) => {
     const file = e.target.files[0]
-    const storageRef = firebase.storage().ref(`/IMG/${file.name}`)
-    const task = storageRef.put(file)
+    const storageRef = firebase.storage().ref();
+    const imageRef = storageRef.child(file.name);
+    const imagesRouteRef = storageRef.child(`/image/${file.name}`)
 
-    task.on('state_changed', snapshot => {
+    imageRef.name === imagesRouteRef.name
+    imageRef.fullPath === imagesRouteRef.fullPath
+    
+    imagesRouteRef.put(file).on( 'state_changed', snapshot => {
       let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       this.setState({
         uploadValueIMG: percentage
@@ -115,18 +134,20 @@ class ManageCourses extends Component {
     }, error => {
       console.log(error.message)
     }, () => {
-      this.setState({
-        uploadValueIMG: 100,
-        image: task.snapshot.metadata.fullPath
+      imagesRouteRef.getDownloadURL().then( url => {
+        this.setState({
+          uploadValueIMG: 100,
+          image: url
+        })
       })
     })
   }
 
   handleEdit = e => {
     e.preventDefault()
-    const { name, description, excerpt, price, image, pdf, capacity, location, date } = this.state
+    const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher } = this.state
 
-    Api.editCourse(name.trim().toLowerCase(), description, excerpt, price, image, pdf, capacity, location, date)
+    Api.editCourse(name.trim().toLowerCase(), description, excerpt, price, image, pdf, capacity, location, date, teacher)
       .then(course => {
         course.data.status === 'OK' ?
           swal({
@@ -148,9 +169,9 @@ class ManageCourses extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const { name, description, excerpt, price, image, pdf, capacity, location, date } = this.state
+    const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher } = this.state
 
-    Api.createCourse(name.trim().toLowerCase(), description, excerpt, price, image, pdf, capacity, location, date)
+    Api.createCourse(name.trim().toLowerCase(), description, excerpt, price, image, pdf, capacity, location, date, teacher)
       .then(course => {
         course.data.status === 'OK' ?
           swal({
@@ -175,8 +196,39 @@ class ManageCourses extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  handleTeachers = e => {
+    this.setState({ teacherToFind: e.target.value.trim() })
+    if (this.state.teacherToFind.length >= 2) {
+      Api.listTeachers(this.state.teacherToFind)
+      .then((_teachers) => {
+        this.setState({ teachersList: _teachers.data.data })
+      })
+    }
+  }
+
+  selectTeacherFromSuggested = (e, teacher) => {
+    e.preventDefault()
+    this.setState({ 
+      teacher: teacher.teacher._id,
+      teacherToFind: `${teacher.teacher.name} ${teacher.teacher.surname}` 
+    })
+  }
+
+  findTeacherName = () => {
+    if (this.state.teacher.length) {
+      Api.retrieveTeacher(this.state.teacher).then(_teacher => {
+        if(_teacher.data.data.status = 'OK') {
+          const teacherName = `${_teacher.data.data.name} ${_teacher.data.data.surname}`
+          this.setState({teacherToFind: teacherName})
+        } else {
+          console.error()
+        }
+      })
+    }
+  }
 
   render() {
+    console.log(this.state.teachersList)
     return (
 
       <div className="container col-md-10 offset-md-2">
@@ -286,13 +338,29 @@ class ManageCourses extends Component {
                 <div className="col-md-6">
                   <div className="form-group">
                     <input
-                      onChange={e => this.handleOnChange(e)}
+                      onChange={e => this.handleTeachers(e)}
                       className="form-control"
                       type="text"
                       name="teacher"
                       placeholder="Profesor"
+                      value={this.state.teacherToFind}
                     />
                     <p className="help-block text-danger" />
+                  </div>
+                  <div className="form-group">
+                    <ul className="list-group">
+                      {this.state.teachersList.length ? 
+                        this.state.teachersList.map(teacher => {
+                          return <button 
+                          className="list-group-item" 
+                          type="button"
+                          onClick={e => this.selectTeacherFromSuggested(e, { teacher })}
+                          >
+                            {teacher.name} {teacher.surname}
+                          </button>
+                        })
+                      : ''}
+                    </ul>
                   </div>
                 </div>
                 <div className="col-md-6">

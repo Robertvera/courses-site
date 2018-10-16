@@ -43,7 +43,7 @@ module.exports = {
     },
 
     listCourses() {
-        return Courses.find({})
+        return Courses.find({}).sort({date: -1})
     },
 
     removeCourse(name) {
@@ -131,7 +131,10 @@ module.exports = {
             })
     },
 
-    listTeachers() {
+    listTeachers(query) {
+        if (query) {
+            return Teachers.find({  name: new RegExp(query, 'i') }, { __v: 0 })
+        }
         return Teachers.find({}, { __v: 0 })
     },
 
@@ -147,10 +150,10 @@ module.exports = {
             })
     },
 
-    retrieveTeacher(documentId) {
+    retrieveTeacher(id) {
         return Promise.resolve()
             .then(() => {
-                return Teachers.findOne({ documentId }, { __v: 0 })
+                return Teachers.findOne({ _id: id }, { __v: 0 })
             })
             .then(teacher => {
                 if (!teacher) throw Error('teacher does not exist')
