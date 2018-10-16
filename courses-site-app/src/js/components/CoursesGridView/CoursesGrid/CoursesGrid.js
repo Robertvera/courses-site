@@ -43,11 +43,11 @@ class CoursesGrid extends Component {
                 courses.map(course => {
                   return <div className="col-md-4">
                     <div className="shop-grid-item">
-                      <div className="shop-item-thumb">
+                      <div className="shop-item-thumb imageContainer">
                         <a
                         onClick={e =>{this.showCourse(e, course.name)}}
                         >
-                          <img src="https://vmbformacion.files.wordpress.com/2017/02/cartel-bcn1.png?w=505&h=388" alt />
+                          <img className="imageCourse" src={course.image || "https://vmbformacion.files.wordpress.com/2017/02/cartel-bcn1.png?w=505&h=388"} alt />
                         </a>
                         <div className="shop-item-hidden">
                           <a 

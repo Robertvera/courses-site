@@ -63,8 +63,8 @@ class Teachers extends Component {
     })
   }
 
-  handleEdit = (documentId) => {
-    this.props.history.push(`/admin/teachers/manage/${documentId}`)
+  handleEdit = (id) => {
+    this.props.history.push(`/admin/teachers/manage/${id}`)
   }
 
   render() {
@@ -109,7 +109,7 @@ class Teachers extends Component {
                       <DeleteButton 
                       onClick={() => this.handleDelete(teacher.documentId, teacher.name, teacher.surname)}/>                      
                       <EditButton
-                      onClick={()=> this.handleEdit(teacher.documentId)}
+                      onClick={()=> this.handleEdit(teacher._id)}
                        />
                       </td>
                     </tr>
