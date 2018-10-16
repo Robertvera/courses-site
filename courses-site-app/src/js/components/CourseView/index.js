@@ -114,7 +114,7 @@ render() {
                       <a 
                       className="btn btn-block btn-dark" 
                       href="#"
-                      onClick={ (e) => { Number(capacity) <= students.length ? this.checkoutCourse(e, id) : this.fullBooked(e)} }>
+                      onClick={ (e) => { Number(capacity) > students.length ? this.checkoutCourse(e, id) : this.fullBooked(e)} }>
                       Comprar curso
                       </a>
                     </div>
