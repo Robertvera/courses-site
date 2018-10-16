@@ -130,12 +130,12 @@ class Courses extends Component {
             <tbody>
               {
                 courses.length ?
-                  courses.map( course => {             
+                  courses.map( course => {
                     return <tr key={course._id}>
                       <td>{course.name}</td>
                       <td>{course.date}</td>
                       <td>{course.location}</td>
-                      <td>Nº ESTUDIANES</td>
+                      <td>{course.students.length}</td>
                       <td>{course.capacity}</td>
                       <td>{course.price}</td>
                       <td>

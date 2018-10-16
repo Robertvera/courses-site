@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import CourseViewHeader from './CourseViewHeader/CourseViewHeader'
+import { withRouter } from "react-router-dom"
 import Api from '../../../api/vmApi'
 import swal from 'sweetalert2'
 import './index.scss'
@@ -19,11 +20,13 @@ class CourseView extends Component {
         location: '',
         date: '',
         teacher: '',
+        id: '',
+        students:'',
         teacherData: {}
     };
 }
 
-componentDidMount() {
+componentDidMount = () => {
 
     if(this.props.match) {
       
@@ -46,6 +49,8 @@ componentDidMount() {
             capacity: courseToShow.capacity || '',
             location: courseToShow.location || '',
             date: courseToShow.date || '',
+            id: courseToShow._id || '',
+            students: courseToShow.students.length || '',
             teacher: courseToShow.teachers[0] || ''
           })
           console.log(this.state)
@@ -68,9 +73,26 @@ componentDidMount() {
       })
     }
   }
+
+checkoutCourse = (e, id) => {
+  e.preventDefault()
+  this.props.history.push(`/es/checkout/${id}`)
+}
+
+fullBooked = (e) => {
+  e.preventDefault()
+
+  swal({
+    type: 'error',
+    title: '¡Lo sentimos!',
+    text: 'ya no quedan plazas para este curso.'
+  })
+
+}
+
 render() {
-  const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher, teacherData } = this.state
-  console.log({ name, description, excerpt, price, image, pdf, capacity, location, date, teacher, teacherData })
+  const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher, teacherData, id, students } = this.state
+
     return (
       <div className='container'>
           <CourseViewHeader />
@@ -100,7 +122,12 @@ render() {
                   </div>
                   <div className="form-row">
                     <div className="form-group col-md-6">
-                      <a className="btn btn-block btn-dark" href="#">Comprar curso</a>
+                      <a 
+                      className="btn btn-block btn-dark" 
+                      href="#"
+                      onClick={ (e) => { Number(capacity) > students.length ? this.checkoutCourse(e, id) : this.fullBooked(e)} }>
+                      Comprar curso
+                      </a>
                     </div>
                   </div>
                   <hr className="m-t-30 m-b-30" />
@@ -186,4 +213,4 @@ render() {
     );
   }
 }
-export default CourseView;
+export default withRouter(CourseView);
