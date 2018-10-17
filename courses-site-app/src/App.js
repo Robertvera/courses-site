@@ -16,6 +16,7 @@ import ManageTeachers from "./js/components/Admin/Teachers/ManageTeachers/Manage
 import CoursesGridView from "./js/components/CoursesGridView/index"
 import CourseDetails from "./js/components/CourseView/index"
 import Checkout from './js/components/Checkout/index'
+import CheckoutCardForm from './js/components/Checkout/CheckoutCardForm/CheckoutCardForm'
 
 class App extends Component {
   constructor() {
@@ -43,12 +44,15 @@ class App extends Component {
               <CourseDetails {...routeProps} />
             )} />
             <Route exact path="/es/checkout/:id" render={(routeProps) => (
-              <StripeProvider apiKey="pk_test_12345">
                 <Checkout {...routeProps}/>
-              </StripeProvider>
             )} />
             <Route path="/es" render={()=> (
               <Footer/>              
+              )} />
+            <Route exact path="/payment" render={() => (
+              <StripeProvider apiKey="pk_test_FMPOPKE34szBONAbbVNm0OCn">
+                <CheckoutCardForm />
+              </StripeProvider>
             )} />
             <Route path="/admin" render={() => (
               <AdminFrame />
