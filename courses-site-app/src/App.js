@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, HashRouter } from 'react-router-dom';
+import {StripeProvider} from 'react-stripe-elements';
 import ReactDOM from "react-dom";
 import TopBar from "./js/components/TopBar/TopBar";
 import Home from "./js/components/Home/Home";
@@ -42,7 +43,9 @@ class App extends Component {
               <CourseDetails {...routeProps} />
             )} />
             <Route exact path="/es/checkout/:id" render={(routeProps) => (
-            <Checkout {...routeProps}/>
+              <StripeProvider apiKey="pk_test_12345">
+                <Checkout {...routeProps}/>
+              </StripeProvider>
             )} />
             <Route path="/es" render={()=> (
               <Footer/>              
