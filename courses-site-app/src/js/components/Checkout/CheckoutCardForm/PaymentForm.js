@@ -10,9 +10,13 @@ class PaymentForm extends React.Component {
 
     // Within the context of `Elements`, this call to createToken knows which Element to
     // tokenize, since there's only one in this group.
-    this.props.stripe.createToken({name: 'Jenny Rosen'}).then(({token}) => {
+    this.props.stripe.createToken({name: 'Jenny sRosen'})
+    .then(({token}) => {
       console.log('Received Stripe token:', token);
-    });
+    })
+    // .then((result) => {
+    //   console.log(result);
+    // })    
 
     // However, this line of code will do the same thing:
     //

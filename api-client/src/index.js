@@ -80,6 +80,12 @@ const vmApi = {
     deleteCourse: function(name) {
         return axios.delete(`${this._url()}/course/${name}`)
     },
+
+    //PAYMENT ROUTES
+
+    sendPayment: function(token) {
+        return axios.post(`${this._url()}/payment`, { token })
+    }
 }
 
 module.exports = vmApi
