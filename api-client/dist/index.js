@@ -81,6 +81,12 @@ var vmApi = {
 
     deleteCourse: function deleteCourse(name) {
         return axios.delete(this._url() + '/course/' + name);
+    },
+
+    //PAYMENT ROUTES
+
+    sendPayment: function sendPayment(token) {
+        return axios.post(this._url() + '/payment', { token: token });
     }
 };
 
