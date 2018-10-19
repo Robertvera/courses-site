@@ -3,7 +3,8 @@ const bodyParser = require('body-parser')
 const { 
     listCourses, createCourse, editCourse, removeCourse, retrieveCourseQuery, retrieveCourse, 
     createStudent, editStudent, removeStudent, retrieveStudent, listStudents, 
-    createTeacher, editTeacher, removeTeacher, retrieveTeacher, listTeachers, retrieveCourseId
+    createTeacher, editTeacher, removeTeacher, retrieveTeacher, listTeachers, retrieveCourseId,
+    createPayment
 } = require('./handlers')
 
 
@@ -11,6 +12,8 @@ const {
 const router = Router()
 
 const jsonBodyParser = bodyParser.json()
+
+const textBodyParser = bodyParser.text()
 
 
 // TEACHERS ROUTES
@@ -57,5 +60,9 @@ router.get('/course/id/:id', retrieveCourseId)
 router.delete('/course/:name', removeCourse)
 
 router.get('/courses/:query', retrieveCourseQuery)
+
+//PAYMENTS ROUTES
+
+router.post('/charges', textBodyParser, createPayment)
 
 module.exports = router

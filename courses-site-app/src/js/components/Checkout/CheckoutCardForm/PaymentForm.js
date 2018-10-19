@@ -2,6 +2,7 @@ import React from 'react';
 import {injectStripe} from 'react-stripe-elements';
 import './PaymentForm.scss'
 import {CardElement} from 'react-stripe-elements';
+import Api from "../../../../api/vmApi"
 
 class PaymentForm extends React.Component {
   handleSubmit = (e) => {
@@ -12,11 +13,11 @@ class PaymentForm extends React.Component {
     // tokenize, since there's only one in this group.
     this.props.stripe.createToken({name: 'Jenny sRosen'})
     .then(({token}) => {
-      console.log('Received Stripe token:', token);
+      console.log('Received Stripe token:', token.id);
+      console.log(token);
+      Api.sendPayment(token.id)
+      .then(result=> console.log(result))
     })
-    // .then((result) => {
-    //   console.log(result);
-    // })    
 
     // However, this line of code will do the same thing:
     //

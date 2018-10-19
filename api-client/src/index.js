@@ -84,7 +84,7 @@ const vmApi = {
     //PAYMENT ROUTES
 
     sendPayment: function(token) {
-        return axios.post(`${this._url()}/payment`, { token })
+        return axios.post(`${this._url()}/charges`, { token }, {headers: {'Content-Type': 'text/plain'}})
     }
 }
 
