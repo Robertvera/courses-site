@@ -10,9 +10,10 @@ class Courses extends Component {
   constructor() {
     super();
     this.state = {
-      courses: '',
+      courses: [],
       courseToEdit: '',
-      query: ''
+      query: '',
+      skipResults: 0
     };
   }
 
@@ -20,9 +21,11 @@ class Courses extends Component {
     this.getCourses()
   }
 
-  componentDidUpdate(props) {
-    console.log("props", props)
-    // this.getCourses()
+  getCourses = () => {
+    const { skipResults } = this.state 
+    Api.listCourses(skipResults).then(courses => {
+      this.refactorCoursesToShow(courses)
+    })
   }
 
   refactorCoursesToShow = courses => {
@@ -33,9 +36,25 @@ class Courses extends Component {
         course.date = `${course.date.getDate()}/${course.date.getMonth()+1}/${course.date.getFullYear()}`;
       }
     });
-    this.setState({
-      courses: coursesListed
-    })
+    this.setState({ courses: [ ...this.state.courses, ...coursesListed ]})
+  }
+
+  showMoreCourses = e => {
+    e.preventDefault()
+    const showMore = this.state.skipResults + 12
+    this.state.skipResults = showMore
+    console.log(this.state.skipResults)
+    this.getCourses()
+  }
+
+  componentDidUpdate(props) {
+    console.log("props", props)
+    // this.getCourses()
+  }
+
+  editCourse = (e,course)=> {
+    e.preventDefault()
+    this.props.history.push(`/admin/courses/manage/${course}`)
   }
 
   searchCoursesByQuery = e => {
@@ -46,11 +65,6 @@ class Courses extends Component {
     })
   }
 
-  getCourses = () => {
-    Api.listCourses().then(courses => {
-      this.refactorCoursesToShow(courses)
-    })
-  }
 
   deleteCourse = (e, course) => {
     e.preventDefault()
@@ -80,11 +94,6 @@ class Courses extends Component {
           })
       }
     })
-  }
-
-  editCourse = (e,course)=> {
-    e.preventDefault()
-    this.props.history.push(`/admin/courses/manage/${course}`)
   }
 
   render() {
@@ -160,6 +169,13 @@ class Courses extends Component {
               }
             </tbody>
           </table>
+          <button
+            onClick={e => this.showMoreCourses(e)}
+            type="button"
+            class="btn-sm btn-outline-danger"
+          >
+            Mostrar más cursos
+          </button>
         </div>
       </main>
     );
