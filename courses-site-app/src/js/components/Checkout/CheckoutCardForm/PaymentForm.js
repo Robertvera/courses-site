@@ -5,6 +5,7 @@ import {CardElement} from 'react-stripe-elements';
 import Api from "../../../../api/vmApi"
 
 class PaymentForm extends React.Component {
+  
   handleSubmit = (e) => {
     // We don't want to let default form submission happen here, which would refresh the page.
     e.preventDefault();

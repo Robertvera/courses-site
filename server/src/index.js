@@ -21,7 +21,7 @@ const MongoPort = process.env.MONGO_PORT
 const database = process.env.MONGO_DB
 
 
-mongoose.connect(`mongodb://${host}:${MongoPort}/${database}`)
+mongoose.connect(`mongodb://${host}:${MongoPort}/${database}`, { useNewUrlParser: true })
 
 
 const app = express()

@@ -86,7 +86,7 @@ var vmApi = {
     //PAYMENT ROUTES
 
     sendPayment: function sendPayment(token) {
-        return axios.post(this._url() + '/charges', { token: token }, { headers: { 'Content-Type': 'text/plain' } });
+        return axios.post(this._url() + '/charges', token, { headers: { 'Content-Type': 'text/plain' } });
     }
 };
 

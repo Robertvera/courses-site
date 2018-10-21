@@ -44,16 +44,13 @@ class App extends Component {
               <CourseDetails {...routeProps} />
             )} />
             <Route exact path="/es/checkout/:id" render={(routeProps) => (
+              <StripeProvider apiKey="pk_test_FMPOPKE34szBONAbbVNm0OCn">
                 <Checkout {...routeProps}/>
+              </StripeProvider>  
             )} />
             <Route path="/es" render={()=> (
               <Footer/>              
-              )} />
-            <Route exact path="/payment" render={() => (
-              <StripeProvider apiKey="pk_test_FMPOPKE34szBONAbbVNm0OCn">
-                <CheckoutCardForm />
-              </StripeProvider>
-            )} />
+              )} />          
             <Route path="/admin" render={() => (
               <AdminFrame />
             )} />

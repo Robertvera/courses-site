@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom"
 import './CheckoutForm.scss'
 import Api from "../../../../api/vmApi"
 import swal from 'sweetalert2'
+import CheckoutCardForm from '../CheckoutCardForm/CheckoutCardForm'
 
 class CheckoutForm extends Component {
   constructor(props) {
@@ -194,6 +195,7 @@ class CheckoutForm extends Component {
                   </tr>                
                 </tbody>
               </table>
+              <CheckoutCardForm/>
               <div className="text-right">
                 <a 
                 className="btn btn-brand" 
