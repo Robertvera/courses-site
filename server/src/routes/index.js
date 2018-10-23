@@ -7,19 +7,13 @@ const {
     createPayment
 } = require('./handlers')
 
-
-
 const router = Router()
 
 const jsonBodyParser = bodyParser.json()
 
-const textBodyParser = bodyParser.text()
-
-
 // TEACHERS ROUTES
 
 router.get('/teachers', listTeachers)
-
 
 router.get('/teachers/:query', listTeachers)
 
@@ -43,9 +37,7 @@ router.get('/student/:documentId', retrieveStudent)
 
 router.delete('/student/:documentId', removeStudent)
 
-
 // COURSES ROUTES
-
 
 router.get('/courses', listCourses)
 
@@ -63,6 +55,6 @@ router.get('/courses/:query', retrieveCourseQuery)
 
 //PAYMENTS ROUTES
 
-router.post('/charges', textBodyParser, createPayment)
+router.post('/charges', jsonBodyParser, createPayment)
 
 module.exports = router

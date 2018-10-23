@@ -90,7 +90,7 @@ class CheckoutForm extends Component {
   }
 
   render() {
-    const {courseName, coursePrice} = this.state
+    const {courseName, coursePrice, name, surname} = this.state
 
     return (
       <section className="module">
@@ -195,7 +195,7 @@ class CheckoutForm extends Component {
                   </tr>                
                 </tbody>
               </table>
-              <CheckoutCardForm/>
+              <CheckoutCardForm courseName={courseName} price={coursePrice} name={`${name} ${surname}`}/>
               <div className="text-right">
                 <a 
                 className="btn btn-brand" 

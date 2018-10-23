@@ -3,17 +3,15 @@ import {Elements} from 'react-stripe-elements';
 
 import InjectedPaymentForm from './PaymentForm';
 
-class CheckoutCardForm extends React.Component {
-  render() {
-    return (
-      <div className="Checkout">
+const CheckoutCardForm = (props) => {
+  return (
+    <div className="Checkout">
         <h1>Card details</h1>
         <Elements>
-          <InjectedPaymentForm />
+          <InjectedPaymentForm courseName={props.courseName} price={props.price} name={props.name}/>
         </Elements>
       </div>
-    );
-  }
+  )
 }
 
 export default CheckoutCardForm;
