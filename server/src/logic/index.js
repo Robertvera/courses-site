@@ -44,8 +44,8 @@ module.exports = {
             })
     },
 
-    listCourses() {
-        return Courses.find({}).sort({date: -1})
+    listCourses(skip) {
+        return Courses.find({}).sort({date: -1}).skip(Number(skip)).limit(12)
     },
 
     removeCourse(name) {

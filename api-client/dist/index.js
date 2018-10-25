@@ -55,8 +55,8 @@ var vmApi = {
 
     // COURSES ROUTES
 
-    listCourses: function listCourses() {
-        return axios.get(this._url() + '/courses');
+    listCourses: function listCourses(skip) {
+        return axios.get(this._url() + '/courses/' + skip);
     },
 
     createCourse: function createCourse(name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students) {
