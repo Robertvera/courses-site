@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, HashRouter } from 'react-router-dom';
+import {StripeProvider} from 'react-stripe-elements';
 import ReactDOM from "react-dom";
 import TopBar from "./js/components/TopBar/TopBar";
 import Home from "./js/components/Home/Home";
@@ -15,6 +16,7 @@ import ManageTeachers from "./js/components/Admin/Teachers/ManageTeachers/Manage
 import CoursesGridView from "./js/components/CoursesGridView/index"
 import CourseDetails from "./js/components/CourseView/index"
 import Checkout from './js/components/Checkout/index'
+import CheckoutCardForm from './js/components/Checkout/CheckoutCardForm/CheckoutCardForm'
 
 class App extends Component {
   constructor() {
@@ -42,11 +44,13 @@ class App extends Component {
               <CourseDetails {...routeProps} />
             )} />
             <Route exact path="/es/checkout/:id" render={(routeProps) => (
-            <Checkout {...routeProps}/>
+              <StripeProvider apiKey="pk_test_FMPOPKE34szBONAbbVNm0OCn">
+                <Checkout {...routeProps}/>
+              </StripeProvider>  
             )} />
             <Route path="/es" render={()=> (
               <Footer/>              
-            )} />
+              )} />          
             <Route path="/admin" render={() => (
               <AdminFrame />
             )} />

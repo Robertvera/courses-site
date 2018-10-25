@@ -10,7 +10,8 @@ class CoursesGrid extends Component {
   constructor() {
     super();
     this.state = {
-      courses: ''
+      courses: [],
+      skipResults: 0
     };
   }
 
@@ -19,11 +20,17 @@ class CoursesGrid extends Component {
   }
 
   getCourses = () => {
-    Api.listCourses().then(courses => {
-      this.setState({
-        courses: courses.data.data
-      })
+    const { skipResults } = this.state 
+    Api.listCourses(skipResults).then(courses => {
+      this.setState({ courses: [ ...this.state.courses, ...courses.data.data ] })
     })
+  }
+
+  showMoreCourses = e => {
+    e.preventDefault()
+    const showMore = this.state.skipResults + 12
+    this.state.skipResults = showMore
+    this.getCourses()
   }
 
   showCourse = (e, course) => {
@@ -33,6 +40,7 @@ class CoursesGrid extends Component {
 
   render() {
     const { courses } = this.state
+    console.log(this.state.courses)
 
     return (
         <section className="module">
@@ -52,7 +60,7 @@ class CoursesGrid extends Component {
                         <div className="shop-item-hidden">
                           <a 
                           className="btn btn-new-white" 
-                          onClick={e =>{this.showCourse(e, course.name, course_id)}}
+                          onClick={e =>{this.showCourse(e, course.name, course._id)}}
                           >
                           Ver más información
                           </a>
@@ -75,6 +83,13 @@ class CoursesGrid extends Component {
               </div>
             </div>
           </div>
+          <button
+            onClick={e => this.showMoreCourses(e)}
+            type="button"
+            class="btn-sm btn-outline-danger"
+          >
+            Mostrar más cursos
+          </button>
         </section>
     );
   }

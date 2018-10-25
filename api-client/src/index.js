@@ -53,8 +53,8 @@ const vmApi = {
 
     // COURSES ROUTES
 
-    listCourses: function () {
-        return axios.get(`${this._url()}/courses`)
+    listCourses: function (skip) {
+        return axios.get(`${this._url()}/courses/${skip}`)
     },
 
     createCourse: function(name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students) {
@@ -80,6 +80,12 @@ const vmApi = {
     deleteCourse: function(name) {
         return axios.delete(`${this._url()}/course/${name}`)
     },
+
+    //PAYMENT ROUTES
+
+    sendPayment: function(token, item, price) {
+        return axios.post(`${this._url()}/charges`, { token, item, price })
+    }
 }
 
 module.exports = vmApi

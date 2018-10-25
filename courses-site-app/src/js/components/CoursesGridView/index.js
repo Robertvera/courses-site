@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import CoursesGridHero from './CoursesGridHero/CoursesGridHero'
 import CoursesGrid from './CoursesGrid/CoursesGrid'
-import CoursesGridPagination from './CoursesGridPagination/CoursesGridPagination'
 
 class CourseGridView extends Component {
   constructor() {
@@ -15,7 +14,6 @@ class CourseGridView extends Component {
       <div className='container'>
           <CoursesGridHero />
           <CoursesGrid />
-          <CoursesGridPagination />
       </div>
     );
   }

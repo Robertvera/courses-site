@@ -55,8 +55,8 @@ var vmApi = {
 
     // COURSES ROUTES
 
-    listCourses: function listCourses() {
-        return axios.get(this._url() + '/courses');
+    listCourses: function listCourses(skip) {
+        return axios.get(this._url() + '/courses/' + skip);
     },
 
     createCourse: function createCourse(name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students) {
@@ -81,6 +81,12 @@ var vmApi = {
 
     deleteCourse: function deleteCourse(name) {
         return axios.delete(this._url() + '/course/' + name);
+    },
+
+    //PAYMENT ROUTES
+
+    sendPayment: function sendPayment(token, item, price) {
+        return axios.post(this._url() + '/charges', { token: token, item: item, price: price });
     }
 };
 
