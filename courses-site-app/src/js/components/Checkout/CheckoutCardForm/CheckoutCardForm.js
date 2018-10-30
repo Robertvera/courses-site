@@ -8,7 +8,7 @@ const CheckoutCardForm = (props) => {
     <div className="Checkout">
         <h1>Card details</h1>
         <Elements>
-          <InjectedPaymentForm courseName={props.courseName} price={props.price} name={props.name}/>
+          <InjectedPaymentForm data={props.data}/>
         </Elements>
       </div>
   )

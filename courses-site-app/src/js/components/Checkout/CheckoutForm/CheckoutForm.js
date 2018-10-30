@@ -44,53 +44,10 @@ class CheckoutForm extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  handleSubmit = e => {
-    e.preventDefault()
-    const { name, surname, dni, address, cp, city, email, phone, course, courseName }  = this.state
-    let { courseStudents } = this.state
-
-    Api.createStudent(name, surname, dni, address, cp, city, email, phone, course)
-    .then(student => {
-
-      if (student.data.status === 'OK') {
-        courseStudents ? courseStudents.push(student.data.data._id) : courseStudents = [student.data.data._id]
-        
-        Api.editCourse(courseName, null, null, null, null, null, null, null, null, null, courseStudents)
-        .then(() => {
-          swal({
-            title: '¡Ya casi está!',
-            text: 'Espera mientras te redirigimos a un entorno seguro para realizar el pago.',
-            showConfirmButton: true,
-            timer: 1500
-          })
-        })
-      } else {
-        swal({
-          type: 'error',
-          title: '¡Error!',
-          text: 'Revisa los datos del formulario y vuelve a intentarlo',
-          showConfirmButton: true,
-          timer: 2000
-        })
-      }
-    })
-    .then(
-      this.setState({
-        name: '',
-        surname: '',
-        dni: '',
-        address: '',
-        cp: '',
-        city: '',
-        email: '',
-        phone: '',
-        course: ''
-      })
-    )
-  }
-
   render() {
-    const {courseName, coursePrice, name, surname} = this.state
+    const {courseName, coursePrice} = this.state
+
+    const data = this.state
 
     return (
       <section className="module">
@@ -195,15 +152,8 @@ class CheckoutForm extends Component {
                   </tr>                
                 </tbody>
               </table>
-              <CheckoutCardForm courseName={courseName} price={coursePrice} name={`${name} ${surname}`}/>
-              <div className="text-right">
-                <a 
-                className="btn btn-brand" 
-                href="#"
-                onClick={e => this.handleSubmit(e)}
-                >
-                Realizar Pedido
-                </a>
+              <CheckoutCardForm data={data}/>
+              <div className="text-right">              
               </div>
             </div>
           </div>
