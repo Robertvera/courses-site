@@ -17,11 +17,13 @@ class CheckoutForm extends Component {
       cp: '',
       city: '',
       email: '',
+      email2: '',
       phone: '',
       course: '',
       courseName: '',
       coursePrice: '',
-      courseStudents: []
+      courseStudents: [],
+      mailCheck: true
     };
   }
 
@@ -29,7 +31,7 @@ class CheckoutForm extends Component {
     if (this.props.match.params.id) {
       Api.retrieveCourseId(this.props.match.params.id)
       .then(course=>{
-        const {name, price, _id, students } = course.data.data[0]       
+        const {name, price, _id, students } = course.data.data[0]
         this.setState ({
           courseName: name,
           coursePrice: price,
@@ -41,13 +43,39 @@ class CheckoutForm extends Component {
   }
 
   handleOnChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
+    this.setState({ [e.target.name]: e.target.value }, this.mailChecker)
   }
 
-  render() {
-    const {courseName, coursePrice} = this.state
+  mailChecker = () => {
+    if (this.state.email !== this.state.email2) {
+      this.setState({mailCheck: false})
+    } else {
+      this.setState({mailCheck: true})
+    }
+  }
 
-    const data = this.state
+
+  render() {
+    const {courseName, coursePrice, mailCheck} = this.state
+
+    const dataForm = {
+      name: this.state.name,
+      surname: this.state.surname,
+      dni: this.state.dni,
+      address: this.state.address,
+      cp: this.state.cp,
+      city: this.state.city,
+      email: this.state.email,
+      phone: this.state.phone,
+      mailCheck: this.state.mailCheck
+    }
+
+    const dataCourse = {
+      course: this.state.course,
+      courseName: this.state.courseName,
+      coursePrice: this.state.coursePrice,
+      courseStudents: this.state.courseStudents
+    }
 
     return (
       <section className="module">
@@ -79,7 +107,7 @@ class CheckoutForm extends Component {
                   </div>
                 </div>
                 <div className="row form-row">
-                  <div className="col-md-3 form-group">
+                  <div className="col-md-2 form-group">
                     <input 
                     onChange={e => this.handleOnChange(e)} 
                     name="dni"
@@ -88,7 +116,7 @@ class CheckoutForm extends Component {
                     placeholder="DNI" 
                     required />
                   </div>
-                  <div className="col-md-4 form-group">
+                  <div className="col-md-2 form-group">
                     <input 
                     onChange={e => this.handleOnChange(e)} 
                     name="phone"
@@ -97,13 +125,23 @@ class CheckoutForm extends Component {
                     placeholder="Teléfono" 
                     required />
                   </div>
-                  <div className="col-md-5 form-group">
+                  <div className="col-md-4 form-group">
                     <input 
-                    onChange={e => this.handleOnChange(e)} 
+                    onChange={e => this.handleOnChange(e)}
                     name="email"
                     className="form-control" 
                     type="text" 
                     placeholder="Correo Electrónico" 
+                    required />
+                  </div>
+                  <div className="col-md-4 form-group">
+                    <input 
+                    onChange={e => this.handleOnChange(e)}
+                    name="email2"
+                    className="form-control" 
+                    type="text" 
+                    placeholder="Repite Correo Electrónico" 
+                    style={mailCheck ? {} : {borderColor: 'red', backgroundColor: '#E09D9D'}}
                     required />
                   </div>
                   <div className="col-md-12 form-group">
@@ -149,11 +187,11 @@ class CheckoutForm extends Component {
                   <tr>
                     <td>{courseName}</td>
                     <td className="text-right">{coursePrice} €</td>
-                  </tr>                
+                  </tr>
                 </tbody>
               </table>
-              <CheckoutCardForm data={data}/>
-              <div className="text-right">              
+              <CheckoutCardForm dataForm={dataForm} dataCourse={dataCourse}/>
+              <div className="text-right">
               </div>
             </div>
           </div>
