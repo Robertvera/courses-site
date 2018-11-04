@@ -91,8 +91,8 @@ var vmApi = {
 
     //MAILING ROUTES
 
-    emailToStudent: function emailToStudent(to, subject, text) {
-        return axios.post(this._url() + '/mailing', { to: to, subject: subject, text: text });
+    emailToStudent: function emailToStudent(to, content) {
+        return axios.post(this._url() + '/mailing', { to: to, content: content });
     }
 };
 

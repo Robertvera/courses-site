@@ -89,7 +89,7 @@ const vmApi = {
 
     //MAILING ROUTES
 
-    emailToStudent: function(to, subject, text) {
+    emailToStudent: function(to, content) {
         return axios.post(`${this._url()}/mailing`, { to, content })
     }
 }
