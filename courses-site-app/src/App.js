@@ -17,6 +17,7 @@ import CoursesGridView from "./js/components/CoursesGridView/index"
 import CourseDetails from "./js/components/CourseView/index"
 import Checkout from './js/components/Checkout/index'
 import CheckoutCardForm from './js/components/Checkout/CheckoutCardForm/CheckoutCardForm'
+import Login from './js/components/Admin/Login/Login'
 
 class App extends Component {
   constructor() {
@@ -80,6 +81,9 @@ class App extends Component {
             )} />
             <Route exact path="/admin/teachers/manage" render={() => (
               <ManageTeachers />
+            )} />
+            <Route exact path="/manage/login" render={() => (
+              <Login />
             )} />
                          
             </div>   
