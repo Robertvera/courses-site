@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import Api from '../../../../api/vmApi'
 import { withRouter } from "react-router-dom"
 import swal from 'sweetalert2'
-
+import firebase from 'firebase'
 
 
 class Courses extends Component {
@@ -13,22 +13,32 @@ class Courses extends Component {
       courses: [],
       courseToEdit: '',
       query: '',
-      skipResults: 0
+      skipResults: 0,
+      login: false
     };
   }
 
-  componentDidMount() {
-    this.getCourses()
-  }
+ 
 
-  getCourses = () => {
-    const { skipResults } = this.state 
-    Api.listCourses(skipResults).then(courses => {
-      this.refactorCoursesToShow(courses)
+  componentDidMount() {
+    const self = this
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        self.getCourses(true)
+      } else {
+        alert('no user')
+      }
     })
   }
 
-  refactorCoursesToShow = courses => {
+  getCourses = (userLogin) => {
+    const { skipResults } = this.state 
+    Api.listCourses(skipResults).then(courses => {
+      this.refactorCoursesToShow(courses, userLogin)
+    })
+  }
+
+  refactorCoursesToShow = (courses, userLogin) => {
     let coursesListed = courses.data.data
     coursesListed.forEach(course => {
       if (course.date && course.date.length) {
@@ -36,7 +46,10 @@ class Courses extends Component {
         course.date = `${course.date.getDate()}/${course.date.getMonth()+1}/${course.date.getFullYear()}`;
       }
     });
-    this.setState({ courses: [ ...this.state.courses, ...coursesListed ]})
+    this.setState({ 
+      courses: [ ...this.state.courses, ...coursesListed ],
+      login: userLogin
+    })
   }
 
   showMoreCourses = e => {
@@ -97,7 +110,7 @@ class Courses extends Component {
   }
 
   render() {
-    const { courses } = this.state
+    const { courses, login } = this.state
     
     return (
       <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -138,7 +151,7 @@ class Courses extends Component {
             </thead>
             <tbody>
               {
-                courses.length ?
+                courses.length && login ?
                   courses.map( course => {
                     return <tr key={course._id}>
                       <td>{course.name}</td>
@@ -166,6 +179,9 @@ class Courses extends Component {
                     </tr>
                   })
                 : null  
+              }
+              {
+                login ? null : <h2> Necesitas loguearte </h2>
               }
             </tbody>
           </table>
