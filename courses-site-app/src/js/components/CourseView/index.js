@@ -101,7 +101,7 @@ render() {
             <div className="row">
               <div className="col-lg-7">
                 <div className="shop-single-item-photos">
-                  <img src={image} alt />
+                  <img src={image}/>
                 </div>
               </div>
               <div className="col-lg-5">

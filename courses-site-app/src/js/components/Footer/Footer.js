@@ -54,31 +54,9 @@ class Footer extends Component {
                         </div>
                         </aside>
                     </div>
-                    <div className="col-md-3">
-
-                        <aside className="widget widget-recent-entries">
-                        <div className="widget-title">
-                            <h6>ÚLTIMOS CURSOS</h6>
-                        </div>
-                        <ul>
-                            <li>
-                            <a href="#">Curso 1</a>
-                            <span className="post-date">20 y 21 Mayo 2018, Barcelona</span>
-                            </li>
-                            <li>
-                            <a href="#">Curso 1</a>
-                            <span className="post-date">20 y 21 Mayo 2018, Barcelona</span>
-                            </li>
-                            <li>
-                            <a href="#">Curso 1</a>
-                            <span className="post-date">20 y 21 Mayo 2018, Barcelona</span>
-                            </li>
-                        </ul>
-                        </aside>
-                    </div>
                     <div className="col-md-6">
-                        <img src="../../../../public/images/logo-white-white.png" alt />
-                    </div>                        
+                        <img src="../../../../public/images/logo-white-white.png"/>
+                    </div>
                     </div>
                 </div>
                 </div>

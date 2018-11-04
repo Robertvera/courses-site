@@ -87,6 +87,12 @@ var vmApi = {
 
     sendPayment: function sendPayment(token, item, price) {
         return axios.post(this._url() + '/charges', { token: token, item: item, price: price });
+    },
+
+    //MAILING ROUTES
+
+    emailToStudent: function emailToStudent(to, subject, text) {
+        return axios.post(this._url() + '/mailing', { to: to, subject: subject, text: text });
     }
 };
 

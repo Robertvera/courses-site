@@ -6,6 +6,8 @@ import Api from "../../../../api/vmApi"
 import swal from 'sweetalert2'
 import {validateData} from '../../../../../public/js/utils/utils'
 import Modals from '../../../../../public/js/utils/modals'
+import {thanks} from '../../../../../public/js/utils/mailTemplates'
+
 
 class PaymentForm extends React.Component {
   
@@ -30,10 +32,15 @@ handleSubmit = (e) => {
 				.then(()=> {
 					this.props.stripe.createToken({name})
 					.then(({token}) => {
+						console.log(token)
 						Api.sendPayment(token.id, this.props.dataCourse.courseName, this.props.dataCourse.coursePrice)
 						.then(result=> {
+							console.log(result)
 							if (result.data.status === 'OK') {
 								Modals.PaymentOK()
+								.then(()=> {
+									Api.emailToStudent(email, thanks(name, surname, courseName, city) )
+								})
 							} else {
 								Modals.UnknownError()
 								.then(()=> {
