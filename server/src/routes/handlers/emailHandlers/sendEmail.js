@@ -3,7 +3,8 @@ const nodemailer = require('nodemailer')
 
 module.exports = (req, res) => {
 
-    const { body: { to, subject, html } } = req
+    const { body: { to, content } } = req
+    const {subject, html} = content
 
     let transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
@@ -14,8 +15,6 @@ module.exports = (req, res) => {
             user: 'robert.vera.roige@gmail.com',
             clientId: process.env.GMAIL_CLIENT_ID,
             clientSecret: process.env.GMAIL_CLIENT_SECRET,
-            refreshToken: process.env.GMAIL_REFRESH_TOKEN,
-            accessToken: process.env.GMAIL_ACCESS_TOKEN
         }
     });
 
@@ -23,7 +22,13 @@ module.exports = (req, res) => {
         from: 'Robert <robert.vera.roige@gmail.com>',
         to: to,
         subject: subject,
-        html: html
+        html: html,
+        auth : {
+            user: 'robert.vera.roige@gmail.com',
+            refreshToken: process.env.GMAIL_REFRESH_TOKEN,
+            accessToken: process.env.GMAIL_ACCESS_TOKEN,
+            expires: Date.now()
+        }
     }
 
     transporter.sendMail(mailOptions)

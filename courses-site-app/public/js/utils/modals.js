@@ -3,7 +3,7 @@ import {translateData} from './utils'
 
 const Modals = {
 	PaymentOK: function () {
-        swal({
+        return swal({
             type: 'success',
             title: '¡Enhorabuena!',
             text: 'PAGO REALIZADO',
@@ -12,7 +12,7 @@ const Modals = {
         })
     },
     UnknownError: function () {
-        swal({
+        return swal({
             type: 'error',
             title: 'Oops...!',
             text: 'Por favor vuelve a probarlo en unos minutos, no se ha realizado ningún cargo en tu tarjeta',
@@ -21,7 +21,7 @@ const Modals = {
         })
     },
     WrongCard: function() {
-        swal({
+        return swal({
             type: 'error',
             title: 'Oops...!',
             text: 'Parece que los datos de la tarjeta no son correctos...',
@@ -30,7 +30,7 @@ const Modals = {
         })
     },
     FormError: function (input) {
-        swal({
+        return swal({
 			type: 'error',
 			title: 'Oops...',
 			html: `Por favor revisa el campo <strong>${translateData(input)}</strong>`,

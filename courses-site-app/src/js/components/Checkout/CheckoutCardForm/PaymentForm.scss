@@ -75,3 +75,7 @@ body, html {
     -webkit-transition: all 150ms ease;
     transition: all 150ms ease;
   }
+
+  .blur {
+    filter: blur(5px);
+  }

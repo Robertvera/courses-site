@@ -4,12 +4,19 @@ import './PaymentForm.scss'
 import {CardElement} from 'react-stripe-elements';
 import Api from "../../../../api/vmApi"
 import swal from 'sweetalert2'
-import {validateData} from '../../../../../public/js/utils/utils'
+import {validateData, formatDate} from '../../../../../public/js/utils/utils'
 import Modals from '../../../../../public/js/utils/modals'
 import {thanks} from '../../../../../public/js/utils/mailTemplates'
+import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner'
 
 
 class PaymentForm extends React.Component {
+	constructor (props) {
+		super(props);
+		this.state = {
+			loading: false
+		}
+	}
   
 handleSubmit = (e) => {
 	e.preventDefault();
@@ -20,10 +27,11 @@ handleSubmit = (e) => {
 	} else { 
 		//CREAR USER
 		const { name, surname, dni, address, cp, city, email, phone } = this.props.dataForm
-		const { course, courseName } = this.props.dataCourse
+		const { course, courseName, location, date } = this.props.dataCourse
 		let { courseStudents } = this.props.dataCourse
 
-		Api.createStudent(name, surname, dni, address, cp, city, email, phone, course)
+		this.setState({loading: true}, ()=> {
+			Api.createStudent(name, surname, dni, address, cp, city, email, phone, course)
 		.then(student => {
 			if (student.data.status === 'OK') {
 				courseStudents ? courseStudents.push(student.data.data._id) : courseStudents = [student.data.data._id]
@@ -35,11 +43,12 @@ handleSubmit = (e) => {
 						console.log(token)
 						Api.sendPayment(token.id, this.props.dataCourse.courseName, this.props.dataCourse.coursePrice)
 						.then(result=> {
+							this.setState({loading: false})
 							console.log(result)
 							if (result.data.status === 'OK') {
 								Modals.PaymentOK()
 								.then(()=> {
-									Api.emailToStudent(email, thanks(name, surname, courseName, city) )
+									Api.emailToStudent(email, thanks(name, surname, courseName, location, formatDate(date)) )
 								})
 							} else {
 								Modals.UnknownError()
@@ -67,12 +76,27 @@ handleSubmit = (e) => {
 		.catch(err => {
 			Modals.UnknownError()
 		})
+		})
+	}
+}
+
+loadingScreen = (status) => {
+	if (status === 'on') {
+		let background = document.querySelector('#root')
+		background.classList.add('blur')
+	
+		return <LoadingSpinner/>
+	} else {
+		let background = document.querySelector('#root')
+		background.classList.remove('blur')
 	}
 }
 
   render() {
+	  const { loading } = this.state
 	return (
 	  <form onSubmit={this.handleSubmit}>
+	  		{loading ? this.loadingScreen('on') : this.loadingScreen('off')}
 			<CardElement />
 		<button>Confirmar Pago</button>
 	  </form>

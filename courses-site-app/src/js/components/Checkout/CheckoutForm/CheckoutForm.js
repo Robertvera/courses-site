@@ -31,12 +31,14 @@ class CheckoutForm extends Component {
     if (this.props.match.params.id) {
       Api.retrieveCourseId(this.props.match.params.id)
       .then(course=>{
-        const {name, price, _id, students } = course.data.data[0]
+        const {name, price, _id, students, location, date } = course.data.data[0]
         this.setState ({
           courseName: name,
           coursePrice: price,
           course: _id,
-          courseStudents: students
+          courseStudents: students,
+          location: location,
+          date: date
         })
       })
     }
@@ -74,7 +76,9 @@ class CheckoutForm extends Component {
       course: this.state.course,
       courseName: this.state.courseName,
       coursePrice: this.state.coursePrice,
-      courseStudents: this.state.courseStudents
+      courseStudents: this.state.courseStudents,
+      location: this.state.location,
+      date: this.state.date
     }
 
     return (

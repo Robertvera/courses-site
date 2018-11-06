@@ -1,4 +1,8 @@
+/*
+Very long document, for an easy usage, find below the name references of the methods available:
+- thanks: thanks email
 
+*/
 const mailTemplates = {
 	thanks: function (name, surname, courseName,city,date) {
         return {
@@ -62,42 +66,6 @@ const mailTemplates = {
                             <v:fill type="tile" color="#cccccc"></v:fill>
                         </v:background>
                     <![endif]--> 
-               <table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;padding:0;Margin:0;width:100%;height:100%;background-repeat:repeat;background-position:center top;"> 
-                 <tr style="border-collapse:collapse;"> 
-                  <td valign="top" style="padding:0;Margin:0;"> 
-                   <table class="es-content" cellspacing="0" cellpadding="0" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%;"> 
-                     <tr style="border-collapse:collapse;"> 
-                      <td class="es-adaptive" align="center" style="padding:0;Margin:0;"> 
-                       <table class="es-content-body" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:#EFEFEF;" width="600" cellspacing="0" cellpadding="0" bgcolor="#efefef" align="center"> 
-                         <tr style="border-collapse:collapse;"> 
-                          <td align="left" style="Margin:0;padding-top:10px;padding-bottom:10px;padding-left:40px;padding-right:40px;"> 
-                           <!--[if mso]><table width="520" cellpadding="0" cellspacing="0"><tr><td width="250" valign="top"><![endif]--> 
-                           <table class="es-left" cellspacing="0" cellpadding="0" align="left" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left;"> 
-                             <tr style="border-collapse:collapse;"> 
-                              <td width="250" align="left" style="padding:0;Margin:0;"> 
-                               <table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;"> 
-                                 <tr style="border-collapse:collapse;"> 
-                                  <td class="es-infoblock" align="left" style="padding:0;Margin:0;line-height:120%;font-size:12px;color:#CCCCCC;"> Put your preheader text here</td> 
-                                 </tr> 
-                               </table> </td> 
-                             </tr> 
-                           </table> 
-                           <!--[if mso]></td><td width="20"></td><td width="250" valign="top"><![endif]--> 
-                           <table class="es-right" cellspacing="0" cellpadding="0" align="right" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:right;"> 
-                             <tr style="border-collapse:collapse;"> 
-                              <td width="250" align="left" style="padding:0;Margin:0;"> 
-                               <table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;"> 
-                                 <tr style="border-collapse:collapse;"> 
-                                  <td class="es-infoblock" align="right" style="padding:0;Margin:0;line-height:120%;font-size:12px;color:#CCCCCC;"> <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:12px;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:120%;color:#CCCCCC;"><a href="https://stripo.email/" target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:12px;text-decoration:underline;color:#CCCCCC;">View in browser</a></p> </td> 
-                                 </tr> 
-                               </table> </td> 
-                             </tr> 
-                           </table> 
-                           <!--[if mso]></td></tr></table><![endif]--> </td> 
-                         </tr> 
-                       </table> </td> 
-                     </tr> 
-                   </table> 
                    <table class="es-header" cellspacing="0" cellpadding="0" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%;background-color:transparent;background-repeat:repeat;background-position:center top;"> 
                      <tr style="border-collapse:collapse;"> 
                       <td class="es-adaptive" align="center" style="padding:0;Margin:0;"> 
@@ -140,10 +108,10 @@ const mailTemplates = {
                                    </table> </td> 
                                  </tr> 
                                  <tr style="border-collapse:collapse;"> 
-                                  <td align="left" style="padding:0;Margin:0;padding-bottom:10px;"> <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:150%;color:#666666;"><span style="font-size:16px;">Hola ${name} ${surname},</span></p> </td> 
+                                  <td align="left" style="padding:0;Margin:0;padding-bottom:10px;"> <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:150%;color:#666666;"><span style="font-size:16px;">Hola <strong>${name} ${surname}</strong>,</span></p> </td> 
                                  </tr> 
                                  <tr style="border-collapse:collapse;"> 
-                                  <td align="left" style="padding:0;Margin:0;"> <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:150%;color:#666666;">desde VMB Formación te damos las gracias por apuntarte a ${courseName}, que tendrá lugar en ${city} el ${date}.</p><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:150%;color:#666666;"><br></p><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:150%;color:#666666;">Si tienes alguna pregunta,&nbsp;por favor no dudes en ponerte en contacto con nosotros. De la misma manera no oblides en visitar nuestra página y revisar todos los cursos que hemos preparado para ti!</p> </td> 
+                                  <td align="left" style="padding:0;Margin:0;"> <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:150%;color:#666666;">desde <strong>VMB Formación</strong> te damos las gracias por apuntarte a <strong>${courseName}</strong>, que tendrá lugar en <strong>${city} el ${date}</strong>. 15 días antes del curso nos pondremos en contacto contigo para que no te olvides :) </p><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:150%;color:#666666;"><br></p><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:150%;color:#666666;">Si tienes alguna pregunta,&nbsp;por favor no dudes en ponerte en contacto con nosotros. No olvides visitar nuestra página y revisar todos los cursos que hemos preparado para ti!</p> </td> 
                                  </tr> 
                                  <tr style="border-collapse:collapse;"> 
                                   <td align="center" style="padding:0;Margin:0;padding-top:20px;padding-bottom:20px;"> <span class="es-button-border" style="border-style:solid;border-color:#4A7EB0;background:#2CB543;border-width:0px;display:inline-block;border-radius:0px;width:auto;"> <a href="https://stripo.email/" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none !important;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:18px;color:#4A7EB0;border-style:solid;border-color:#EFEFEF;border-width:10px 25px;display:inline-block;background:#EFEFEF;border-radius:0px;font-weight:normal;font-style:normal;line-height:120%;width:auto;text-align:center;">Ver más cursos</a> </span> </td> 
@@ -240,26 +208,7 @@ const mailTemplates = {
                        </table> </td> 
                      </tr> 
                    </table> 
-                   <table class="es-content" cellspacing="0" cellpadding="0" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%;"> 
-                     <tr style="border-collapse:collapse;"> 
-                      <td align="center" style="padding:0;Margin:0;"> 
-                       <table class="es-content-body" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:transparent;" width="600" cellspacing="0" cellpadding="0" align="center"> 
-                         <tr style="border-collapse:collapse;"> 
-                          <td align="left" style="Margin:0;padding-left:20px;padding-right:20px;padding-top:30px;padding-bottom:30px;"> 
-                           <table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;"> 
-                             <tr style="border-collapse:collapse;"> 
-                              <td width="560" valign="top" align="center" style="padding:0;Margin:0;"> 
-                               <table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;"> 
-                                 <tr style="border-collapse:collapse;"> 
-                                  <td class="es-infoblock" align="center" style="padding:0;Margin:0;line-height:120%;font-size:12px;color:#CCCCCC;"> <a target="_blank" href="http://stripo.email/?utm_source=templates&utm_medium=email&utm_campaign=construction&utm_content=trigger_newsletter" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:12px;text-decoration:underline;color:#CCCCCC;"> <img src="images/64951510234941531.png" alt="" width="125" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;"> </a> </td> 
-                                 </tr> 
-                               </table> </td> 
-                             </tr> 
-                           </table> </td> 
-                         </tr> 
-                       </table> </td> 
-                     </tr> 
-                   </table> </td> 
+                   </td> 
                  </tr> 
                </table> 
               </div>  

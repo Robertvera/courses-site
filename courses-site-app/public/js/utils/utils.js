@@ -29,7 +29,15 @@ const Utils = {
 			case 'cp':
 				return 'Código Postal'
 		}
-	}
+	},
+
+	formatDate: function (input) {
+		var datePart = input.match(/\d+/g),
+		year = datePart[0],
+		month = datePart[1], day = datePart[2];
+	  
+		return day+'/'+month+'/'+year;
+	  }
 }
 
 module.exports = Utils
