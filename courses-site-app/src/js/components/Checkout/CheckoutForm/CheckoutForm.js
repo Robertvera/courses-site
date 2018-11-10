@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { withRouter } from "react-router-dom"
 import './CheckoutForm.scss'
 import Api from "../../../../api/vmApi"
-import swal from 'sweetalert2'
 import CheckoutCardForm from '../CheckoutCardForm/CheckoutCardForm'
 
 class CheckoutForm extends Component {
@@ -56,7 +55,6 @@ class CheckoutForm extends Component {
     }
   }
 
-
   render() {
     const {courseName, coursePrice, mailCheck} = this.state
 
@@ -69,7 +67,7 @@ class CheckoutForm extends Component {
       city: this.state.city,
       email: this.state.email,
       phone: this.state.phone,
-      mailCheck: this.state.mailCheck
+      mailCheck: this.state.mailCheck,
     }
 
     const dataCourse = {
@@ -145,7 +143,7 @@ class CheckoutForm extends Component {
                     className="form-control" 
                     type="text" 
                     placeholder="Repite Correo Electrónico" 
-                    style={mailCheck ? {} : {borderColor: 'red', backgroundColor: '#E09D9D'}}
+                    style={mailCheck ? {} : {borderColor: 'red'}}
                     required />
                   </div>
                   <div className="col-md-12 form-group">

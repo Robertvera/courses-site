@@ -1,7 +1,7 @@
 const Utils = {
 	validateData: function (data) {
 		let missing
-		Object.keys(data).forEach(function(key,index) {
+		Object.keys(data).forEach(function(key) {
 			if (!data[key] && !missing) {
 				missing = key
 			}
@@ -32,11 +32,11 @@ const Utils = {
 	},
 
 	formatDate: function (input) {
-		var datePart = input.match(/\d+/g),
+		const datePart = input.match(/\d+/g),
 		year = datePart[0],
 		month = datePart[1], day = datePart[2];
 	  
-		return day+'/'+month+'/'+year;
+		return `${day}/${month}/${year}`;
 	  }
 }
 

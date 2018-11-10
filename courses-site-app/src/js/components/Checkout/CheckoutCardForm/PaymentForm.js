@@ -1,13 +1,12 @@
 import React from 'react';
+import { withRouter } from "react-router-dom"
 import {injectStripe} from 'react-stripe-elements';
 import './PaymentForm.scss'
 import {CardElement} from 'react-stripe-elements';
 import Api from "../../../../api/vmApi"
-import swal from 'sweetalert2'
 import {validateData, formatDate} from '../../../../../public/js/utils/utils'
 import Modals from '../../../../../public/js/utils/modals'
 import {thanks} from '../../../../../public/js/utils/mailTemplates'
-import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner'
 
 
 class PaymentForm extends React.Component {
@@ -17,6 +16,10 @@ class PaymentForm extends React.Component {
 			loading: false
 		}
 	}
+
+redirectToHome = () => {
+	return this.props.history.push(`/es/home`)
+}
   
 handleSubmit = (e) => {
 	e.preventDefault();
@@ -50,7 +53,11 @@ handleSubmit = (e) => {
 								.then(()=> {
 									Api.emailToStudent(email, thanks(name, surname, courseName, location, formatDate(date)) )
 								})
+								.then(()=> {
+									this.redirectToHome()
+								})
 							} else {
+								this.setState({loading: false})
 								Modals.UnknownError()
 								.then(()=> {
 									Api.deleteStudent(dni)
@@ -59,6 +66,7 @@ handleSubmit = (e) => {
 						})
 					})
 					.catch(err=> {
+						this.setState({loading: false})
 						Modals.WrongCard()
 						.then(()=> {
 							Api.deleteStudent(dni)
@@ -66,6 +74,7 @@ handleSubmit = (e) => {
 					})
 				})
 				.catch(err=> {
+					this.setState({loading: false})
 					Modals.UnknownError()
 					.then(()=> {
 						Api.deleteStudent(dni)
@@ -74,35 +83,26 @@ handleSubmit = (e) => {
 			}
 		})
 		.catch(err => {
+			this.setState({loading: false})
 			Modals.UnknownError()
 		})
 		})
 	}
 }
 
-loadingScreen = (status) => {
-	if (status === 'on') {
-		let background = document.querySelector('#root')
-		background.classList.add('blur')
-	
-		return <LoadingSpinner/>
-	} else {
-		let background = document.querySelector('#root')
-		background.classList.remove('blur')
-	}
-}
-
   render() {
 	  const { loading } = this.state
 	return (
-	  <form onSubmit={this.handleSubmit}>
-	  		{loading ? this.loadingScreen('on') : this.loadingScreen('off')}
-			<CardElement />
-		<button>Confirmar Pago</button>
-	  </form>
+		<div>
+			<form onSubmit={this.handleSubmit}>
+					<CardElement />
+				<button>Confirmar Pago</button>
+			</form>
+			{loading ? Modals.Loading() : Modals.CloseLoading()}
+		</div>
 	);
   }
 
 }
 
-export default injectStripe(PaymentForm);
+export default withRouter(injectStripe(PaymentForm));

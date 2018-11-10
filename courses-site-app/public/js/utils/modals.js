@@ -35,7 +35,21 @@ const Modals = {
 			title: 'Oops...',
 			html: `Por favor revisa el campo <strong>${translateData(input)}</strong>`,
 		})
+    },
+    Loading: function () {
+         swal({           
+            imageUrl: 'https://media.giphy.com/media/cZDRRGVuNMLOo/giphy.gif',
+            backdrop: `
+              rgba(0,0,123,0.4)
+            `,
+            text: 'Por favor espera mientras se efectúa el pago.',
+            showConfirmButton: false
+          })
+    },
+    CloseLoading: function () {
+        return swal.close()
     }
+
 }
 
 module.exports = Modals
