@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import Api from '../../../../api/vmApi'
 import { withRouter } from "react-router-dom"
 import swal from 'sweetalert2'
-import firebase from 'firebase'
 
 
 class Courses extends Component {
@@ -13,32 +12,23 @@ class Courses extends Component {
       courses: [],
       courseToEdit: '',
       query: '',
-      skipResults: 0,
-      login: false
+      skipResults: 0
     };
   }
 
- 
 
   componentDidMount() {
-    const self = this
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        self.getCourses(true)
-      } else {
-        alert('no user')
-      }
-    })
+    this.getCourses()
   }
 
-  getCourses = (userLogin) => {
+  getCourses = () => {
     const { skipResults } = this.state 
     Api.listCourses(skipResults).then(courses => {
-      this.refactorCoursesToShow(courses, userLogin)
+      this.refactorCoursesToShow(courses)
     })
   }
 
-  refactorCoursesToShow = (courses, userLogin) => {
+  refactorCoursesToShow = (courses) => {
     let coursesListed = courses.data.data
     coursesListed.forEach(course => {
       if (course.date && course.date.length) {
@@ -48,7 +38,6 @@ class Courses extends Component {
     });
     this.setState({ 
       courses: [ ...this.state.courses, ...coursesListed ],
-      login: userLogin
     })
   }
 
@@ -151,7 +140,7 @@ class Courses extends Component {
             </thead>
             <tbody>
               {
-                courses.length && login ?
+                courses && courses.length ?
                   courses.map( course => {
                     return <tr key={course._id}>
                       <td>{course.name}</td>
@@ -179,9 +168,6 @@ class Courses extends Component {
                     </tr>
                   })
                 : null  
-              }
-              {
-                login ? null : <h2> Necesitas loguearte </h2>
               }
             </tbody>
           </table>

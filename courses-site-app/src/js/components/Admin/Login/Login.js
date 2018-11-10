@@ -28,18 +28,20 @@ class Login extends Component {
         console.log(e)
         e.preventDefault()
         const { email, password } = this.state
- 
-        firebase.auth().signInWithEmailAndPassword(email, password)
-            .catch(function (error) {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                if (errorCode === 'auth/wrong-password') {
-                    alert('Wrong password.');
-                } else {
-                    alert(errorMessage);
-                }
-                console.log(error);
+
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+            .then(() =>{
+                firebase.auth().signInWithEmailAndPassword(email, password)
+                    .catch(function (error) {
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        if (errorCode === 'auth/wrong-password') {
+                            alert('Wrong password.');
+                        } else {
+                            alert(errorMessage);
+                        }
+                        ;
+                    })
             })
             .then(() =>{
                 swal({
@@ -49,8 +51,13 @@ class Login extends Component {
                   })
             })
             .then(() => {
-                this.props.history.push('/admin')
+                this.props.onCheckForLogin()
             })
+            .catch(function(error) {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.error(errorCode, errorMessage)
+              });
         
     }
 

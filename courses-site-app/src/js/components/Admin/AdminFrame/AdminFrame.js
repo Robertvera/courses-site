@@ -2,13 +2,46 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { NavLink } from 'react-router-dom'
 import './AdminFrame.scss'
+import Login from '../Login/Login'
+import firebase from 'firebase'
 
 class AdminFrame extends Component {
   constructor() {
     super();
     this.state = {
+      login: false
     };
   }
+
+  componentDidMount() {
+    this.checkForLogin()
+  }
+
+  checkForLogin = () => {
+    let userLogin = false
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        userLogin = true
+        this.setState({ login: userLogin })
+      } else {
+        this.setState({ login: userLogin })
+      }
+    })
+  }
+
+  logoutUser = (ev) => {
+    ev.preventDefault()
+    firebase.auth().signOut().then(() => {
+      this.checkForLogin()
+    }).catch((error) => {
+      console.error(error)
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('nextProps => ', nextProps)
+  }
+
   render() {
     return (
         <div>
@@ -17,7 +50,12 @@ class AdminFrame extends Component {
     <input className="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search" />
     <ul className="navbar-nav px-3">
       <li className="nav-item text-nowrap">
-        <a className="nav-link" href="#">Sign out</a>
+        <button 
+          className="nav-link" 
+          onClick={this.logoutUser}
+        >
+        Sign out
+        </button>
       </li>
     </ul>
   </nav>
@@ -44,14 +82,12 @@ class AdminFrame extends Component {
           </ul>
         </div>
       </nav>
-      
-
-      
     </div>
+      {
+        this.state.login ?  '' : < Login onCheckForLogin={this.checkForLogin} />
+      }
   </div>
 </div>
-
-
     );
   }
 }
