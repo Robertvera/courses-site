@@ -5,7 +5,6 @@ import { withRouter } from "react-router-dom"
 import swal from 'sweetalert2'
 
 
-
 class Courses extends Component {
   constructor() {
     super();
@@ -16,6 +15,7 @@ class Courses extends Component {
       skipResults: 0
     };
   }
+
 
   componentDidMount() {
     this.getCourses()
@@ -28,7 +28,7 @@ class Courses extends Component {
     })
   }
 
-  refactorCoursesToShow = courses => {
+  refactorCoursesToShow = (courses) => {
     let coursesListed = courses.data.data
     coursesListed.forEach(course => {
       if (course.date && course.date.length) {
@@ -36,7 +36,9 @@ class Courses extends Component {
         course.date = `${course.date.getDate()}/${course.date.getMonth()+1}/${course.date.getFullYear()}`;
       }
     });
-    this.setState({ courses: [ ...this.state.courses, ...coursesListed ]})
+    this.setState({ 
+      courses: [ ...this.state.courses, ...coursesListed ],
+    })
   }
 
   showMoreCourses = e => {
@@ -97,7 +99,7 @@ class Courses extends Component {
   }
 
   render() {
-    const { courses } = this.state
+    const { courses, login } = this.state
     
     return (
       <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -138,7 +140,7 @@ class Courses extends Component {
             </thead>
             <tbody>
               {
-                courses.length ?
+                courses && courses.length ?
                   courses.map( course => {
                     return <tr key={course._id}>
                       <td>{course.name}</td>
