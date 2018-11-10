@@ -32,12 +32,11 @@ const Utils = {
 	},
 
 	formatDate: function (input) {
-		const datePart = input.match(/\d+/g),
-		year = datePart[0],
-		month = datePart[1], day = datePart[2];
-	  
-		return `${day}/${month}/${year}`;
-	  }
+		const newDate = new Date(input)
+		return `${newDate.getDate()}/${newDate.getMonth()+1}/${newDate.getFullYear()}`;
+	}
+
+
 }
 
 module.exports = Utils

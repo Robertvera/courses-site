@@ -4,9 +4,9 @@ import {injectStripe} from 'react-stripe-elements';
 import './PaymentForm.scss'
 import {CardElement} from 'react-stripe-elements';
 import Api from "../../../../api/vmApi"
-import {validateData, formatDate} from '../../../../../public/js/utils/utils'
-import Modals from '../../../../../public/js/utils/modals'
-import {thanks} from '../../../../../public/js/utils/mailTemplates'
+import {validateData, formatDate} from '../../utils/utils'
+import Modals from '../../utils/modals'
+import {thanks} from '../../utils/mailTemplates'
 
 
 class PaymentForm extends React.Component {
