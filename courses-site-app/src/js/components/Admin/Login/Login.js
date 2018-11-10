@@ -42,13 +42,13 @@ class Login extends Component {
                         }
                         ;
                     })
-            })
-            .then(() =>{
-                swal({
-                    title: 'Login correcto',
-                    showConfirmButton: true,
-                    timer: 1000
-                  })
+                    // .then(() =>{
+                    //     swal({
+                    //         title: 'Login correcto',
+                    //         showConfirmButton: true,
+                    //         timer: 1000
+                    //       })
+                    // })
             })
             .then(() => {
                 this.props.onCheckForLogin()
