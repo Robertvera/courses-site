@@ -7,6 +7,8 @@ node_modules
 
 package-lock.json
 
+.eslintrc.js
+
 ### macOS ###
 *.DS_Store
 .AppleDouble

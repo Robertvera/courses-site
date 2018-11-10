@@ -85,6 +85,12 @@ const vmApi = {
 
     sendPayment: function(token, item, price) {
         return axios.post(`${this._url()}/charges`, { token, item, price })
+    },
+
+    //MAILING ROUTES
+
+    emailToStudent: function(to, content) {
+        return axios.post(`${this._url()}/mailing`, { to, content })
     }
 }
 

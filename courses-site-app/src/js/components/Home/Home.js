@@ -3,36 +3,36 @@ import ReactDOM from "react-dom";
 import './Home.scss'
 
 class Home extends Component {
-  constructor() {
-    super();
-    this.state = {
-    };
-  }
+
+    Hero = () => {
+        return <section className="module-cover parallax fullscreen text-center" id="home" data-background="../../../../public/images/adult-application-asian-733856.jpg" data-overlay="0.5">
+        <div className="container">
+        <div className="row">
+            <div className="col-md-12">
+            <h1 className="m-b-20">
+                <strong>Formación para terapeutas
+                <br /> ocupacionales, fisioterapeutas y
+                <br /> logopedas</strong>
+            </h1>
+            <p>
+                <a className="btn btn-circle btn-outline-new-white" href="/#/es/cursos">Ver cursos</a>
+            </p>
+            </div>
+        </div>
+        </div>
+    </section>
+    }
+
   render() {
     return (
-        <div className="wrapper">    
-            <section className="module-cover parallax fullscreen text-center" id="home" data-background="../../../../public/images/adult-application-asian-733856.jpg" data-overlay="0.5">
-                <div className="container">
-                <div className="row">
-                    <div className="col-md-12">
-                    <h1 className="m-b-20">
-                        <strong>Formación para terapeutas
-                        <br /> ocupacionales, fisioterapeutas y
-                        <br /> logopedas</strong>
-                    </h1>
-                    <p>
-                        <a className="btn btn-circle btn-outline-new-white" href="/#/es/cursos">Ver cursos</a>
-                    </p>
-                    </div>
-                </div>
-                </div>
-            </section>
+        <div className="wrapper">
+            {this.Hero()}
 
             <section className="module bg-gray">
                 <div className="container">
                 <div className="row align-items-center">
                     <div className="col-lg-6">
-                    <img src="../../../../public/images/notebook-vmb.png" alt />
+                    <img src="../../../../public/images/notebook-vmb.png"/>
                     </div>
                     <div className="col-lg-5 offset-lg-1">
                     <h2>VMB FORMACIÓN</h2>
@@ -110,7 +110,7 @@ class Home extends Component {
                     <div className="col-lg-4 col-md-6">
                     <div className="team-item">
                         <div className="team-image">
-                        <img src="../../../../public/images/team/1.jpg" alt />
+                        <img src="../../../../public/images/team/1.jpg"/>
                         <div className="team-wrap">
                             <div className="team-content">
                             <h6 className="team-name">Albert Giménez</h6>
@@ -137,7 +137,7 @@ class Home extends Component {
                     <div className="col-lg-4 col-md-6">
                     <div className="team-item">
                         <div className="team-image">
-                        <img src="../../../../public/images/team/2.jpg" alt />
+                        <img src="../../../../public/images/team/2.jpg"/>
                         <div className="team-wrap">
                             <div className="team-content">
                             <h6 className="team-name">Facundo Caloggero</h6>
@@ -164,7 +164,7 @@ class Home extends Component {
                     <div className="col-lg-4 col-md-6">
                     <div className="team-item">
                         <div className="team-image">
-                        <img src="../../../../public/images/team/3.jpg" alt />
+                        <img src="../../../../public/images/team/3.jpg"/>
                         <div className="team-wrap">
                             <div className="team-content">
                             <h6 className="team-name">Patricia Murciego</h6>
@@ -191,7 +191,7 @@ class Home extends Component {
                     <div className="col-lg-4 col-md-6">
                     <div className="team-item">
                         <div className="team-image">
-                        <img src="../../../../public/images/team/4.jpg" alt />
+                        <img src="../../../../public/images/team/4.jpg"/>
                         <div className="team-wrap">
                             <div className="team-content">
                             <h6 className="team-name">Laia Sallés</h6>
@@ -218,7 +218,7 @@ class Home extends Component {
                     <div className="col-lg-4 col-md-6">
                     <div className="team-item">
                         <div className="team-image">
-                        <img src="../../../../public/images/team/5.jpg" alt />
+                        <img src="../../../../public/images/team/5.jpg"/>
                         <div className="team-wrap">
                             <div className="team-content">
                             <h6 className="team-name">María González</h6>
@@ -245,7 +245,7 @@ class Home extends Component {
                     <div className="col-lg-4 col-md-6">
                     <div className="team-item">
                         <div className="team-image">
-                        <img src="../../../../public/images/team/6.jpg" alt />
+                        <img src="../../../../public/images/team/6.jpg"/>
                         <div className="team-wrap">
                             <div className="team-content">
                             <h6 className="team-name">Armando Rodríguez</h6>
@@ -303,7 +303,7 @@ class Home extends Component {
                     <article className="post">
                         <div className="post-preview">
                         <a href="#">
-                            <img src="../../../../public/images/blog/1.jpg" alt />
+                            <img src="../../../../public/images/blog/1.jpg"/>
                         </a>
                         </div>
                         <div className="post-wrapper">
@@ -340,7 +340,7 @@ class Home extends Component {
                     <article className="post">
                         <div className="post-preview">
                         <a href="#">
-                            <img src="../../../../public/images/blog/3.jpg" alt />
+                            <img src="../../../../public/images/blog/3.jpg"/>
                         </a>
                         </div>
                         <div className="post-wrapper">
@@ -377,7 +377,7 @@ class Home extends Component {
                     <article className="post">
                         <div className="post-preview">
                         <a href="#">
-                            <img src="../../../../public/images/blog/5.jpg" alt />
+                            <img src="../../../../public/images/blog/5.jpg"/>
                         </a>
                         </div>
                         <div className="post-wrapper">
@@ -427,7 +427,7 @@ class Home extends Component {
                         </div>
                         <div className="review-card-author">
                         <div className="review-card-author-photo">
-                            <img src="../../../../public/images/avatar/1.jpg" alt />
+                            <img src="../../../../public/images/avatar/1.jpg"/>
                         </div>
                         <div className="review-card-author-info">
                             <h6 className="review-card-author-title">Emma Connor</h6>
@@ -443,7 +443,7 @@ class Home extends Component {
                         </div>
                         <div className="review-card-author">
                         <div className="review-card-author-photo">
-                            <img src="../../../../public/images/avatar/1.jpg" alt />
+                            <img src="../../../../public/images/avatar/1.jpg"/>
                         </div>
                         <div className="review-card-author-info">
                             <h6 className="review-card-author-title">Emma Connor</h6>
@@ -459,7 +459,7 @@ class Home extends Component {
                         </div>
                         <div className="review-card-author">
                         <div className="review-card-author-photo">
-                            <img src="../../../../public/images/avatar/1.jpg" alt />
+                            <img src="../../../../public/images/avatar/1.jpg"/>
                         </div>
                         <div className="review-card-author-info">
                             <h6 className="review-card-author-title">Emma Connor</h6>
@@ -497,22 +497,22 @@ class Home extends Component {
                     <div className="col-md-10 m-auto">
                     <div className="owl-carousel clients-carousel">
                         <div className="client">
-                        <img src="../../../../public/images/partners/apato-ico2.png" alt />
+                        <img src="../../../../public/images/partners/apato-ico2.png"/>
                         </div>
                         <div className="client">
-                        <img src="../../../../public/images/partners/aptoca-ico2.png" alt />
+                        <img src="../../../../public/images/partners/aptoca-ico2.png"/>
                         </div>
                         <div className="client">
-                        <img src="../../../../public/images/partners/coptoa-ico2.png" alt />
+                        <img src="../../../../public/images/partners/coptoa-ico2.png"/>
                         </div>
                         <div className="client">
-                        <img src="../../../../public/images/partners/coptocyl-ico2.png" alt />
+                        <img src="../../../../public/images/partners/coptocyl-ico2.png"/>
                         </div>
                         <div className="client">
-                        <img src="../../../../public/images/partners/coptoex-ico2.png" alt />
+                        <img src="../../../../public/images/partners/coptoex-ico2.png"/>
                         </div>
                         <div className="client">
-                        <img src="../../../../public/images/partners/coptopa-ico2.png" alt />
+                        <img src="../../../../public/images/partners/coptopa-ico2.png"/>
                         </div>
                     </div>
                     </div>

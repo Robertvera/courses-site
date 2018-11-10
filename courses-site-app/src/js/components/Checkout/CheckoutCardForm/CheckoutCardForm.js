@@ -6,9 +6,9 @@ import InjectedPaymentForm from './PaymentForm';
 const CheckoutCardForm = (props) => {
   return (
     <div className="Checkout">
-        <h1>Card details</h1>
+        <h1>Detalles de pago</h1>
         <Elements>
-          <InjectedPaymentForm courseName={props.courseName} price={props.price} name={props.name}/>
+          <InjectedPaymentForm dataForm={props.dataForm} dataCourse={props.dataCourse}/>
         </Elements>
       </div>
   )

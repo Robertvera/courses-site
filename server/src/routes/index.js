@@ -4,7 +4,7 @@ const {
     listCourses, createCourse, editCourse, removeCourse, retrieveCourseQuery, retrieveCourse, 
     createStudent, editStudent, removeStudent, retrieveStudent, listStudents, 
     createTeacher, editTeacher, removeTeacher, retrieveTeacher, listTeachers, retrieveCourseId,
-    createPayment
+    createPayment, sendEmail
 } = require('./handlers')
 
 const router = Router()
@@ -56,5 +56,9 @@ router.get('/courses/:query', retrieveCourseQuery)
 //PAYMENTS ROUTES
 
 router.post('/charges', jsonBodyParser, createPayment)
+
+//MAILING ROUTES
+
+router.post('/mailing', jsonBodyParser, sendEmail)
 
 module.exports = router
