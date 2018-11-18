@@ -3,8 +3,7 @@ const axios = require('axios')
 const vmApi = {
 
     _url() {
-        //return `https://aqueous-tundra-90892.herokuapp.com/api`
-        return 'http://localhost:5000/api'
+        return 'https://vmb-server-test.appspot.com/api'
     },
 
     // TEACHERS ROUTES
@@ -85,6 +84,12 @@ const vmApi = {
 
     sendPayment: function(token, item, price) {
         return axios.post(`${this._url()}/charges`, { token, item, price })
+    },
+
+    //MAILING ROUTES
+
+    emailToStudent: function(to, content) {
+        return axios.post(`${this._url()}/mailing`, { to, content })
     }
 }
 

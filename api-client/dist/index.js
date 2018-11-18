@@ -5,7 +5,7 @@ var axios = require('axios');
 var vmApi = {
     _url: function _url() {
         //return `https://aqueous-tundra-90892.herokuapp.com/api`
-        return 'http://localhost:5000/api';
+        return 'https://vmb-server-test.appspot.com/api';
     },
 
 
@@ -87,6 +87,12 @@ var vmApi = {
 
     sendPayment: function sendPayment(token, item, price) {
         return axios.post(this._url() + '/charges', { token: token, item: item, price: price });
+    },
+
+    //MAILING ROUTES
+
+    emailToStudent: function emailToStudent(to, content) {
+        return axios.post(this._url() + '/mailing', { to: to, content: content });
     }
 };
 

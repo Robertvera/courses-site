@@ -2,6 +2,7 @@ const { listCourses, createCourse, editCourse, removeCourse, retrieveCourse, ret
 const { createStudent, editStudent, removeStudent,retrieveStudent, listStudents } = require('./studentsHandlers')
 const { createTeacher, editTeacher, removeTeacher, retrieveTeacher, listTeachers } = require('./teachersHandlers')
 const { createPayment } = require('./paymentsHandlers')
+const { sendEmail } = require('./emailHandlers')
 
 module.exports = {
     listCourses,
@@ -21,5 +22,6 @@ module.exports = {
     removeTeacher,
     retrieveTeacher,
     listTeachers,
-    createPayment
+    createPayment,
+    sendEmail
 }

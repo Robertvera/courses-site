@@ -7,6 +7,8 @@ node_modules
 
 package-lock.json
 
+.eslintrc.js
+
 ### macOS ###
 *.DS_Store
 .AppleDouble
@@ -36,3 +38,5 @@ Temporary Items
 
 
 # End of https://www.gitignore.io/api/macos
+.vscode/settings.json
+.eslintrc.js
