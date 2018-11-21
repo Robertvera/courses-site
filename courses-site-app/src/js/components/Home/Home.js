@@ -5,28 +5,30 @@ import './Home.scss'
 class Home extends Component {
 
     Hero = () => {
-        return <section className="module-cover parallax fullscreen text-center" id="home" data-background="../../../../public/images/adult-application-asian-733856.jpg" data-overlay="0.5">
-        <div className="container">
-        <div className="row">
-            <div className="col-md-12">
-            <h1 className="m-b-20">
-                <strong>Formación para terapeutas
-                <br /> ocupacionales, fisioterapeutas y
-                <br /> logopedas</strong>
-            </h1>
-            <p>
-                <a className="btn btn-circle btn-outline-new-white" href="/#/es/cursos">Ver cursos</a>
-            </p>
-            </div>
-        </div>
-        </div>
-    </section>
+        return 
     }
 
   render() {
     return (
         <div className="wrapper">
-            {this.Hero()}
+            <section className="module-cover parallax fullscreen text-center " id="home" >
+            <div className="overlay-background">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <h1 className="m-b-20">
+                                <strong>Formación para terapeutas
+                                <br /> ocupacionales, fisioterapeutas y
+                                <br /> logopedas</strong>
+                            </h1>
+                            <p>
+                                <a className="btn btn-circle btn-outline-new-white" href="/#/es/cursos">Ver cursos</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </section>
 
             <section className="module bg-gray">
                 <div className="container">
