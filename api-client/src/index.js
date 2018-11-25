@@ -3,7 +3,9 @@ const axios = require('axios')
 const vmApi = {
 
     _url() {
-        return 'https://vmb-server-test.appspot.com/api'
+        // return 'https://vmb-server-test.appspot.com/api'
+        // return 'https://aqueous-tundra-90892.herokuapp.com/api'
+        return 'http://localhost:5000/api'
     },
 
     // TEACHERS ROUTES
