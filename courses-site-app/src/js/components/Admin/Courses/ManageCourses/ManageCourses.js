@@ -1,236 +1,261 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { withRouter } from "react-router-dom"
-import Api from "../../../../../api/vmApi"
-import swal from 'sweetalert2'
-import firebase from 'firebase'
+import { withRouter } from "react-router-dom";
+import Api from "../../../../../api/vmApi";
+import swal from "sweetalert2";
+import firebase from "firebase";
 
 class ManageCourses extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      description: '',
-      excerpt: '',
-      price: '',
-      image: '',
-      pdf: '',
-      capacity: '',
-      location: '',
-      date: '',
-      teacher: '',
-      teacherToFind: '',
+      name: "",
+      description: "",
+      excerpt: "",
+      price: "",
+      image: "",
+      pdf: "",
+      capacity: "",
+      location: "",
+      date: "",
+      teacher: "",
+      teacherToFind: "",
       teachersList: [],
-      uploadValuePDF: '',
-      uploadValueIMG: '',
+      uploadValuePDF: "",
+      uploadValueIMG: "",
       editingCourse: false
     };
   }
 
   defaultState = () => {
     this.setState({
-      name: '',
-      description: '',
-      excerpt: '',
-      price: '',
-      image: '',
-      pdf: '',
-      capacity: '',
-      location: '',
-      date: '',
-      teacher: '',
-      teacherToFind: '',
+      name: "",
+      description: "",
+      excerpt: "",
+      price: "",
+      image: "",
+      pdf: "",
+      capacity: "",
+      location: "",
+      date: "",
+      teacher: "",
+      teacherToFind: "",
       teachersList: [],
-      uploadValuePDF: '',
-      uploadValueIMG: '',
+      uploadValuePDF: "",
+      uploadValueIMG: "",
       editingCourse: false
-    })
-  }
+    });
+  };
 
   componentDidMount() {
-
     if (this.props.match) {
+      const course = this.props.match.params.course;
 
-      const course = this.props.match.params.course
-
-      Api.retrieveCourse(course).then(_course => {
-        if (_course.data.status === 'OK') {
-          this.editCourse(_course.data.data[0])
-        } else {
-          swal({
-            type: 'error',
-            title: 'Error al editar el curso',
-            showConfirmButton: true,
-            timer: 2000
-          })
-        }
-      }).then(() => {
-        this.findTeacherName()
-      })
+      Api.retrieveCourse(course)
+        .then(_course => {
+          if (_course.data.status === "OK") {
+            this.editCourse(_course.data.data[0]);
+          } else {
+            swal({
+              type: "error",
+              title: "Error al editar el curso",
+              showConfirmButton: true,
+              timer: 2000
+            });
+          }
+        })
+        .then(() => {
+          this.findTeacherName();
+        });
     }
   }
 
   editCourse(courseToEdit) {
     if (courseToEdit) {
-
       this.setState({
-        name: courseToEdit.name || '',
-        description: courseToEdit.description || '',
-        excerpt: courseToEdit.excerpt || '',
-        price: courseToEdit.price || '',
-        image: courseToEdit.image || '',
-        pdf: courseToEdit.pdf || '',
-        capacity: courseToEdit.capacity || '',
-        location: courseToEdit.location || '',
-        date: courseToEdit.date || '',
-        teacher: courseToEdit.teachers[0] || '',
+        name: courseToEdit.name || "",
+        description: courseToEdit.description || "",
+        excerpt: courseToEdit.excerpt || "",
+        price: courseToEdit.price || "",
+        image: courseToEdit.image || "",
+        pdf: courseToEdit.pdf || "",
+        capacity: courseToEdit.capacity || "",
+        location: courseToEdit.location || "",
+        date: courseToEdit.date || "",
+        teacher: courseToEdit.teachers[0] || "",
         editingCourse: true,
         uploadValuePDF: courseToEdit.pdf.length ? 100 : "",
-        uploadValueIMG: courseToEdit.pdf.length ? 100 : "",
-      })
+        uploadValueIMG: courseToEdit.pdf.length ? 100 : ""
+      });
     }
   }
 
-  handleUploadPDF = (e) => {
-    const file = e.target.files[0]
+  handleUploadPDF = e => {
+    const file = e.target.files[0];
     const storageRef = firebase.storage().ref();
     const pdfRef = storageRef.child(file.name);
-    const pdfRouteRef = storageRef.child(`/pdf/${file.name}`)
+    const pdfRouteRef = storageRef.child(`/pdf/${file.name}`);
 
-    pdfRef.name === pdfRouteRef.name
-    pdfRef.fullPath === pdfRouteRef.fullPath
-    
-    pdfRouteRef.put(file).on( 'state_changed', snapshot => {
-      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      this.setState({
-        uploadValuePDF: percentage
-      })
-    }, error => {
-      console.log(error.message)
-    }, () => {
-      pdfRouteRef.getDownloadURL().then( url => {
+    pdfRef.name === pdfRouteRef.name;
+    pdfRef.fullPath === pdfRouteRef.fullPath;
+
+    pdfRouteRef.put(file).on(
+      "state_changed",
+      snapshot => {
+        let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         this.setState({
-          uploadValuePDF: 100,
-          pdf: url
-        })
-      })
-    })
-  }
+          uploadValuePDF: percentage
+        });
+      },
+      error => {
+        console.log(error.message);
+      },
+      () => {
+        pdfRouteRef.getDownloadURL().then(url => {
+          this.setState({
+            uploadValuePDF: 100,
+            pdf: url
+          });
+        });
+      }
+    );
+  };
 
-  handleUploadIMG = (e) => {
-    const file = e.target.files[0]
+  handleUploadIMG = e => {
+    const file = e.target.files[0];
     const storageRef = firebase.storage().ref();
     const imageRef = storageRef.child(file.name);
-    const imagesRouteRef = storageRef.child(`/image/${file.name}`)
+    const imagesRouteRef = storageRef.child(`/image/${file.name}`);
 
-    imageRef.name === imagesRouteRef.name
-    imageRef.fullPath === imagesRouteRef.fullPath
-    
-    imagesRouteRef.put(file).on( 'state_changed', snapshot => {
-      let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      this.setState({
-        uploadValueIMG: percentage
-      })
-    }, error => {
-      console.log(error.message)
-    }, () => {
-      imagesRouteRef.getDownloadURL().then( url => {
+    imageRef.name === imagesRouteRef.name;
+    imageRef.fullPath === imagesRouteRef.fullPath;
+
+    imagesRouteRef.put(file).on(
+      "state_changed",
+      snapshot => {
+        let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         this.setState({
-          uploadValueIMG: 100,
-          image: url
-        })
-      })
-    })
-  }
+          uploadValueIMG: percentage
+        });
+      },
+      error => {
+        console.log(error.message);
+      },
+      () => {
+        imagesRouteRef.getDownloadURL().then(url => {
+          this.setState({
+            uploadValueIMG: 100,
+            image: url
+          });
+        });
+      }
+    );
+  };
 
   handleEdit = e => {
-    e.preventDefault()
-    const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher } = this.state
+    e.preventDefault();
+    const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher } = this.state;
 
-    Api.editCourse(name.trim().toLowerCase(), description, excerpt, price, image, pdf, capacity, location, date, teacher)
+    Api.editCourse(
+      name.trim().toLowerCase(),
+      description,
+      excerpt,
+      price,
+      image,
+      pdf,
+      capacity,
+      location,
+      date,
+      teacher
+    )
       .then(course => {
-        course.data.status === 'OK' ?
-          swal({
-            title: '¡Curso editado!',
-            showConfirmButton: true,
-            timer: 1500
-          })
-          :
-          swal({
-            type: 'error',
-            title: 'Error editando el curso',
-            showConfirmButton: true,
-            timer: 2000
-          })
+        course.data.status === "OK"
+          ? swal({
+              title: "¡Curso editado!",
+              showConfirmButton: true,
+              timer: 1500
+            }).then(this.props.history.push("/admin/courses"))
+          : swal({
+              type: "error",
+              title: "Error editando el curso",
+              showConfirmButton: true,
+              timer: 2000
+            });
       })
-      .then(this.defaultState())
-      .then(this.props.history.push('/admin/courses'))
-  }
+      .then(this.defaultState());
+  };
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-    const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher } = this.state
+  handleSubmit = e => {
+    e.preventDefault();
+    const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher } = this.state;
 
-    Api.createCourse(name.trim().toLowerCase(), description, excerpt, price, image, pdf, capacity, location, date, teacher)
+    Api.createCourse(
+      name.trim().toLowerCase(),
+      description,
+      excerpt,
+      price,
+      image,
+      pdf,
+      capacity,
+      location,
+      date,
+      teacher.length ? teacher : undefined,
+      undefined
+    )
       .then(course => {
-        course.data.status === 'OK' ?
-          swal({
-            title: '¡Curso creado!',
-            showConfirmButton: true,
-            timer: 1500
-          })
-          :
-          swal({
-            type: 'error',
-            title: 'Error creando el curso',
-            showConfirmButton: true,
-            timer: 2000
-          })
+        course.data.status === "OK"
+          ? swal({
+              title: "¡Curso creado!",
+              showConfirmButton: true,
+              timer: 1500
+            }).then(this.props.history.push("/admin/courses"))
+          : swal({
+              type: "error",
+              title: "Error creando el curso",
+              showConfirmButton: true,
+              timer: 2000
+            });
       })
-      .then(this.defaultState())
-      .then(this.props.history.push('/admin/courses'))
-  }
-
+      .then(this.defaultState());
+  };
 
   handleOnChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   handleTeachers = e => {
-    this.setState({ teacherToFind: e.target.value.trim() })
+    this.setState({ teacherToFind: e.target.value.trim() });
     if (this.state.teacherToFind.length >= 2) {
-      Api.listTeachers(this.state.teacherToFind)
-      .then((_teachers) => {
-        this.setState({ teachersList: _teachers.data.data })
-      })
+      Api.listTeachers(this.state.teacherToFind).then(_teachers => {
+        this.setState({ teachersList: _teachers.data.data });
+      });
     }
-  }
+  };
 
   selectTeacherFromSuggested = (e, teacher) => {
-    e.preventDefault()
-    this.setState({ 
+    e.preventDefault();
+    this.setState({
       teacher: teacher.teacher._id,
-      teacherToFind: `${teacher.teacher.name} ${teacher.teacher.surname}` 
-    })
-  }
+      teacherToFind: `${teacher.teacher.name} ${teacher.teacher.surname}`
+    });
+  };
 
   findTeacherName = () => {
     if (this.state.teacher.length) {
       Api.retrieveTeacher(this.state.teacher).then(_teacher => {
-        if(_teacher.data.data.status = 'OK') {
-          const teacherName = `${_teacher.data.data.name} ${_teacher.data.data.surname}`
-          this.setState({teacherToFind: teacherName})
+        if ((_teacher.data.data.status = "OK")) {
+          const teacherName = `${_teacher.data.data.name} ${_teacher.data.data.surname}`;
+          this.setState({ teacherToFind: teacherName });
         } else {
-          console.error()
+          console.error();
         }
-      })
+      });
     }
-  }
+  };
 
   render() {
-    console.log(this.state.teachersList)
+    const { editingCourse } = this.state;
     return (
-
       <div className="container col-md-10 offset-md-2">
         <div className="row">
           <div className="col-md-12">
@@ -240,8 +265,10 @@ class ManageCourses extends Component {
         <div className="row">
           <div className="col-md-12 pt-5">
             <form
-              onSubmit={e => !this.state.editingCourse ? this.handleSubmit(e) : this.handleEdit(e)}
-              id="courses-form" method="post" noValidate
+              onSubmit={e => (!this.state.editingCourse ? this.handleSubmit(e) : this.handleEdit(e))}
+              id="courses-form"
+              method="post"
+              noValidate
             >
               <div className="row">
                 <div className="col-md-8">
@@ -253,6 +280,7 @@ class ManageCourses extends Component {
                       name="name"
                       placeholder="Nombre curso"
                       defaultValue={this.state.name || ""}
+                      disabled={editingCourse ? true : false}
                       required
                     />
                     <p className="help-block text-danger" />
@@ -349,44 +377,39 @@ class ManageCourses extends Component {
                   </div>
                   <div className="form-group">
                     <ul className="list-group">
-                      {this.state.teachersList.length ? 
-                        this.state.teachersList.map(teacher => {
-                          return <button 
-                          className="list-group-item" 
-                          type="button"
-                          onClick={e => this.selectTeacherFromSuggested(e, { teacher })}
-                          >
-                            {teacher.name} {teacher.surname}
-                          </button>
-                        })
-                      : ''}
+                      {this.state.teachersList.length
+                        ? this.state.teachersList.map(teacher => {
+                            return (
+                              <button
+                                className="list-group-item"
+                                type="button"
+                                onClick={e => this.selectTeacherFromSuggested(e, { teacher })}
+                              >
+                                {teacher.name} {teacher.surname}
+                              </button>
+                            );
+                          })
+                        : ""}
                     </ul>
                   </div>
                 </div>
                 <div className="col-md-6">
                   <div className="row">
                     <div className="col-md-6">
-                      <progress value={this.state.uploadValuePDF} mx="100"></progress>
+                      <progress value={this.state.uploadValuePDF} mx="100" />
                       <br />
                       <span>Añadir PDF</span>
-                      <input
-                        type="file"
-                        onChange={e => this.handleUploadPDF(e)}
-                      />
+                      <input type="file" onChange={e => this.handleUploadPDF(e)} />
                     </div>
                     <div className="col-md-6">
-                    <progress value={this.state.uploadValueIMG} mx="100"></progress>
+                      <progress value={this.state.uploadValueIMG} mx="100" />
                       <br />
                       <span>Añadir Imagen</span>
-                      <input
-                        type="file"
-                        onChange={e => this.handleUploadIMG(e)}
-                      />
+                      <input type="file" onChange={e => this.handleUploadIMG(e)} />
                     </div>
                   </div>
                 </div>
                 <div className="col-md-12 mt-4">
-
                   <div className="text-center">
                     <input className="btn btn-circle btn-brand" type="submit" defaultValue="Guardar" />
                   </div>
@@ -396,11 +419,6 @@ class ManageCourses extends Component {
           </div>
         </div>
       </div>
-
-
-
-
-
     );
   }
 }
