@@ -16,29 +16,29 @@ class TopBar extends Component {
         <div className="container-fluid">
 
             <div className="inner-header">
-            <a className="inner-brand" href="index.html">VMB Formación</a>
+            <a className="inner-brand" href="/#/">VMB Formación</a>
             </div>
 
             <div className="inner-navigation collapse">
             <div className="inner-nav onepage-nav">
                 <ul>
                 <li>
-                    <a href="/#/es/home">
+                    <a href="/#/">
                         <span className="menu-item-span">Home</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/#/es/cursos">
+                    <a href="/#/cursos">
                     <span className="menu-item-span">Cursos</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/#/es/contacto">
+                    <a href="/#/contacto">
                     <span className="menu-item-span">Contacto</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/#/es/blog">
+                    <a href="/#/blog">
                     <span className="menu-item-span">Blog</span>
                     </a>
                 </li>

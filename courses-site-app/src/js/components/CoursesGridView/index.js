@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import TopBar from '../TopBar/TopBar'
+import Footer from '../Footer/Footer'
 import CoursesGridHero from './CoursesGridHero/CoursesGridHero'
 import CoursesGrid from './CoursesGrid/CoursesGrid'
 
@@ -11,10 +12,15 @@ class CourseGridView extends Component {
   }
   render() {
     return (
+    <div>
+      <TopBar/>
+    
       <div className='container'>
           <CoursesGridHero />
           <CoursesGrid />
       </div>
+      <Footer/>
+    </div>
     );
   }
 }
