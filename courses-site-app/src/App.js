@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, HashRouter } from 'react-router-dom';
+import { Route, HashRouter, Switch } from 'react-router-dom';
 import {StripeProvider} from 'react-stripe-elements';
 import ReactDOM from "react-dom";
 import TopBar from "./js/components/TopBar/TopBar";
@@ -29,29 +29,23 @@ class App extends Component {
     return (
         <HashRouter>
           <div>
-            <Route path="/es" render={()=> (
-              <TopBar/>              
-            )} />
-            <Route exact path="/es/home" render={() => (
+            <Route exact path="/" render={() => (
               <Home />
             )} />
-            <Route exact path="/es/contacto" render={() => (
+            <Route exact path="/contacto" render={() => (
               <Contact />
             )} />
-            <Route exact path="/es/cursos" render={() => (
+            <Route exact path="/cursos" render={() => (
               <CoursesGridView />
             )} />
-            <Route exact path="/es/detalles/:course" render={(routeProps) => (
+            <Route exact path="/detalles/:course" render={(routeProps) => (
               <CourseDetails {...routeProps} />
             )} />
-            <Route exact path="/es/checkout/:id" render={(routeProps) => (
+            <Route exact path="/checkout/:id" render={(routeProps) => (
               <StripeProvider apiKey="pk_test_FMPOPKE34szBONAbbVNm0OCn">
                 <Checkout {...routeProps}/>
               </StripeProvider>  
             )} />
-            <Route path="/es" render={()=> (
-              <Footer/>              
-              )} />          
             <Route path="/admin" render={() => (
               <AdminFrame />
             )} />
@@ -85,10 +79,13 @@ class App extends Component {
             <Route exact path="/manage/login" render={() => (
               <Login />
             )} />
-                         
-            </div>   
+            </div>
         </HashRouter>
     );
   }
 }
 export default App;
+
+
+
+
