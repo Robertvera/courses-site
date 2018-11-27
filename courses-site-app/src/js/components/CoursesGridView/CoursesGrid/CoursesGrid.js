@@ -35,7 +35,7 @@ class CoursesGrid extends Component {
 
   showCourse = (e, course) => {
     e.preventDefault()
-    this.props.history.push(`/es/detalles/${course}`)
+    this.props.history.push(`/detalles/${course}`)
   }
 
   render() {

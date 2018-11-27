@@ -21,7 +21,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: "css-loader"
+            loader: "css-loader" 
           }
         ]
       },
@@ -32,6 +32,12 @@ module.exports = {
           "css-loader",
           "sass-loader"
         ]
+      },
+      { 
+        test: /\.(png|woff|woff2|eot|ttf|svg|jpg)$/, 
+        use: {
+          loader: 'url-loader?limit=100000'
+        } 
       }
     ]
   },

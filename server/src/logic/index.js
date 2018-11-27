@@ -92,7 +92,7 @@ module.exports = {
     },
 
     listStudents() {
-        return Students.find({}, { __v: 0 })
+        return Students.find({}, { __v: 0 }).sort({name: 1})
     },
 
     updateStudent(name, surname, documentId, address, cp, city, email, phoneNumber, courses) {
@@ -150,7 +150,7 @@ module.exports = {
         if (query) {
             return Teachers.find({  name: new RegExp(query, 'i') }, { __v: 0 })
         }
-        return Teachers.find({}, { __v: 0 })
+        return Teachers.find({}, { __v: 0 }).sort({name: 1})
     },
 
     updateTeacher(name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses) {

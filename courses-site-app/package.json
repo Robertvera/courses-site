@@ -21,14 +21,24 @@
   "homepage": "https://github.com/Robertvera/courses-site#readme",
   "devDependencies": {
     "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.6",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1",
+    "file-loader": "^2.0.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.9.0",
+    "prettier": "^1.15.2",
+    "prettier-eslint": "^8.8.2",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-router-dom": "^4.3.1",
@@ -41,9 +51,9 @@
   "dependencies": {
     "api-client": "file:../api-client",
     "firebase": "^5.5.0",
-    "react-autosuggest": "^9.4.2",
     "react-stripe-checkout": "^2.6.3",
     "react-stripe-elements": "^2.0.1",
-    "sweetalert2": "^7.26.11"
+    "sweetalert2": "^7.26.11",
+    "url-loader": "^1.1.2"
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Login.scss'
-import swal from 'sweetalert2'
+import Modals from '../../utils/modals'
 import firebase from 'firebase'
 
 
@@ -34,21 +34,12 @@ class Login extends Component {
                 firebase.auth().signInWithEmailAndPassword(email, password)
                     .catch(function (error) {
                         const errorCode = error.code;
-                        const errorMessage = error.message;
                         if (errorCode === 'auth/wrong-password') {
-                            alert('Wrong password.');
+                            Modals.LoginError('Password')
                         } else {
-                            alert(errorMessage);
+                            Modals.LoginError('User')
                         }
-                        ;
                     })
-                    // .then(() =>{
-                    //     swal({
-                    //         title: 'Login correcto',
-                    //         showConfirmButton: true,
-                    //         timer: 1000
-                    //       })
-                    // })
             })
             .then(() => {
                 this.props.onCheckForLogin()

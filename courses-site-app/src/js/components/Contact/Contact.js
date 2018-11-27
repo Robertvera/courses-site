@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import TopBar from '../TopBar/TopBar'
+import Footer from '../Footer/Footer'
 import './Contact.scss'
 
 class Contact extends Component {
@@ -10,6 +11,8 @@ class Contact extends Component {
   }
   render() {
     return (
+        <div>
+        <TopBar/>
         <section className="module divider-top">
             <div className="container">
                 <div className="row">
@@ -63,7 +66,8 @@ class Contact extends Component {
                 </div>
             </div>
         </section>
-
+        <Footer/>
+        </div>
     );
   }
 }
