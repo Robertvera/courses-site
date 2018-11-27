@@ -27,7 +27,7 @@ class Courses extends Component {
 		});
 	};
 
-	refactorCoursesToShow = (courses) => {
+	refactorCoursesToShow = (courses, query) => {
 		const coursesListed = courses.data.data;
 		coursesListed.forEach((course) => {
 			if (course.date && course.date.length) {
@@ -35,10 +35,17 @@ class Courses extends Component {
 				course.date = `${ course.date.getDate() }/${ course.date.getMonth() + 1 }/${ course.date.getFullYear() }`;
 			}
 		});
-		this.setState({
-			// eslint-disable-next-line react/destructuring-assignment
-			courses: [...this.state.courses, ...coursesListed]
-		});
+
+		if (query) {
+			this.setState({
+				courses: coursesListed
+			});
+		} else {
+			this.setState({
+				// eslint-disable-next-line react/destructuring-assignment
+				courses: [...this.state.courses, ...coursesListed]
+			});
+		}
 	};
 
 	showMoreCourses = (e) => {
@@ -57,7 +64,7 @@ class Courses extends Component {
 
 	searchCoursesByQuery = (e) => {
 		Api.retrieveCourseQuery(e.target.value.trim()).then((courses) => {
-			this.setState({ courses });
+			this.refactorCoursesToShow(courses, true);
 		});
 	};
 
