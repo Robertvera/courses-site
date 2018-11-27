@@ -51,7 +51,7 @@ router.get('/course/id/:id', retrieveCourseId)
 
 router.delete('/course/:name', removeCourse)
 
-router.get('/courses/:query', retrieveCourseQuery)
+router.get('/courses/query/:query', retrieveCourseQuery)
 
 //PAYMENTS ROUTES
 

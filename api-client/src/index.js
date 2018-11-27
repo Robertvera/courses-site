@@ -75,7 +75,7 @@ const vmApi = {
     },
 
     retrieveCourseQuery: function(query) {
-        return axios.get(`${this._url()}/courses/${query}`)
+        return axios.get(`${this._url()}/courses/query/${query}`)
     },
 
     deleteCourse: function(name) {

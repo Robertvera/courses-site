@@ -77,7 +77,7 @@ var vmApi = {
     },
 
     retrieveCourseQuery: function retrieveCourseQuery(query) {
-        return axios.get(this._url() + '/courses/' + query);
+        return axios.get(this._url() + '/courses/query/' + query);
     },
 
     deleteCourse: function deleteCourse(name) {
