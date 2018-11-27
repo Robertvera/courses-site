@@ -1,32 +1,50 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import TopBar from '../TopBar/TopBar'
+import Footer from '../Footer/Footer'
+import Api from '../../../api/vmApi'
 import './Home.scss'
+import {formatDate} from '../utils/utils'
 
 class Home extends Component {
+    constructor() {
+        super();
+        this.state = {
+            lastCourses: []
+        };
+      }
 
-    Hero = () => {
-        return <section className="module-cover parallax fullscreen text-center" id="home" data-background="../../../../public/images/adult-application-asian-733856.jpg" data-overlay="0.5">
-        <div className="container">
-        <div className="row">
-            <div className="col-md-12">
-            <h1 className="m-b-20">
-                <strong>Formación para terapeutas
-                <br /> ocupacionales, fisioterapeutas y
-                <br /> logopedas</strong>
-            </h1>
-            <p>
-                <a className="btn btn-circle btn-outline-new-white" href="/#/es/cursos">Ver cursos</a>
-            </p>
-            </div>
-        </div>
-        </div>
-    </section>
-    }
+    componentDidMount = () => {
+        Api.listCourses().then(courses => {
+            const {data} = courses.data 
+          this.setState({
+              lastCourses: [data[0], data[1], data[2]]
+          })
+        })
+      }
 
   render() {
+    const {lastCourses} = this.state
+
     return (
+        <div>
+        <TopBar/>
         <div className="wrapper">
-            {this.Hero()}
+            <section className="module-cover parallax fullscreen text-center" id="home" data-background="../../../../public/images/adult-application-asian-733856.jpg" data-overlay="0.5">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <h1 className="m-b-20">
+                                <strong>Formación para terapeutas
+                                <br /> ocupacionales, fisioterapeutas y
+                                <br /> logopedas</strong>
+                            </h1>
+                            <p>
+                                <a className="btn btn-circle btn-outline-new-white" href="/#/cursos">Ver cursos</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <section className="module bg-gray">
                 <div className="container">
@@ -278,7 +296,7 @@ class Home extends Component {
                 <div className="row">
                     <div className="col-md-12">
                     <p className="text-center">
-                        <a className="btn btn-circle btn-outline-brand" href="#">Ver cursos</a>
+                        <a className="btn btn-circle btn-outline-brand" href="/#/cursos">Ver cursos</a>
                     </p>
                     </div>
                 </div>
@@ -297,38 +315,35 @@ class Home extends Component {
                     <div className="space" data-my="60px" />
                     </div>
                 </div>
+                {lastCourses.length >0 ?
                 <div className="row row-post-masonry">
                     <div className="col-md-4 post-item">
 
                     <article className="post">
                         <div className="post-preview">
-                        <a href="#">
-                            <img src="../../../../public/images/blog/1.jpg"/>
+                        <a href={`/#/detalles/${lastCourses[0].name}`}>
+                            <img src={lastCourses[0].image}/>
                         </a>
                         </div>
                         <div className="post-wrapper">
                         <div className="post-header">
                             <h2 className="post-title">
-                            <a href="blog-single.html">Curso 1</a>
+                            <a href="blog-single.html">{lastCourses[0].name}</a>
                             </h2>
                         </div>
                         <div className="post-content">
                             <ul>
                             <li>
                                 <i className="ti-calendar" />
-                                <strong>Fechas:</strong> 20 y 21 Enero 2018
+                                <strong>Fecha:</strong> {formatDate(lastCourses[0].date)}
                             </li>
                             <li>
                                 <i className="ti-location-pin" />
-                                <strong>Localización:</strong> Barcelona
-                            </li>
-                            <li>
-                                <i className="ti-id-badge" />
-                                <strong>Docente:</strong> Facundo Fisio
+                                <strong>Localización:</strong> {lastCourses[0].location}
                             </li>
                             </ul>
                             <p>
-                            <a href="#">Ver curso</a>
+                            <a href={`/#/detalles/${lastCourses[0].name}`}>Ver curso</a>
                             </p>
                         </div>
                         </div>
@@ -339,33 +354,29 @@ class Home extends Component {
 
                     <article className="post">
                         <div className="post-preview">
-                        <a href="#">
-                            <img src="../../../../public/images/blog/3.jpg"/>
+                        <a href={`/#/detalles/${lastCourses[1].name}`}>
+                            <img src={lastCourses[1].image}/>
                         </a>
                         </div>
                         <div className="post-wrapper">
                         <div className="post-header">
                             <h2 className="post-title">
-                            <a href="blog-single.html">Curso 2</a>
+                            <a href="blog-single.html">{lastCourses[1].name}</a>
                             </h2>
                         </div>
                         <div className="post-content">
                             <ul>
                             <li>
                                 <i className="ti-calendar" />
-                                <strong>Fechas:</strong> 20 y 21 Enero 2018
+                                <strong>Fechas:</strong> {formatDate(lastCourses[1].date)}
                             </li>
                             <li>
                                 <i className="ti-location-pin" />
-                                <strong>Localización:</strong> Barcelona
-                            </li>
-                            <li>
-                                <i className="ti-id-badge" />
-                                <strong>Docente:</strong> Facundo Fisio
+                                <strong>Localización:</strong> {lastCourses[1].location}
                             </li>
                             </ul>
                             <p>
-                            <a href="#">Ver curso</a>
+                            <a href={`/#/detalles/${lastCourses[1].name}`}>Ver curso</a>
                             </p>
                         </div>
                         </div>
@@ -376,39 +387,36 @@ class Home extends Component {
 
                     <article className="post">
                         <div className="post-preview">
-                        <a href="#">
-                            <img src="../../../../public/images/blog/5.jpg"/>
+                        <a href={`/#/detalles/${lastCourses[2].name}`}>
+                            <img src={lastCourses[2].image}/>
                         </a>
                         </div>
                         <div className="post-wrapper">
                         <div className="post-header">
                             <h2 className="post-title">
-                            <a href="blog-single.html">Curso 3</a>
+                            <a href="blog-single.html">{lastCourses[2].name}</a>
                             </h2>
                         </div>
                         <div className="post-content">
                             <ul>
                             <li>
                                 <i className="ti-calendar" />
-                                <strong>Fechas:</strong> 20 y 21 Enero 2018
+                                <strong>Fechas:</strong> {formatDate(lastCourses[2].date)}
                             </li>
                             <li>
                                 <i className="ti-location-pin" />
-                                <strong>Localización:</strong> Barcelona
-                            </li>
-                            <li>
-                                <i className="ti-id-badge" />
-                                <strong>Docente:</strong> Facundo Fisio
+                                <strong>Localización:</strong> {lastCourses[2].location}
                             </li>
                             </ul>
                             <p>
-                            <a href="#">Ver curso</a>
+                            <a href={`/#/detalles/${lastCourses[2].name}`}>Ver curso</a>
                             </p>
                         </div>
                         </div>
                     </article>
                     </div>
                 </div>
+                : null}
                 </div>
             </section>
 
@@ -519,8 +527,8 @@ class Home extends Component {
                 </div>
                 </div>
             </section>
-
-            
+    </div>
+    <Footer/>
     </div>
     );
   }

@@ -48,6 +48,24 @@ const Modals = {
     },
     CloseLoading: function () {
         return swal.close()
+    },
+    LoginError: function (type) {
+        return type === 'User' ? 
+        swal({
+            type: 'error',
+            title: 'Oops...!',
+            text: 'Parece que el usuario introducido no existe',
+            showConfirmButton: true,
+            timer: 2000
+        })
+        :
+        swal({
+            type: 'error',
+            title: 'Oops...!',
+            text: 'Parece que la contraseña introducida es incorrecta',
+            showConfirmButton: true,
+            timer: 2000
+        })
     }
 
 }

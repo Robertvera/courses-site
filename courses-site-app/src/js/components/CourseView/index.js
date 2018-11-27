@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import TopBar from '../TopBar/TopBar'
+import Footer from '../Footer/Footer'
 import CourseViewHeader from './CourseViewHeader/CourseViewHeader'
 import { withRouter } from "react-router-dom"
 import Api from '../../../api/vmApi'
@@ -94,6 +95,8 @@ render() {
   const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher, teacherData, id, students } = this.state
 
     return (
+      <div>
+        <TopBar/>
       <div className='container'>
           <CourseViewHeader />
         <section className="module">
@@ -209,6 +212,8 @@ render() {
           </div>
         </section>
 
+      </div>
+      <Footer />
       </div>
     );
   }
