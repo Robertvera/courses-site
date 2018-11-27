@@ -94,7 +94,9 @@ class ManageStudents extends Component {
               name="name" 
               placeholder="Nombre" 
               value={name}
-              required />
+              required 
+              disabled
+              />
               <p className="help-block text-danger" />
             </div>
           </div>          
@@ -120,7 +122,9 @@ class ManageStudents extends Component {
                 name="documentId" 
                 placeholder="DNI" 
                 value={documentId}
-                required />
+                required 
+                disabled
+                />
                 <p className="help-block text-danger" />
             </div>
           </div>

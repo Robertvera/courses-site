@@ -100,7 +100,7 @@ class ManageTeachers extends Component {
 
   render() {
 
-    const {name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses} = this.state
+    const {name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, modeEdition} = this.state
     const textButton = this.state.modeEdition ? 'Guardar' : 'Crear'
 
     return (
@@ -128,7 +128,9 @@ class ManageTeachers extends Component {
               placeholder="Nombre" 
               value={name}
               onChange={e => this.handleOnChange(e)} 
-              required />
+              required 
+              disabled={modeEdition ? true : false}
+              />
               <p className="help-block text-danger" />
             </div>
           </div>          
@@ -154,7 +156,9 @@ class ManageTeachers extends Component {
                 placeholder="DNI" 
                 value={documentId}
                 onChange={e => this.handleOnChange(e)} 
-                required />
+                required
+                disabled={modeEdition ? true : false}
+                />
                 <p className="help-block text-danger" />
             </div>
           </div>
@@ -235,30 +239,6 @@ class ManageTeachers extends Component {
               required />
               <p className="help-block text-danger" />
             </div>
-          </div>
-          <div className="col-md-6">
-            <div className="table-responsive">
-                <table className="table table-striped table-sm">
-                  <thead>
-                    <tr>
-                      <th>Cursos que imparte</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  {this.state.courses ?
-                  <tbody>
-                    {this.state.courses.map(course => {
-                    return <tr key={course._id}>
-                            <td>{course.name}</td>
-                            <td>
-                            <DeleteButton />                           
-                            </td>
-                          </tr>
-                    })}
-                  </tbody>
-                  : undefined}
-                </table>
-              </div>
           </div>
           <div className="col-md-12 mt-4">
 
