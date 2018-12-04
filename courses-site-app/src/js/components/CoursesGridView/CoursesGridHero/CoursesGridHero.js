@@ -11,19 +11,11 @@ class CoursesGridHero extends Component {
     }
     render() {
         return (
-            <section className="module-page-title parallax  bg-gray" data-background="" data-overlay="0.1">
+            <section className="module-page-title parallax bg-gray" data-background="../../../../public/images/blackpattern.jpg" data-overlay="0.1">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
                             <h2>Cursos</h2>
-                            <ol className="breadcrumb">
-                                <li className="breadcrumb-item">
-                                    <a href="#">Home</a>
-                                </li>
-                                <li className="breadcrumb-item">
-                                    <a href="#">Cursos</a>
-                                </li>
-                            </ol>
                         </div>
                     </div>
                 </div>

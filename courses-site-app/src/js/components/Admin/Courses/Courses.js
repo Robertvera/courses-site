@@ -4,8 +4,10 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import './Courses.scss'
 import swal from 'sweetalert2';
 import Api from '../../../../api/vmApi';
+import ShowMoreButton from '../../Buttons/ShowMoreButton';
 
 class Courses extends Component {
 	constructor() {
@@ -107,15 +109,13 @@ class Courses extends Component {
 					<h1 className="h2">Cursos</h1>
 					<input
 						onChange={(e) => this.searchCoursesByQuery(e)}
-						className="form-control form-control w-100"
+						className="form-control query"
 						type="text"
 						placeholder="Search"
 						aria-label="Search"
 					/>
 					<div className="btn-toolbar mb-2 mb-md-0">
 						<div className="btn-group mr-2">
-							{/* <button className="btn btn-sm btn-outline-secondary">Share</button>
-							<button className="btn btn-sm btn-outline-secondary">Export</button> */}
 							<button
 								type="submit"
 								onClick={() => history.push('/admin/courses/manage')}
@@ -174,9 +174,10 @@ class Courses extends Component {
 								: null}
 						</tbody>
 					</table>
-					<button onClick={(e) => this.showMoreCourses(e)} type="button" className="btn-sm btn-outline-danger">
-						{'Mostrar más cursos'}
-					</button>
+					<ShowMoreButton 
+					onClick={(e) => this.showMoreCourses(e)} 
+					type="button" 
+					className="btn-sm btn-outline-danger"/>
 				</div>
 			</main>
 		);

@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 //import CourseDetails from './../../CourseView/index'
 import './CoursesGrid.scss'
 import Api from '../../../../api/vmApi'
 import { withRouter } from "react-router-dom"
-import swal from 'sweetalert2'
+import ShowMoreCourses from '../../Buttons/ShowMoreButton'
 
 class CoursesGrid extends Component {
   constructor() {
@@ -83,13 +82,11 @@ class CoursesGrid extends Component {
               </div>
             </div>
           </div>
-          <button
+          <ShowMoreCourses
             onClick={e => this.showMoreCourses(e)}
             type="button"
-            className="btn-sm btn-outline-danger"
-          >
-            Mostrar más cursos
-          </button>
+            className="show-more"
+          />
         </section>
     );
   }

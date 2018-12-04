@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import TopBar from '../TopBar/TopBar'
 import Footer from '../Footer/Footer'
-import CourseViewHeader from './CourseViewHeader/CourseViewHeader'
 import { withRouter } from "react-router-dom"
 import Api from '../../../api/vmApi'
 import swal from 'sweetalert2'
@@ -77,7 +76,7 @@ componentDidMount = () => {
 
 checkoutCourse = (e, id) => {
   e.preventDefault()
-  this.props.history.push(`/es/checkout/${id}`)
+  this.props.history.push(`/checkout/${id}`)
 }
 
 fullBooked = (e) => {
@@ -98,7 +97,6 @@ render() {
       <div>
         <TopBar/>
       <div className='container'>
-          <CourseViewHeader />
         <section className="module">
           <div className="container">
             <div className="row">
@@ -110,15 +108,6 @@ render() {
               <div className="col-lg-5">
                 <div className="shop-single-item">
                   <h2 className="shop-single-item-title">{name}</h2>
-                  <div className="shop-single-item-rating">
-                    <span className="star-rating">
-                      <i className="fas fa-star" />
-                      <i className="fas fa-star" />
-                      <i className="fas fa-star" />
-                      <i className="fas fa-star" />
-                      <i className="far fa-star" />
-                    </span>
-                  </div>
                   <h2 className="shop-single-item-price">{price}€</h2>
                   <div className="shop-single-item-description">
                     <p>{excerpt}</p>
