@@ -166,7 +166,8 @@ class ManageCourses extends Component {
       capacity,
       location,
       date,
-      teacher
+      teacher.length ? teacher : undefined,
+      undefined
     )
       .then(course => {
         course.data.status === "OK"

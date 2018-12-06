@@ -22,11 +22,17 @@ class Courses extends Component {
 		this.getCourses();
 	}
 
-	getCourses = () => {
-		const { skipResults } = this.state;
-		Api.listCourses(skipResults).then((courses) => {
+	getCourses = (remove) => {
+		if (remove) {
+			this.setState({
+				courses: [],
+				skipResults: 0
+			})
+		} 
+		Api.listCourses(this.state.skipResults).then((courses) => {
 			this.refactorCoursesToShow(courses);
 		});
+		
 	};
 
 	refactorCoursesToShow = (courses, query) => {
@@ -92,7 +98,7 @@ class Courses extends Component {
 						onOpen: () => {
 							swal.showLoading();
 						}
-					}).then(this.getCourses());
+					}).then(this.getCourses('remove'));
 				});
 			}
 		});

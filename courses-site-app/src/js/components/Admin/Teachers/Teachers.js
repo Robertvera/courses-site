@@ -67,11 +67,26 @@ class Teachers extends Component {
     this.props.history.push(`/admin/teachers/manage/${id}`)
   }
 
+  listTeachersByQuery = (e) => {
+		Api.listTeachers(e.target.value.trim()).then(students=> {
+      this.setState({
+        teachers: students.data.data
+      })
+		});
+	};
+
   render() {
     return (
       <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 className="h2">Profesores</h1>    
+          <h1 className="h2">Profesores</h1>
+          <input
+						onChange={(e) => this.listTeachersByQuery(e)}
+						className="form-control form-control w-100"
+						type="text"
+						placeholder="Search"
+						aria-label="Search"
+					/>
           <div className="btn-toolbar mb-2 mb-md-0">
             <NavLink to="/admin/teachers/manage">
               <button 
