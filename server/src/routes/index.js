@@ -29,6 +29,8 @@ router.delete('/teacher/:documentId', removeTeacher)
 
 router.get('/students', listStudents)
 
+router.get('/students/:query', listStudents)
+
 router.post('/create-student', jsonBodyParser, createStudent)
 
 router.put('/edit-student/:documentId', jsonBodyParser, editStudent)
