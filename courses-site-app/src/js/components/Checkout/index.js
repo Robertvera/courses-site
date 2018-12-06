@@ -14,7 +14,6 @@ class Checkout extends Component {
     return (
         <div>
             <TopBar/>
-            <CheckoutHeader />
             <CheckoutForm />
             <Footer/>
         </div>

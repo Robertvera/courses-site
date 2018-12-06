@@ -88,15 +88,11 @@ class Teachers extends Component {
 						aria-label="Search"
 					/>
           <div className="btn-toolbar mb-2 mb-md-0">
-            <div className="btn-group mr-2">
-              <button className="btn btn-sm btn-outline-secondary">Share</button>
-              <button className="btn btn-sm btn-outline-secondary">Export</button>
-            </div>
             <NavLink to="/admin/teachers/manage">
               <button 
               className="btn btn-sm btn-outline-secondary"
               >
-                  + Nuevo profesor
+                  Crear profesor
               </button>
             </NavLink>
           </div>

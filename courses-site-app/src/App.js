@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-import { Route, HashRouter, Switch } from 'react-router-dom';
+import { Route, HashRouter } from 'react-router-dom';
 import {StripeProvider} from 'react-stripe-elements';
-import ReactDOM from "react-dom";
-import TopBar from "./js/components/TopBar/TopBar";
 import Home from "./js/components/Home/Home";
-import Footer from "./js/components/Footer/Footer"
 import Contact from "./js/components/Contact/Contact"
 import AdminFrame from "./js/components/Admin/AdminFrame/AdminFrame"
 import Students from "./js/components/Admin/Students/Students"
@@ -16,8 +13,8 @@ import ManageTeachers from "./js/components/Admin/Teachers/ManageTeachers/Manage
 import CoursesGridView from "./js/components/CoursesGridView/index"
 import CourseDetails from "./js/components/CourseView/index"
 import Checkout from './js/components/Checkout/index'
-import CheckoutCardForm from './js/components/Checkout/CheckoutCardForm/CheckoutCardForm'
 import Login from './js/components/Admin/Login/Login'
+import ScrollToTop from './js/components/utils/ScrollToTop'
 
 class App extends Component {
   constructor() {
@@ -25,10 +22,12 @@ class App extends Component {
     this.state = {
     };
   }
+  
   render() {
+
     return (
         <HashRouter>
-          <div>
+          <ScrollToTop>
             <Route exact path="/" render={() => (
               <Home />
             )} />
@@ -79,7 +78,7 @@ class App extends Component {
             <Route exact path="/manage/login" render={() => (
               <Login />
             )} />
-            </div>
+          </ScrollToTop>
         </HashRouter>
     );
   }

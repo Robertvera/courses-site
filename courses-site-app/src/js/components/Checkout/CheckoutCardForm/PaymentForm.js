@@ -18,7 +18,7 @@ class PaymentForm extends React.Component {
 	}
 
 redirectToHome = () => {
-	return this.props.history.push(`/es/home`)
+	return this.props.history.push(`/`)
 }
   
 handleSubmit = (e) => {

@@ -83,16 +83,6 @@ class Students extends Component {
 						placeholder="Search"
 						aria-label="Search"
 					/>
-    <div className="btn-toolbar mb-2 mb-md-0">
-      <div className="btn-group mr-2">
-        <button className="btn btn-sm btn-outline-secondary">Share</button>
-        <button className="btn btn-sm btn-outline-secondary">Export</button>
-      </div>
-      <button className="btn btn-sm btn-outline-secondary dropdown-toggle">
-        <span data-feather="calendar" />
-        This week
-      </button>
-    </div>
   </div>
   <div className="table-responsive">
     <table className="table table-striped table-sm">
