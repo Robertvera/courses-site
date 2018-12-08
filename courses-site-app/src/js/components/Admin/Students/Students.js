@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import firebase from "firebase";
 import { withRouter } from "react-router-dom"
 import Api from "../../../../api/vmApi"
 import swal from 'sweetalert2'
@@ -10,11 +10,13 @@ class Students extends Component {
   constructor() {
     super();
     this.state = {
-      students: []
+      students: [],
+      login: false
     };
   }
 
   componentDidMount = () => {
+    this.checkForLogin();
     Api.listStudents('')
     .then(students=> {
       this.setState({
@@ -22,6 +24,18 @@ class Students extends Component {
       })
     })
   }
+
+  checkForLogin = () => {
+		let userLogin = false
+		firebase.auth().onAuthStateChanged((user) => {
+			if (user) {
+			userLogin = true
+			this.setState({ login: userLogin })
+			} else {
+			this.setState({ login: userLogin })
+			}
+		})
+	}
 
   handleDelete = (documentId, name, surname) => {
     swal({
@@ -72,51 +86,60 @@ class Students extends Component {
 	};
 
   render() {
+    const { login } = this.state;
+
     return (
-        <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-  <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 className="h2">Estudiantes</h1>
-          <input
-						onChange={(e) => this.listStudentsByQuery(e)}
-						className="form-control form-control w-100"
-						type="text"
-						placeholder="Search"
-						aria-label="Search"
-					/>
-  </div>
-  <div className="table-responsive">
-    <table className="table table-striped table-sm">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Teléfono</th>
-          <th>E-mail</th>
-          <th>DNI</th>
-          <th></th>
-        </tr>
-      </thead>
-      {this.state.students ? 
-        <tbody>
-        {this.state.students.map(student => {
-          return  <tr key={student.documentId}>
-                    <td>{student.name} {student.surname}</td>
-                    <td>{student.phoneNumber}</td>
-                    <td>{student.email}</td>
-                    <td>{student.documentId}</td>
-                    <td>
-                      <DeleteButton 
-                      onClick={() => this.handleDelete(student.documentId, student.name, student.surname)}/>                      
-                      <EditButton
-                      onClick={()=> this.handleEdit(student.documentId)}
-                       />
-                    </td>
-                  </tr>
-        })}
-        </tbody>
-        : undefined}
-    </table>
-  </div>
-</main>
+      <React.Fragment>
+        {
+          login ?
+            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+              <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 className="h2">Estudiantes</h1>
+                <input
+                  onChange={(e) => this.listStudentsByQuery(e)}
+                  className="form-control form-control w-100"
+                  type="text"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+              </div>
+              <div className="table-responsive">
+                <table className="table table-striped table-sm">
+                  <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Teléfono</th>
+                      <th>E-mail</th>
+                      <th>DNI</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  {this.state.students ?
+                    <tbody>
+                      {this.state.students.map(student => {
+                        return <tr key={student.documentId}>
+                          <td>{student.name} {student.surname}</td>
+                          <td>{student.phoneNumber}</td>
+                          <td>{student.email}</td>
+                          <td>{student.documentId}</td>
+                          <td>
+                            <DeleteButton
+                              onClick={() => this.handleDelete(student.documentId, student.name, student.surname)} />
+                            <EditButton
+                              onClick={() => this.handleEdit(student.documentId)}
+                            />
+                          </td>
+                        </tr>
+                      })}
+                    </tbody>
+                    : undefined}
+                </table>
+              </div>
+            </main>
+            :
+            ''
+        }
+      </React.Fragment>
     );
   }
 }
