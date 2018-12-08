@@ -41,19 +41,6 @@ class Teachers extends Component {
 			})
 	}
 
-	getCourses = (remove) => {
-		if (remove) {
-			this.setState({
-				courses: [],
-				skipResults: 0
-			})
-		} 
-		Api.listCourses(this.state.skipResults).then((courses) => {
-			this.refactorCoursesToShow(courses);
-		});
-		
-	};
-
   handleDelete = (documentId, name, surname) => {
     swal({
       title: `¿Estás seguro de que quieres eliminar a ${name} ${surname}?`,
