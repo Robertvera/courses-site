@@ -202,7 +202,7 @@ class Courses extends Component {
 										<ShowMoreButton
 											onClick={(e) => this.showMoreCourses(e)}
 											type="button"
-											className="btn-sm btn-outline-danger"
+											className="show-more"
 										/> :
 										null
 								}
