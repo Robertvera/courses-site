@@ -5,6 +5,7 @@ import Api from "../../../../api/vmApi"
 import swal from 'sweetalert2'
 import EditButton from '../../Buttons/editButton'
 import DeleteButton from '../../Buttons/deleteButton'
+import './Teachers.scss'
 
 class Teachers extends Component {
   constructor() {
@@ -96,7 +97,7 @@ class Teachers extends Component {
 								<h1 className="h2">Profesores</h1>
 								<input
 									onChange={(e) => this.listTeachersByQuery(e)}
-									className="form-control form-control w-100"
+									className="form-control query"
 									type="text"
 									placeholder="Search"
 									aria-label="Search"
