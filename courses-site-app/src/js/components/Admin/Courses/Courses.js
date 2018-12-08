@@ -123,92 +123,95 @@ class Courses extends Component {
 		const { courses, login } = this.state;
 		const { history } = this.props;
 
-
 		return (
-      <React.Fragment>
-        {
-          login ?
-            <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-              <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 className="h2">Cursos</h1>
-                <input
-                  onChange={(e) => this.searchCoursesByQuery(e)}
-                  className="form-control query"
-                  type="text"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <div className="btn-toolbar mb-2 mb-md-0">
-                  <div className="btn-group mr-2">
-                    <button
-                      type="submit"
-                      onClick={() => history.push('/admin/courses/manage')}
-                      className="btn btn-sm btn-outline-secondary"
-                    >
-                      {'Crear curso'}
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div className="table-responsive">
-                <table className="table table-striped table-sm">
-                  <thead>
-                    <tr>
-                      <th>Nombre</th>
-                      <th>Fecha</th>
-                      <th>Sede</th>
-                      <th>Apuntados</th>
-                      <th>Límite</th>
-                      <th>Precio</th>
-                      <th />
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {courses && courses.length
-                      ? courses.map((course) => (
-                        <tr key={course._id}>
-                          <td>{course.name}</td>
-                          <td>{course.date}</td>
-                          <td>{course.location}</td>
-                          <td>{course.students.length}</td>
-                          <td>{course.capacity}</td>
-                          <td>{course.price}</td>
-                          <td>
-                            <button
-                              onClick={(e) => {
-                                this.deleteCourse(e, course.name);
-                              }}
-                              type="button"
-                              className="btn-sm btn-outline-danger"
-                            >
-                              {'Borrar'}
-                            </button>
-                            <button
-                              onClick={(e) => {
-                                this.editCourse(e, course.name);
-                              }}
-                              type="button"
-                              className="btn-sm btn-outline-warning"
-                            >
-                              {'Editar'}
-                            </button>
-                          </td>
-                        </tr>
-                      ))
-                      : null}
-                  </tbody>
-                </table>
-                <ShowMoreButton
-                  onClick={(e) => this.showMoreCourses(e)}
-                  type="button"
-                  className="btn-sm btn-outline-danger" />
-              </div>
-            </main>
-            :
-            ''
-        }
-
-      </React.Fragment>
+			<React.Fragment>
+				{
+					login ?
+						<main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+							<div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+								<h1 className="h2">Cursos</h1>
+								<input
+									onChange={(e) => this.searchCoursesByQuery(e)}
+									className="form-control query"
+									type="text"
+									placeholder="Search"
+									aria-label="Search"
+								/>
+								<div className="btn-toolbar mb-2 mb-md-0">
+									<div className="btn-group mr-2">
+										<button
+											type="submit"
+											onClick={() => history.push('/admin/courses/manage')}
+											className="btn btn-sm btn-outline-secondary"
+										>
+											{'Crear curso'}
+										</button>
+									</div>
+								</div>
+							</div>
+							<div className="table-responsive">
+								<table className="table table-striped table-sm">
+									<thead>
+										<tr>
+											<th>Nombre</th>
+											<th>Fecha</th>
+											<th>Sede</th>
+											<th>Apuntados</th>
+											<th>Límite</th>
+											<th>Precio</th>
+											<th />
+										</tr>
+									</thead>
+									<tbody>
+										{courses && courses.length
+											? courses.map((course) => (
+												<tr key={course._id}>
+													<td>{course.name}</td>
+													<td>{course.date}</td>
+													<td>{course.location}</td>
+													<td>{course.students.length}</td>
+													<td>{course.capacity}</td>
+													<td>{course.price}</td>
+													<td>
+														<button
+															onClick={(e) => {
+																this.deleteCourse(e, course.name);
+															}}
+															type="button"
+															className="btn-sm btn-outline-danger"
+														>
+															{'Borrar'}
+														</button>
+														<button
+															onClick={(e) => {
+																this.editCourse(e, course.name);
+															}}
+															type="button"
+															className="btn-sm btn-outline-warning"
+														>
+															{'Editar'}
+														</button>
+													</td>
+												</tr>
+											))
+											: null}
+									</tbody>
+								</table>
+								{
+									courses && courses.length >= 12 ?
+										<ShowMoreButton
+											onClick={(e) => this.showMoreCourses(e)}
+											type="button"
+											className="btn-sm btn-outline-danger"
+										/> :
+										null
+								}
+							</div>
+						</main>
+						:
+						''
+				}
+			</React.Fragment>
 		);
 	}
 }
