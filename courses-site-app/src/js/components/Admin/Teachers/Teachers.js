@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import firebase from 'firebase'
 import { NavLink, withRouter } from "react-router-dom"
 import Api from "../../../../api/vmApi"
 import swal from 'sweetalert2'
@@ -10,27 +10,49 @@ class Teachers extends Component {
   constructor() {
     super();
     this.state = {
-      teachers: []
+      teachers: [],
+      login: false
     };
   }
 
-  listTeachers = () => {
-    Api.listTeachers('')
-    .then(teachers=> {
-      this.setState({
-        teachers: teachers.data.data
-      })
-    })
-  }
+	componentDidMount = () => {
+		this.checkForLogin();
+		this.listTeachers()
+	}
 
+	checkForLogin = () => {
+		let userLogin = false
+		firebase.auth().onAuthStateChanged((user) => {
+			if (user) {
+			userLogin = true
+			this.setState({ login: userLogin })
+			} else {
+			this.setState({ login: userLogin })
+			}
+		})
+	}
 
-  componentDidMount = () => {
-    this.listTeachers()
-  }
+	listTeachers = () => {
+		Api.listTeachers('')
+			.then(teachers => {
+				this.setState({
+					teachers: teachers.data.data
+				})
+			})
+	}
 
-  newTeacher = () => {
-    
-  }
+	getCourses = (remove) => {
+		if (remove) {
+			this.setState({
+				courses: [],
+				skipResults: 0
+			})
+		} 
+		Api.listCourses(this.state.skipResults).then((courses) => {
+			this.refactorCoursesToShow(courses);
+		});
+		
+	};
 
   handleDelete = (documentId, name, surname) => {
     swal({
@@ -75,62 +97,72 @@ class Teachers extends Component {
 		});
 	};
 
-  render() {
-    return (
-      <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 className="h2">Profesores</h1>
-          <input
-						onChange={(e) => this.listTeachersByQuery(e)}
-						className="form-control form-control w-100"
-						type="text"
-						placeholder="Search"
-						aria-label="Search"
-					/>
-          <div className="btn-toolbar mb-2 mb-md-0">
-            <NavLink to="/admin/teachers/manage">
-              <button 
-              className="btn btn-sm btn-outline-secondary"
-              >
-                  Crear profesor
+	render() {
+		const { login } = this.state;
+
+		return (
+			<React.Fragment>
+				{
+					login ?
+						<main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+							<div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+								<h1 className="h2">Profesores</h1>
+								<input
+									onChange={(e) => this.listTeachersByQuery(e)}
+									className="form-control form-control w-100"
+									type="text"
+									placeholder="Search"
+									aria-label="Search"
+								/>
+								<div className="btn-toolbar mb-2 mb-md-0">
+									<NavLink to="/admin/teachers/manage">
+										<button
+											className="btn btn-sm btn-outline-secondary"
+										>
+											Crear profesor
               </button>
-            </NavLink>
-          </div>
-        </div>  
-        <div className="table-responsive">
-          <table className="table table-striped table-sm">
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>DNI</th>
-                <th>Email</th>
-                <th>Teléfono</th>
-                <th></th>
-              </tr>
-            </thead>
-            {this.state.teachers ?
-            <tbody>
-              {this.state.teachers.map(teacher => {
-              return <tr key={teacher.documentId}>
-                      <td>{teacher.name} {teacher.surname}</td>
-                      <td>{teacher.documentId}</td>
-                      <td>{teacher.email}</td>
-                      <td>{teacher.phoneNumber}</td>
-                      <td>
-                      <DeleteButton 
-                      onClick={() => this.handleDelete(teacher.documentId, teacher.name, teacher.surname)}/>                      
-                      <EditButton
-                      onClick={()=> this.handleEdit(teacher._id)}
-                       />
-                      </td>
-                    </tr>
-              })}
-            </tbody>
-            : undefined}
-          </table>
-        </div>
-      </main>
-    );
-  }
+									</NavLink>
+								</div>
+							</div>
+							<div className="table-responsive">
+								<table className="table table-striped table-sm">
+									<thead>
+										<tr>
+											<th>Nombre</th>
+											<th>DNI</th>
+											<th>Email</th>
+											<th>Teléfono</th>
+											<th></th>
+										</tr>
+									</thead>
+									{this.state.teachers ?
+										<tbody>
+											{this.state.teachers.map(teacher => {
+												return <tr key={teacher.documentId}>
+													<td>{teacher.name} {teacher.surname}</td>
+													<td>{teacher.documentId}</td>
+													<td>{teacher.email}</td>
+													<td>{teacher.phoneNumber}</td>
+													<td>
+														<DeleteButton
+															onClick={() => this.handleDelete(teacher.documentId, teacher.name, teacher.surname)} />
+														<EditButton
+															onClick={() => this.handleEdit(teacher._id)}
+														/>
+													</td>
+												</tr>
+											})}
+										</tbody>
+										: undefined}
+								</table>
+							</div>
+						</main>
+						:
+						''
+				}
+
+			</React.Fragment>
+		);
+	}
 }
 export default withRouter(Teachers);
