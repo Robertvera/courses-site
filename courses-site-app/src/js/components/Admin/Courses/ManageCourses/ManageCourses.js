@@ -180,7 +180,7 @@ class ManageCourses extends Component {
       capacity,
       location,
       date,
-      teacher.length ? teacher : undefined,
+      teacher.length ? teacher : [],
       undefined
     )
       .then(course => {
@@ -214,7 +214,7 @@ class ManageCourses extends Component {
       capacity,
       location,
       date,
-      teacher.length ? teacher : undefined,
+      teacher.length ? teacher : [],
       undefined
     )
       .then(course => {
