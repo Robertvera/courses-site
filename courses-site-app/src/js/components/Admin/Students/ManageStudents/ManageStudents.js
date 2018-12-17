@@ -60,7 +60,6 @@ class ManageStudents extends Component {
 
     Api.editStudent(name, surname, documentId, address, cp, city, email, phoneNumber)
     .then(student => {
-      console.log(student)
       student.data.status === 'OK' ?
         swal({
           title: '¡Estudiante modificado!',

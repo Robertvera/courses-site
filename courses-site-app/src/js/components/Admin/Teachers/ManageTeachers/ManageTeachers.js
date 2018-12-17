@@ -88,7 +88,6 @@ class ManageTeachers extends Component {
 
     Api.createTeacher(name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber)
     .then(teacher => {
-      console.log(teacher)
       teacher.data.status === 'OK' ?
       swal({
         title: 'Profesor creado!',

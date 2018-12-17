@@ -39,8 +39,6 @@ class CoursesGrid extends Component {
 
 	render() {
 		const { courses } = this.state
-		console.log(this.state.courses)
-
 		return (
 			<section className="module">
 				<div className="container">

@@ -53,7 +53,6 @@ componentDidMount = () => {
             students: courseToShow.students.length || '',
             teacher: courseToShow.teachers[0] || ''
           })
-          console.log(this.state)
         } else {
           swal({
             type: 'error',

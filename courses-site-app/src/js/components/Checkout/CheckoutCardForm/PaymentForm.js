@@ -43,11 +43,9 @@ handleSubmit = (e) => {
 				.then(()=> {
 					this.props.stripe.createToken({name})
 					.then(({token}) => {
-						console.log(token)
 						Api.sendPayment(token.id, this.props.dataCourse.courseName, this.props.dataCourse.coursePrice)
 						.then(result=> {
 							this.setState({loading: false})
-							console.log(result)
 							if (result.data.status === 'OK') {
 								Modals.PaymentOK()
 								.then(()=> {
