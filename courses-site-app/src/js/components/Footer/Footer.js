@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import './Footer.scss'
 
 class Footer extends Component {
@@ -24,29 +23,29 @@ class Footer extends Component {
                             <p>Formación para terapeutas ocupacionales, fisioterapeutas y logopedas
                             </p>
                             <p>
-                            Dirección: Barcelona ...
-                            <br /> E-mail: info@vmbformacion.com
-                            <br /> Teléfono: 6xx xx xx xx
-                            <br />
+                                E-mail: vmbformacion@gmail.com
+                                <br /> 
+                                Teléfono: 640 571 426
+                                <br />
                             </p>
                             <ul className="social-icons">
                             <li>
-                                <a href="#">
+                                <a href="https://twitter.com/vmbformacion">
                                 <i className="fab fa-twitter" />
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="https://www.instagram.com/vmbformacion/">
                                 <i className="fab fa-instagram" />
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="https://www.facebook.com/VMBTOFORMACION/">
                                 <i className="fab fa-facebook-f" />
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="https://www.linkedin.com/company/vmbformacion/">
                                 <i className="fab fa-linkedin" />
                                 </a>
                             </li>
