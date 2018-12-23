@@ -30,22 +30,22 @@ class Footer extends Component {
                             </p>
                             <ul className="social-icons">
                             <li>
-                                <a href="https://twitter.com/vmbformacion">
+                                <a href="https://twitter.com/vmbformacion" target="_blank">
                                 <i className="fab fa-twitter" />
                                 </a>
                             </li>
                             <li>
-                                <a href="https://www.instagram.com/vmbformacion/">
+                                <a href="https://www.instagram.com/vmbformacion/" target="_blank">
                                 <i className="fab fa-instagram" />
                                 </a>
                             </li>
                             <li>
-                                <a href="https://www.facebook.com/VMBTOFORMACION/">
+                                <a href="https://www.facebook.com/VMBTOFORMACION/" target="_blank">
                                 <i className="fab fa-facebook-f" />
                                 </a>
                             </li>
                             <li>
-                                <a href="https://www.linkedin.com/company/vmbformacion/">
+                                <a href="https://www.linkedin.com/company/vmbformacion/" target="_blank">
                                 <i className="fab fa-linkedin" />
                                 </a>
                             </li>

@@ -12,19 +12,19 @@ module.exports = (req, res) => {
         secure: true,
         auth: {
             type: 'OAuth2',
-            user: 'robert.vera.roige@gmail.com',
+            user: 'vmbformacion@gmail.com',
             clientId: process.env.GMAIL_CLIENT_ID,
             clientSecret: process.env.GMAIL_CLIENT_SECRET,
         }
     });
 
     const mailOptions = {
-        from: 'Robert <robert.vera.roige@gmail.com>',
+        from: 'VMB Formación <vmbformacion@gmail.com>',
         to: to,
         subject: subject,
         html: html,
         auth : {
-            user: 'robert.vera.roige@gmail.com',
+            user: 'vmbformacion@gmail.com',
             refreshToken: process.env.GMAIL_REFRESH_TOKEN,
             accessToken: process.env.GMAIL_ACCESS_TOKEN,
             expires: Date.now()
