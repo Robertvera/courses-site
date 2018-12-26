@@ -399,7 +399,7 @@ class ManageCourses extends Component {
                               ? this.state.teachersList.map(teacher => {
                                 return (
                                   <button
-                                    className="list-group-item"
+                                    className="list-group-item bg-light text-secondary teachers-list"
                                     type="button"
                                     onClick={e => this.selectTeacherFromSuggested(e, { teacher })}
                                   >
