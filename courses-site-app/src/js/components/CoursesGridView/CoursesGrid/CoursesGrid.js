@@ -4,6 +4,8 @@ import './CoursesGrid.scss'
 import Api from '../../../../api/vmApi'
 import { withRouter } from "react-router-dom"
 import ShowMoreCourses from '../../Buttons/ShowMoreButton'
+import { formatText } from '../../utils/utils'
+
 
 class CoursesGrid extends Component {
   constructor() {
@@ -64,7 +66,7 @@ class CoursesGrid extends Component {
 												</div>
 											</div>
 											<div className="shop-item-captions">
-												<h6 className="shop-item-title">{course.name}</h6>
+												<h6 className="shop-item-title">{formatText(course.name)}</h6>
 												<span className="shop-item-price">{course.price}€</span>
 											</div>
 										</div>

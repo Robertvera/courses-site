@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import swal from 'sweetalert2'
 import TopBar from '../TopBar/TopBar'
 import Footer from '../Footer/Footer'
 import { withRouter } from "react-router-dom"
 import Api from '../../../api/vmApi'
-import swal from 'sweetalert2'
 import './index.scss'
+import {formatText} from '../utils/utils'
+
 
 class CourseView extends Component {
   constructor() {
@@ -106,7 +108,7 @@ render() {
               </div>
               <div className="col-lg-5">
                 <div className="shop-single-item">
-                  <h2 className="shop-single-item-title">{name}</h2>
+                  <h2 className="shop-single-item-title">{formatText(name)}</h2>
                   <h2 className="shop-single-item-price">{price}€</h2>
                   <div className="shop-single-item-description">
                     <p>{excerpt}</p>
