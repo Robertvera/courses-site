@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { NavLink } from 'react-router-dom'
 import './TopBar.scss'
-import logo from '../../../../public/images/logos/30941541267017436.png'
+import logo from '../../../../public/images/logos/only-logo.png'
 
 class TopBar extends Component {
   constructor() {
@@ -15,11 +15,13 @@ class TopBar extends Component {
 
         <header className="header header-transparent">
         <div className="container-fluid">
-
             <div className="inner-header">
-            <a className="inner-brand vmlogo" href="/#/">
-            <img src={logo}/>
-            </a>
+                <a className="inner-brand" href="/#/">
+                    <div className="vmblogo">
+                        <img src={logo}/>
+                        <span> VMB Formación </span>
+                    </div>
+                </a>
             </div>
 
             <div className="inner-navigation collapse">
