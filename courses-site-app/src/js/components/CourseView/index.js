@@ -194,7 +194,7 @@ render() {
                     <p>{teacherData.linkedin} | {teacherData.twitter}</p>
                   </div>
                   <div className="tab-pane fade" id="shop-comment">
-                  <object data={pdf} type="application/pdf" height="800" width="800"></object>
+                  <object data={pdf} type="application/pdf" height="350" width="800"></object>
                   </div>
                 </div>
               </div>
