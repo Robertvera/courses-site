@@ -41,8 +41,7 @@ class App extends Component {
               <CourseDetails {...routeProps} />
             )} />
             <Route exact path="/checkout/:id" render={(routeProps) => (
-              <StripeProvider apiKey="pk_test_FMPOPKE34szBONAbbVNm0OCn">
-              {/* <StripeProvider apiKey="pk_live_zJl4KlFhNK4zqdqzTJNGLBD9"> */}
+              <StripeProvider apiKey="pk_live_zJl4KlFhNK4zqdqzTJNGLBD9">
                 <Checkout {...routeProps}/>
               </StripeProvider>  
             )} />
