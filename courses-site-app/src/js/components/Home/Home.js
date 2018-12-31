@@ -3,7 +3,7 @@ import TopBar from '../TopBar/TopBar'
 import Footer from '../Footer/Footer'
 import Api from '../../../api/vmApi'
 import './Home.scss'
-import {formatDate} from '../utils/utils'
+import {formatDate, formatText} from '../utils/utils'
 
 class Home extends Component {
     constructor() {
@@ -328,7 +328,7 @@ class Home extends Component {
                         <div className="post-wrapper">
                         <div className="post-header">
                             <h2 className="post-title">
-                            <a href="blog-single.html">{lastCourses[0].name}</a>
+                            <a href={`/#/detalles/${lastCourses[0].name}`}>{formatText(lastCourses[0].name)}</a>
                             </h2>
                         </div>
                         <div className="post-content">
@@ -361,7 +361,7 @@ class Home extends Component {
                         <div className="post-wrapper">
                         <div className="post-header">
                             <h2 className="post-title">
-                            <a href="blog-single.html">{lastCourses[1].name}</a>
+                            <a href={`/#/detalles/${lastCourses[1].name}`}>{formatText(lastCourses[1].name)}</a>
                             </h2>
                         </div>
                         <div className="post-content">
@@ -394,7 +394,7 @@ class Home extends Component {
                         <div className="post-wrapper">
                         <div className="post-header">
                             <h2 className="post-title">
-                            <a href="blog-single.html">{lastCourses[2].name}</a>
+                            <a href={`/#/detalles/${lastCourses[2].name}`}>{formatText(lastCourses[2].name)}</a>
                             </h2>
                         </div>
                         <div className="post-content">

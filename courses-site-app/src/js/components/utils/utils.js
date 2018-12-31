@@ -34,6 +34,10 @@ const Utils = {
   formatDate: function(input) {
     const newDate = new Date(input);
     return `${newDate.getDate()}/${newDate.getMonth() + 1}/${newDate.getFullYear()}`;
+  },
+
+  formatText: function(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 };
 

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
+import swal from 'sweetalert2'
 import TopBar from '../TopBar/TopBar'
 import Footer from '../Footer/Footer'
 import { withRouter } from "react-router-dom"
 import Api from '../../../api/vmApi'
-import swal from 'sweetalert2'
 import './index.scss'
-import { formatDate } from "../utils/utils"
+import { formatDate, formatText } from "../utils/utils"
 
 class CourseView extends Component {
   constructor() {
@@ -107,7 +107,7 @@ render() {
               </div>
               <div className="col-lg-5">
                 <div className="shop-single-item">
-                  <h2 className="shop-single-item-title">{name}</h2>
+                  <h2 className="shop-single-item-title">{formatText(name)}</h2>
                   <h2 className="shop-single-item-price">{price}€</h2>
                   <div className="shop-single-item-description">
                     <p>{excerpt}</p>
@@ -195,13 +195,10 @@ render() {
                   </div>
                   <div className="tab-pane fade" id="course-teacher">
                     <p>{teacherData.name} {teacherData.surname}</p>
-                    <p>{teacherData.email}</p>
-                    <p>{teacherData.phoneNumber}</p>
                     <p>{teacherData.titles}</p>
-                    <p>{teacherData.linkedin} | {teacherData.twitter}</p>
                   </div>
                   <div className="tab-pane fade" id="shop-comment">
-                  <object data={pdf} type="application/pdf" height="800" width="800"></object>
+                  <object data={pdf} type="application/pdf" height="350" width="800"></object>
                   </div>
                 </div>
               </div>
