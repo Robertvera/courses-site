@@ -188,10 +188,7 @@ render() {
                   </div>
                   <div className="tab-pane fade" id="course-teacher">
                     <p>{teacherData.name} {teacherData.surname}</p>
-                    <p>{teacherData.email}</p>
-                    <p>{teacherData.phoneNumber}</p>
                     <p>{teacherData.titles}</p>
-                    <p>{teacherData.linkedin} | {teacherData.twitter}</p>
                   </div>
                   <div className="tab-pane fade" id="shop-comment">
                   <object data={pdf} type="application/pdf" height="350" width="800"></object>
