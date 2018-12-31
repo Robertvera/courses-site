@@ -66,6 +66,15 @@ const Modals = {
             showConfirmButton: true,
             timer: 2000
         })
+    },
+    MessageSent: function () {
+        return swal({
+            type: 'success',
+            title: '¡Gracias por tu mensaje!',
+            text: 'Nos pondremos en contacto contigo por teléfono o a través del email.',
+            showConfirmButton: false,
+            timer: 2500
+        })
     }
 
 }

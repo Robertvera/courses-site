@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom"
 import Api from '../../../api/vmApi'
 import swal from 'sweetalert2'
 import './index.scss'
+import { formatDate } from "../utils/utils"
 
 class CourseView extends Component {
   constructor() {
@@ -110,6 +111,9 @@ render() {
                   <h2 className="shop-single-item-price">{price}€</h2>
                   <div className="shop-single-item-description">
                     <p>{excerpt}</p>
+                    <br/>
+                    <p><span>Fecha:</span> {formatDate(date)}</p>
+                    <p><span>Localización:</span> {location}</p>
                   </div>
                   <div className="form-row">
                     <div className="form-group col-md-6">
@@ -117,7 +121,7 @@ render() {
                       className="btn btn-block btn-dark" 
                       href="#"
                       onClick={ (e) => { Number(capacity) > students ? this.checkoutCourse(e, id) : this.fullBooked(e)} }>
-                      Comprar curso
+                      Inscribirse
                       </a>
                     </div>
                   </div>
@@ -125,22 +129,27 @@ render() {
                   <hr className="m-t-30 m-b-30" />
                   <div className="info-list">
                     <li>
-                      <span className="info-list-title">Siguenos en:</span>
+                      <span className="info-list-title">Síguenos en:</span>
                       <span>
                         <ul className="social-icons">
                           <li>
-                            <a href="#">
-                              <i className="ti-twitter">Twitter</i>
+                          <a href="https://twitter.com/vmbformacion" target="_blank">
+                              <i className="ti-twitter" />
                             </a>
                           </li>
                           <li>
-                            <a href="#">
-                              <i className="ti-instagram">Instagram</i>
+                          <a href="https://www.instagram.com/vmbformacion/" target="_blank">
+                              <i className="ti-instagram" />
                             </a>
                           </li>
                           <li>
-                            <a href="#">
-                              <i className="ti-facebook">Facebook</i>
+                          <a href="https://www.facebook.com/VMBTOFORMACION/" target="_blank">
+                              <i className="ti-facebook" />
+                            </a>
+                          </li>
+                          <li>
+                          <a href="https://www.linkedin.com/company/vmbformacion/" target="_blank">
+                              <i className="ti-linkedin" />
                             </a>
                           </li>
                         </ul>
