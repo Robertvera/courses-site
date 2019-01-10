@@ -2,6 +2,7 @@ const { Bills } = require('../models/index')
 const { Courses } = require('../models/index')
 const { Students } = require('../models/index')
 const { Teachers } = require('../models/index')
+const Utils = require('./utils')
 
 module.exports = {
     /////////////////////////////// COURSES METHODS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -83,7 +84,9 @@ module.exports = {
                 return Students.findOne({documentId})
             })
             .then((student)=> {
-                if (student) throw Error('Student already exists')
+                if (student) {
+                    return Utils.addCourseToStudent(documentId, courses)
+                }
 
                 return Students.create({ name, surname, documentId, address, cp, city, email, phoneNumber, courses })
                     .then((student) => student
