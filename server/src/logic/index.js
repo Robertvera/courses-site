@@ -133,8 +133,16 @@ module.exports = {
             .then(student => {
                 if (!student) throw Error('student does not exist')
 
+                const coursesToBePulled = student.courses
+                const studentMongoId = student._id
+                    for (let i = 0 ; i < coursesToBePulled.length; i++) {
+                        Courses.findOne({ _id: coursesToBePulled[i] })
+                        .then ((course) => {
+                            course.students.pull(studentMongoId)
+                            return course.save()
+                        })
+                    }
                 return Students.deleteOne({ documentId })
-                    .then(() => documentId)
             })
     },
     /////////////////////////////// TEACHERS METHODS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
