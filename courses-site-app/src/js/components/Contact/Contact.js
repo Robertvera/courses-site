@@ -6,6 +6,7 @@ import Api from "../../../api/vmApi"
 import './Contact.scss'
 import {contactUs} from '../utils/mailTemplates'
 import { MessageSent } from '../utils/modals'
+import Recaptcha from '../utils/recaptcha'
 
 class Contact extends Component {
   constructor() {
@@ -112,7 +113,8 @@ class Contact extends Component {
                         </div>
                         <div className="col-md-12">
                         <p />
-                        <div className="text-center">
+                        <div className="text-center form-send-row">
+                            <Recaptcha />
                             <input className="btn btn-circle btn-brand" type="submit" value="Enviar mensaje" />
                         </div>
                         </div>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route, HashRouter } from 'react-router-dom';
 import {StripeProvider} from 'react-stripe-elements';
 import ReactGA from 'react-ga';
+import { loadReCaptcha } from 'react-recaptcha-google'
 import Home from "./js/components/Home/Home";
 import Contact from "./js/components/Contact/Contact"
 import AdminFrame from "./js/components/Admin/AdminFrame/AdminFrame"
@@ -27,6 +28,7 @@ class App extends Component {
   componentDidMount() {
     ReactGA.initialize('UA-132816841-1'); 
     ReactGA.pageview(window.location.hash);
+    loadReCaptcha();
   }
 
   pageView = () => ReactGA.pageview(window.location.hash);
