@@ -26,13 +26,15 @@ class Contact extends Component {
   handleSubmit = e => {
       e.preventDefault();
       const { name, email, message, phone } = this.state
-    Api.emailToStudent('vmbformacion@gmail.com', contactUs(name, email, message, phone))
-    .then (()=> {
-        MessageSent()
-        .then(()=> {
-            this.redirectToHome()
-        })
-    })
+      if (name && email && message) {
+          Api.emailToStudent('vmbformacion@gmail.com', contactUs(name, email, message, phone))
+          .then ((data)=> {
+              MessageSent()
+              .then(()=> {
+                  this.redirectToHome()
+              })
+          })
+      }
   }
 
   handleOnChange = e => {
