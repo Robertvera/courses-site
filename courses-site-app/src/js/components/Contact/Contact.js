@@ -26,7 +26,7 @@ class Contact extends Component {
   handleSubmit = e => {
       e.preventDefault();
       const { name, email, message, phone } = this.state
-      if (name && email && message) {
+      if (name && email) {
           Api.emailToStudent('vmbformacion@gmail.com', contactUs(name, email, message, phone))
           .then ((data)=> {
               MessageSent()
