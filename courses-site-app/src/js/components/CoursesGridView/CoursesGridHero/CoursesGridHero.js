@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import './CoursesGridHero.scss'
-//import Header from './../../../../../public/images/cursos.jpg'
 
 class CoursesGridHero extends Component {
     constructor() {
@@ -11,19 +10,11 @@ class CoursesGridHero extends Component {
     }
     render() {
         return (
-            <section className="module-page-title parallax  bg-gray" data-background="" data-overlay="0.1">
+            <section className="module-page-title parallax courses-image" data-background="/../../../../../public/images/header-courses.jpg" data-overlay="0.1">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
                             <h2>Cursos</h2>
-                            <ol className="breadcrumb">
-                                <li className="breadcrumb-item">
-                                    <a href="#">Home</a>
-                                </li>
-                                <li className="breadcrumb-item">
-                                    <a href="#">Cursos</a>
-                                </li>
-                            </ol>
                         </div>
                     </div>
                 </div>

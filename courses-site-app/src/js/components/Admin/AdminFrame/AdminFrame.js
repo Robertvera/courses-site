@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import { NavLink } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 import './AdminFrame.scss'
 import Login from '../Login/Login'
 import firebase from 'firebase'
@@ -31,22 +30,23 @@ class AdminFrame extends Component {
 
   logoutUser = (ev) => {
     ev.preventDefault()
-    firebase.auth().signOut().then(() => {
+    firebase.auth().signOut()
+    .then(() => {
       this.checkForLogin()
-    }).catch((error) => {
+    })
+    .then(() => {
+    this.props.history.push(`/admin`)
+    })
+    .catch((error) => {
       console.error(error)
     });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log('nextProps => ', nextProps)
   }
 
   render() {
     return (
         <div>
   <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="#/es/home">VMB FORMACIÓN</a>
+    <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="#/">VMB FORMACIÓN</a>
     <ul className="navbar-nav px-3">
       <li className="nav-item text-nowrap">
         <button 
@@ -90,4 +90,4 @@ class AdminFrame extends Component {
     );
   }
 }
-export default AdminFrame;
+export default withRouter(AdminFrame);

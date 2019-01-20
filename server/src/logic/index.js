@@ -91,7 +91,10 @@ module.exports = {
             })
     },
 
-    listStudents() {
+    listStudents(query) {
+        if (query) {
+            return Students.find({  name: new RegExp(query, 'i') }, { __v: 0 })
+        }
         return Students.find({}, { __v: 0 }).sort({name: 1})
     },
 

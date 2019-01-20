@@ -1,11 +1,11 @@
 import React, { Component } from "react";
+import swal from 'sweetalert2'
 import TopBar from '../TopBar/TopBar'
 import Footer from '../Footer/Footer'
-import CourseViewHeader from './CourseViewHeader/CourseViewHeader'
 import { withRouter } from "react-router-dom"
 import Api from '../../../api/vmApi'
-import swal from 'sweetalert2'
 import './index.scss'
+import { formatDate, formatText } from "../utils/utils"
 
 class CourseView extends Component {
   constructor() {
@@ -54,7 +54,6 @@ componentDidMount = () => {
             students: courseToShow.students.length || '',
             teacher: courseToShow.teachers[0] || ''
           })
-          console.log(this.state)
         } else {
           swal({
             type: 'error',
@@ -77,7 +76,7 @@ componentDidMount = () => {
 
 checkoutCourse = (e, id) => {
   e.preventDefault()
-  this.props.history.push(`/es/checkout/${id}`)
+  this.props.history.push(`/checkout/${id}`)
 }
 
 fullBooked = (e) => {
@@ -98,7 +97,6 @@ render() {
       <div>
         <TopBar/>
       <div className='container'>
-          <CourseViewHeader />
         <section className="module">
           <div className="container">
             <div className="row">
@@ -109,19 +107,13 @@ render() {
               </div>
               <div className="col-lg-5">
                 <div className="shop-single-item">
-                  <h2 className="shop-single-item-title">{name}</h2>
-                  <div className="shop-single-item-rating">
-                    <span className="star-rating">
-                      <i className="fas fa-star" />
-                      <i className="fas fa-star" />
-                      <i className="fas fa-star" />
-                      <i className="fas fa-star" />
-                      <i className="far fa-star" />
-                    </span>
-                  </div>
+                  <h2 className="shop-single-item-title">{formatText(name)}</h2>
                   <h2 className="shop-single-item-price">{price}€</h2>
                   <div className="shop-single-item-description">
                     <p>{excerpt}</p>
+                    <br/>
+                    <p><span>Fecha:</span> {formatDate(date)}</p>
+                    <p><span>Localización:</span> {location}</p>
                   </div>
                   <div className="form-row">
                     <div className="form-group col-md-6">
@@ -129,7 +121,7 @@ render() {
                       className="btn btn-block btn-dark" 
                       href="#"
                       onClick={ (e) => { Number(capacity) > students ? this.checkoutCourse(e, id) : this.fullBooked(e)} }>
-                      Comprar curso
+                      Inscribirse
                       </a>
                     </div>
                   </div>
@@ -137,22 +129,27 @@ render() {
                   <hr className="m-t-30 m-b-30" />
                   <div className="info-list">
                     <li>
-                      <span className="info-list-title">Siguenos en:</span>
+                      <span className="info-list-title">Síguenos en:</span>
                       <span>
                         <ul className="social-icons">
                           <li>
-                            <a href="#">
-                              <i className="ti-twitter">Twitter</i>
+                          <a href="https://twitter.com/vmbformacion" target="_blank">
+                              <i className="ti-twitter" />
                             </a>
                           </li>
                           <li>
-                            <a href="#">
-                              <i className="ti-instagram">Instagram</i>
+                          <a href="https://www.instagram.com/vmbformacion/" target="_blank">
+                              <i className="ti-instagram" />
                             </a>
                           </li>
                           <li>
-                            <a href="#">
-                              <i className="ti-facebook">Facebook</i>
+                          <a href="https://www.facebook.com/VMBTOFORMACION/" target="_blank">
+                              <i className="ti-facebook" />
+                            </a>
+                          </li>
+                          <li>
+                          <a href="https://www.linkedin.com/company/vmbformacion/" target="_blank">
+                              <i className="ti-linkedin" />
                             </a>
                           </li>
                         </ul>
@@ -198,13 +195,10 @@ render() {
                   </div>
                   <div className="tab-pane fade" id="course-teacher">
                     <p>{teacherData.name} {teacherData.surname}</p>
-                    <p>{teacherData.email}</p>
-                    <p>{teacherData.phoneNumber}</p>
                     <p>{teacherData.titles}</p>
-                    <p>{teacherData.linkedin} | {teacherData.twitter}</p>
                   </div>
                   <div className="tab-pane fade" id="shop-comment">
-                  <object data={pdf} type="application/pdf" height="800" width="800"></object>
+                  <object data={pdf} type="application/pdf" height="350" width="800"></object>
                   </div>
                 </div>
               </div>

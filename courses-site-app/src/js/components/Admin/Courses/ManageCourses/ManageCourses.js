@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import { withRouter } from "react-router-dom";
-import Api from "../../../../../api/vmApi";
 import swal from "sweetalert2";
 import firebase from "firebase";
+import { withRouter } from "react-router-dom";
+import Api from "../../../../../api/vmApi";
 
 class ManageCourses extends Component {
   constructor(props) {
@@ -23,7 +22,8 @@ class ManageCourses extends Component {
       teachersList: [],
       uploadValuePDF: "",
       uploadValueIMG: "",
-      editingCourse: false
+      editingCourse: false,
+      login: false
     };
   }
 
@@ -43,11 +43,13 @@ class ManageCourses extends Component {
       teachersList: [],
       uploadValuePDF: "",
       uploadValueIMG: "",
-      editingCourse: false
+      editingCourse: false,
+      login: false
     });
   };
 
   componentDidMount() {
+    this.checkForLogin()
     if (this.props.match) {
       const course = this.props.match.params.course;
 
@@ -68,6 +70,18 @@ class ManageCourses extends Component {
           this.findTeacherName();
         });
     }
+  }
+
+  checkForLogin = () => {
+    let userLogin = false
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        userLogin = true
+        this.setState({ login: userLogin })
+      } else {
+        this.setState({ login: userLogin })
+      }
+    })
   }
 
   editCourse(courseToEdit) {
@@ -166,7 +180,8 @@ class ManageCourses extends Component {
       capacity,
       location,
       date,
-      teacher
+      teacher.length ? teacher : [],
+      undefined
     )
       .then(course => {
         course.data.status === "OK"
@@ -199,7 +214,7 @@ class ManageCourses extends Component {
       capacity,
       location,
       date,
-      teacher.length ? teacher : undefined,
+      teacher.length ? teacher : [],
       undefined
     )
       .then(course => {
@@ -254,171 +269,179 @@ class ManageCourses extends Component {
   };
 
   render() {
-    const { editingCourse } = this.state;
+    const { editingCourse, login } = this.state;
     return (
-      <div className="container col-md-10 offset-md-2">
-        <div className="row">
-          <div className="col-md-12">
-            <div className="space" data-my="60px" />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-12 pt-5">
-            <form
-              onSubmit={e => (!this.state.editingCourse ? this.handleSubmit(e) : this.handleEdit(e))}
-              id="courses-form"
-              method="post"
-              noValidate
-            >
+      <React.Fragment>
+        {
+          login ?
+            <div className="container col-md-10 offset-md-2">
               <div className="row">
-                <div className="col-md-8">
-                  <div className="form-group">
-                    <input
-                      onChange={e => this.handleOnChange(e)}
-                      className="form-control"
-                      type="text"
-                      name="name"
-                      placeholder="Nombre curso"
-                      defaultValue={this.state.name || ""}
-                      disabled={editingCourse ? true : false}
-                      required
-                    />
-                    <p className="help-block text-danger" />
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="form-group">
-                    <input
-                      onChange={e => this.handleOnChange(e)}
-                      className="form-control"
-                      type="date"
-                      name="date"
-                      placeholder="Fecha"
-                      defaultValue={this.state.date || ""}
-                    />
-                    <p className="help-block text-danger" />
-                  </div>
-                </div>
                 <div className="col-md-12">
-                  <div className="form-group">
-                    <textarea
-                      onChange={e => this.handleOnChange(e)}
-                      className="form-control"
-                      name="description"
-                      placeholder="Descripción curso"
-                      value={this.state.description || ""}
-                      rows={12}
-                    />
-                  </div>
-                </div>
-                <div className="col-md-10">
-                  <div className="form-group">
-                    <input
-                      onChange={e => this.handleOnChange(e)}
-                      className="form-control"
-                      type="text"
-                      name="excerpt"
-                      placeholder="Resumen"
-                      defaultValue={this.state.excerpt || ""}
-                    />
-                    <p className="help-block text-danger" />
-                  </div>
-                </div>
-                <div className="col-md-2">
-                  <div className="form-group">
-                    <input
-                      onChange={e => this.handleOnChange(e)}
-                      className="form-control"
-                      type="number"
-                      name="price"
-                      placeholder="Precio"
-                      defaultValue={this.state.price || ""}
-                    />
-                    <p className="help-block text-danger" />
-                  </div>
-                </div>
-                <div className="col-md-2">
-                  <div className="form-group">
-                    <input
-                      onChange={e => this.handleOnChange(e)}
-                      className="form-control"
-                      type="number"
-                      name="capacity"
-                      placeholder="Capacidad"
-                      defaultValue={this.state.capacity || ""}
-                    />
-                    <p className="help-block text-danger" />
-                  </div>
-                </div>
-                <div className="col-md-10">
-                  <div className="form-group">
-                    <input
-                      onChange={e => this.handleOnChange(e)}
-                      className="form-control"
-                      type="text"
-                      name="location"
-                      placeholder="Localización"
-                      defaultValue={this.state.location || ""}
-                    />
-                    <p className="help-block text-danger" />
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <input
-                      onChange={e => this.handleTeachers(e)}
-                      className="form-control"
-                      type="text"
-                      name="teacher"
-                      placeholder="Profesor"
-                      value={this.state.teacherToFind}
-                    />
-                    <p className="help-block text-danger" />
-                  </div>
-                  <div className="form-group">
-                    <ul className="list-group">
-                      {this.state.teachersList.length
-                        ? this.state.teachersList.map(teacher => {
-                            return (
-                              <button
-                                className="list-group-item"
-                                type="button"
-                                onClick={e => this.selectTeacherFromSuggested(e, { teacher })}
-                              >
-                                {teacher.name} {teacher.surname}
-                              </button>
-                            );
-                          })
-                        : ""}
-                    </ul>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="row">
-                    <div className="col-md-6">
-                      <progress value={this.state.uploadValuePDF} mx="100" />
-                      <br />
-                      <span>Añadir PDF</span>
-                      <input type="file" onChange={e => this.handleUploadPDF(e)} />
-                    </div>
-                    <div className="col-md-6">
-                      <progress value={this.state.uploadValueIMG} mx="100" />
-                      <br />
-                      <span>Añadir Imagen</span>
-                      <input type="file" onChange={e => this.handleUploadIMG(e)} />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-12 mt-4">
-                  <div className="text-center">
-                    <input className="btn btn-circle btn-brand" type="submit" defaultValue="Guardar" />
-                  </div>
+                  <div className="space" data-my="60px" />
                 </div>
               </div>
-            </form>
-          </div>
-        </div>
-      </div>
+              <div className="row">
+                <div className="col-md-12 pt-5">
+                  <form
+                    onSubmit={e => (!this.state.editingCourse ? this.handleSubmit(e) : this.handleEdit(e))}
+                    id="courses-form"
+                    method="post"
+                    noValidate
+                  >
+                    <div className="row">
+                      <div className="col-md-8">
+                        <div className="form-group">
+                          <input
+                            onChange={e => this.handleOnChange(e)}
+                            className="form-control"
+                            type="text"
+                            name="name"
+                            placeholder="Nombre curso"
+                            defaultValue={this.state.name || ""}
+                            disabled={editingCourse ? true : false}
+                            required
+                          />
+                          <p className="help-block text-danger" />
+                        </div>
+                      </div>
+                      <div className="col-md-4">
+                        <div className="form-group">
+                          <input
+                            onChange={e => this.handleOnChange(e)}
+                            className="form-control"
+                            type="date"
+                            name="date"
+                            placeholder="Fecha"
+                            defaultValue={this.state.date || ""}
+                          />
+                          <p className="help-block text-danger" />
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="form-group">
+                          <textarea
+                            onChange={e => this.handleOnChange(e)}
+                            className="form-control"
+                            name="description"
+                            placeholder="Descripción curso"
+                            value={this.state.description || ""}
+                            rows={12}
+                          />
+                        </div>
+                      </div>
+                      <div className="col-md-10">
+                        <div className="form-group">
+                          <input
+                            onChange={e => this.handleOnChange(e)}
+                            className="form-control"
+                            type="text"
+                            name="excerpt"
+                            placeholder="Resumen"
+                            defaultValue={this.state.excerpt || ""}
+                          />
+                          <p className="help-block text-danger" />
+                        </div>
+                      </div>
+                      <div className="col-md-2">
+                        <div className="form-group">
+                          <input
+                            onChange={e => this.handleOnChange(e)}
+                            className="form-control"
+                            type="number"
+                            name="price"
+                            placeholder="Precio"
+                            defaultValue={this.state.price || ""}
+                          />
+                          <p className="help-block text-danger" />
+                        </div>
+                      </div>
+                      <div className="col-md-2">
+                        <div className="form-group">
+                          <input
+                            onChange={e => this.handleOnChange(e)}
+                            className="form-control"
+                            type="number"
+                            name="capacity"
+                            placeholder="Capacidad"
+                            defaultValue={this.state.capacity || ""}
+                          />
+                          <p className="help-block text-danger" />
+                        </div>
+                      </div>
+                      <div className="col-md-10">
+                        <div className="form-group">
+                          <input
+                            onChange={e => this.handleOnChange(e)}
+                            className="form-control"
+                            type="text"
+                            name="location"
+                            placeholder="Localización"
+                            defaultValue={this.state.location || ""}
+                          />
+                          <p className="help-block text-danger" />
+                        </div>
+                      </div>
+                      <div className="col-md-6">
+                        <div className="form-group">
+                          <input
+                            onChange={e => this.handleTeachers(e)}
+                            className="form-control"
+                            type="text"
+                            name="teacher"
+                            placeholder="Profesor"
+                            value={this.state.teacherToFind}
+                          />
+                          <p className="help-block text-danger" />
+                        </div>
+                        <div className="form-group">
+                          <ul className="list-group">
+                            {this.state.teachersList.length
+                              ? this.state.teachersList.map(teacher => {
+                                return (
+                                  <button
+                                    className="list-group-item bg-light text-secondary teachers-list"
+                                    type="button"
+                                    onClick={e => this.selectTeacherFromSuggested(e, { teacher })}
+                                  >
+                                    {teacher.name} {teacher.surname}
+                                  </button>
+                                );
+                              })
+                              : ""}
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="col-md-6">
+                        <div className="row">
+                          <div className="col-md-6">
+                            <progress value={this.state.uploadValuePDF} mx="100" />
+                            <br />
+                            <span>Añadir PDF</span>
+                            <input type="file" onChange={e => this.handleUploadPDF(e)} />
+                          </div>
+                          <div className="col-md-6">
+                            <progress value={this.state.uploadValueIMG} mx="100" />
+                            <br />
+                            <span>Añadir Imagen</span>
+                            <input type="file" onChange={e => this.handleUploadIMG(e)} />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-md-12 mt-4">
+                        <div className="text-center">
+                          <input className="btn btn-circle btn-brand" type="submit" defaultValue="Guardar" />
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            :
+            ''
+        }
+
+      </React.Fragment>
     );
   }
 }

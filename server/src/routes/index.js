@@ -29,6 +29,8 @@ router.delete('/teacher/:documentId', removeTeacher)
 
 router.get('/students', listStudents)
 
+router.get('/students/:query', listStudents)
+
 router.post('/create-student', jsonBodyParser, createStudent)
 
 router.put('/edit-student/:documentId', jsonBodyParser, editStudent)
@@ -51,7 +53,7 @@ router.get('/course/id/:id', retrieveCourseId)
 
 router.delete('/course/:name', removeCourse)
 
-router.get('/courses/:query', retrieveCourseQuery)
+router.get('/courses/query/:query', retrieveCourseQuery)
 
 //PAYMENTS ROUTES
 

@@ -1,6 +1,7 @@
 /*
 Very long document, for an easy usage, find below the name references of the methods available:
 - thanks: thanks email
+- contactUs: message from contact us form
 
 */
 const mailTemplates = {
@@ -77,7 +78,7 @@ const mailTemplates = {
                               <td width="520" valign="top" align="center" style="padding:0;Margin:0;"> 
                                <table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;"> 
                                  <tr style="border-collapse:collapse;"> 
-                                  <td class="es-m-p0l" align="center" style="padding:0;Margin:0;"> <img src="courses-site-app/public/images/logos/30941541267017436.png" alt="Smart home logo" title="Smart home logo" width="118" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;"></td> 
+                                  <td class="es-m-p0l" align="center" style="padding:0;Margin:0;"> <img src="https://firebasestorage.googleapis.com/v0/b/vmbformacion-3c649.appspot.com/o/image%2F30941541267017436.png?alt=media&token=05e449d5-4eae-4f9b-9320-992015e94ba1" alt="VMB logo" title="VMB logo" width="118" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;"></td> 
                                  </tr> 
                                </table> </td> 
                              </tr> 
@@ -114,7 +115,7 @@ const mailTemplates = {
                                   <td align="left" style="padding:0;Margin:0;"> <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:150%;color:#666666;">desde <strong>VMB Formación</strong> te damos las gracias por apuntarte a <strong>${courseName}</strong>, que tendrá lugar en <strong>${city} el ${date}</strong>. 15 días antes del curso nos pondremos en contacto contigo para que no te olvides :) </p><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:150%;color:#666666;"><br></p><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:150%;color:#666666;">Si tienes alguna pregunta,&nbsp;por favor no dudes en ponerte en contacto con nosotros. No olvides visitar nuestra página y revisar todos los cursos que hemos preparado para ti!</p> </td> 
                                  </tr> 
                                  <tr style="border-collapse:collapse;"> 
-                                  <td align="center" style="padding:0;Margin:0;padding-top:20px;padding-bottom:20px;"> <span class="es-button-border" style="border-style:solid;border-color:#4A7EB0;background:#2CB543;border-width:0px;display:inline-block;border-radius:0px;width:auto;"> <a href="https://stripo.email/" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none !important;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:18px;color:#4A7EB0;border-style:solid;border-color:#EFEFEF;border-width:10px 25px;display:inline-block;background:#EFEFEF;border-radius:0px;font-weight:normal;font-style:normal;line-height:120%;width:auto;text-align:center;">Ver más cursos</a> </span> </td> 
+                                  <td align="center" style="padding:0;Margin:0;padding-top:20px;padding-bottom:20px;"> <span class="es-button-border" style="border-style:solid;border-color:#4A7EB0;background:#2CB543;border-width:0px;display:inline-block;border-radius:0px;width:auto;"> <a href="http://vmbformacion.com/" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none !important;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:18px;color:#4A7EB0;border-style:solid;border-color:#EFEFEF;border-width:10px 25px;display:inline-block;background:#EFEFEF;border-radius:0px;font-weight:normal;font-style:normal;line-height:120%;width:auto;text-align:center;">Ver más cursos</a> </span> </td> 
                                  </tr> 
                                  <tr style="border-collapse:collapse;"> 
                                   <td align="left" style="padding:0;Margin:0;"> <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:150%;color:#666666;">Saludos cordiales del equipo de VMB Formación.</p> </td> 
@@ -158,7 +159,7 @@ const mailTemplates = {
                               <td class="es-m-p0r es-m-p20b" width="174" align="center" style="padding:0;Margin:0;"> 
                                <table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;"> 
                                  <tr style="border-collapse:collapse;"> 
-                                  <td class="es-m-p0l" align="center" style="padding:0;Margin:0;padding-bottom:10px;"> <img src="courses-site-app/public/images/logos/13131541267384459.png" alt="" width="103" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;"></td> 
+                                  <td class="es-m-p0l" align="center" style="padding:0;Margin:0;padding-bottom:10px;"> <img src="https://firebasestorage.googleapis.com/v0/b/vmbformacion-3c649.appspot.com/o/image%2F13131541267384459.png?alt=media&token=112714dc-a457-451b-952d-e0a71fff77c4" alt="" width="103" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;"></td> 
                                  </tr> 
                                </table> </td> 
                               <td class="es-hidden" width="20" style="padding:0;Margin:0;"></td> 
@@ -193,10 +194,10 @@ const mailTemplates = {
                                   <td align="center" style="padding:0;Margin:0;"> 
                                    <table class="es-table-not-adapt es-social" cellspacing="0" cellpadding="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;"> 
                                      <tr style="border-collapse:collapse;"> 
-                                      <td valign="top" align="center" style="padding:0;Margin:0;padding-right:20px;"> <a href="https://twitter.com/VmbFormacion" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:14px;text-decoration:underline;color:#333333;"><img title="Twitter" src="courses-site-app/public/images/logos/twitter-circle-colored.png" alt="Tw" width="24" height="24" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;"></a> </td> 
-                                      <td valign="top" align="center" style="padding:0;Margin:0;padding-right:20px;"> <a href="https://www.facebook.com/VMBTOFORMACION/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:14px;text-decoration:underline;color:#333333;"><img title="Facebook" src="courses-site-app/public/images/logos/facebook-circle-colored.png" alt="Fb" width="24" height="24" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;"></a> </td> 
-                                      <td valign="top" align="center" style="padding:0;Margin:0;padding-right:20px;"> <a href="https://www.linkedin.com/in/vmb-formacion-084820137/" target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:14px;text-decoration:underline;color:#333333;"><img title="Linkedin" src="courses-site-app/public/images/logos/linkedin-circle-colored.png" alt="In" width="24" height="24" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;"></a> </td> 
-                                      <td valign="top" align="center" style="padding:0;Margin:0;"> <a href="https://www.instagram.com/vmbformacion/" target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:14px;text-decoration:underline;color:#333333;"><img title="Instagram" src="courses-site-app/public/images/logos/instagram-circle-colored.png" alt="Ig" width="24" height="24" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;"></a> </td> 
+                                      <td valign="top" align="center" style="padding:0;Margin:0;padding-right:20px;"> <a href="https://twitter.com/VmbFormacion" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:14px;text-decoration:underline;color:#333333;"><img title="Twitter" src="https://firebasestorage.googleapis.com/v0/b/vmbformacion-3c649.appspot.com/o/image%2Ftwitter-circle-colored.png?alt=media&token=e89f3c4b-e2cf-42d5-ba23-64fe081622a1" alt="Tw" width="24" height="24" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;"></a> </td> 
+                                      <td valign="top" align="center" style="padding:0;Margin:0;padding-right:20px;"> <a href="https://www.facebook.com/VMBTOFORMACION/" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:14px;text-decoration:underline;color:#333333;"><img title="Facebook" src="https://firebasestorage.googleapis.com/v0/b/vmbformacion-3c649.appspot.com/o/image%2Ffacebook-circle-colored.png?alt=media&token=aa107900-be4a-416a-ab41-333a8a4f20ef" alt="Fb" width="24" height="24" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;"></a> </td> 
+                                      <td valign="top" align="center" style="padding:0;Margin:0;padding-right:20px;"> <a href="https://www.linkedin.com/in/vmb-formacion-084820137/" target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:14px;text-decoration:underline;color:#333333;"><img title="Linkedin" src="https://firebasestorage.googleapis.com/v0/b/vmbformacion-3c649.appspot.com/o/image%2Flinkedin-circle-colored.png?alt=media&token=a03f8d4a-4a77-4200-a4e0-26c8949ae15b" alt="In" width="24" height="24" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;"></a> </td> 
+                                      <td valign="top" align="center" style="padding:0;Margin:0;"> <a href="https://www.instagram.com/vmbformacion/" target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;font-size:14px;text-decoration:underline;color:#333333;"><img title="Instagram" src="https://firebasestorage.googleapis.com/v0/b/vmbformacion-3c649.appspot.com/o/image%2Finstagram-circle-colored.png?alt=media&token=728d6631-75c1-4560-bb24-2692dba0a6db" alt="Ig" width="24" height="24" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;"></a> </td> 
                                      </tr> 
                                    </table> </td> 
                                  </tr> 
@@ -215,6 +216,101 @@ const mailTemplates = {
              </body>
             </html>`
         }
+    },
+    contactUs: function (name, email, message, phone) {
+      return {
+        subject: `¡Has recibido un mensaje de ${name} a través del formulario de contacto!`,
+        html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        <html>
+        
+        <head>
+            <meta charset="UTF-8">
+            <meta content="width=device-width, initial-scale=1" name="viewport">
+            <meta name="x-apple-disable-message-reformatting">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta content="telephone=no" name="format-detection">
+            <title></title>
+            <!--[if (mso 16)]>
+            <style type="text/css">
+            a {text-decoration: none;}
+            </style>
+            <![endif]-->
+            <!--[if gte mso 9]><style>sup { font-size: 100% !important; }</style><![endif]-->
+        </head>
+        
+        <body>
+            <div class="es-wrapper-color">
+                <!--[if gte mso 9]>
+              <v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
+                <v:fill type="tile" color="#f6f6f6"></v:fill>
+              </v:background>
+            <![endif]-->
+                <table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0">
+                    <tbody>
+                        <tr>
+                            <td class="esd-email-paddings" valign="top">
+                                <table class="es-content esd-header-popover" cellspacing="0" cellpadding="0" align="center">
+                                    <tbody>
+                                        <tr>
+                                            <td class="esd-stripe" align="center">
+                                                <table class="es-content-body" width="600" cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="esd-structure es-p20t es-p20b es-p20r es-p20l" align="left">
+                                                                <table width="100%" cellspacing="0" cellpadding="0">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td class="esd-container-frame" width="560" valign="top" align="center">
+                                                                                <table width="100%" cellspacing="0" cellpadding="0">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td class="esd-block-text es-p15b" align="left">
+                                                                                                <h2>Nuevo mensaje enviado a través del formulario de contacto</h2>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td class="esd-block-text es-p20t" align="left">
+                                                                                                <p><strong>Nombre:</strong> ${name}</p>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td class="esd-block-text es-p15t" align="left">
+                                                                                                <p><strong>E-mail:</strong> ${email}</p>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td class="esd-block-text es-p20t" align="left">
+                                                                                                <p><strong>Número de teléfono:</strong> ${phone}</p>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td class="esd-block-text es-p20t" align="left">
+                                                                                                <p><strong>Mensaje:</strong> ${message}</p>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </body>
+        
+        </html>`
+      }
     }
 }
 
