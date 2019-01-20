@@ -94,14 +94,15 @@ class Courses extends Component {
 	deleteCourse = (e, course) => {
 		e.preventDefault();
 		swal({
-			title: `¿Estás seguro de que qwithRouterar ${ course }?`,
-			text: 'Una vez eliminado, no pwithRouteratrás',
+			title: `¿Estás seguro de que quieres eliminar ${ course }?`,
+			text: 'Una vez eliminado, no podrás recuperarlo',
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: '#3085d6',withRouter,
 			cancelButtonColor: '#d33',
 			confirmButtonText: 'Sí, lo quiero eliminar',
-			cancelButtonText: 'Cancelar'
+			cancelButtonText: 'Cancelar',
+			buttonsStyling: false
 		}).then((result) => {
 			if (result.value) {
 				Api.deleteCourse(course).then(() => {
