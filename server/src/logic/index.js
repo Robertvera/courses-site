@@ -98,7 +98,7 @@ module.exports = {
         if (query) {
             return Students.find({  name: new RegExp(query, 'i') }, { __v: 0 })
         }
-        return Students.find({}, { __v: 0 }).sort({name: 1})
+        return Students.find({}, { __v: 0 }).sort({name: 1}).populate('courses')
     },
 
     updateStudent(name, surname, documentId, address, cp, city, email, phoneNumber, courses) {
@@ -124,27 +124,51 @@ module.exports = {
                 return student
             })
     },
-
     removeStudent(documentId) {
         return Promise.resolve()
-            .then(() => {
-                return Students.findOne({ documentId })
-            })
-            .then(student => {
-                if (!student) throw Error('student does not exist')
+        .then(() => {
+            return Students.findOne({ documentId })
+        })
+        .then(student => {
+            if (!student) throw Error('student does not exist')
 
-                const coursesToBePulled = student.courses
-                const studentMongoId = student._id
-                    for (let i = 0 ; i < coursesToBePulled.length; i++) {
-                        Courses.findOne({ _id: coursesToBePulled[i] })
-                        .then ((course) => {
-                            course.students.pull(studentMongoId)
-                            return course.save()
-                        })
-                    }
                 return Students.deleteOne({ documentId })
             })
     },
+
+    // removeStudent(documentId) {
+    //     return Promise.resolve()
+    //     .then(() => {
+    //         return Students.findOne({ documentId })
+    //     })
+    //     .then(student => {
+    //         if (!student) throw Error('student does not exist')
+
+    //         const coursesToBePulled = student.courses.toString().split(',')
+    //         const studentMongoId = student._id.toString()
+
+    //         const pullStudentFromCourse = (courseId, studentId) => {
+    //             return Courses.findOne( {_id: courseId} )
+    //             .then((course) => {
+    //                 const studentIndex = course.students.indexOf(studentId)
+    //                 course.students.splice(studentIndex, 1)
+
+    //                 return course.save()
+    //             })
+
+    //         }
+
+    //         async function updateStudentInCourses (coursesToBePulled, studentMongoId) {
+    //             for (const item in coursesToBePulled) {
+    //                 await pullStudentFromCourse(coursesToBePulled[item], studentMongoId)
+    //             }
+
+    //             return Students.deleteOne({ documentId })
+    //         }
+
+    //         return updateStudentInCourses (coursesToBePulled, studentMongoId)
+    //     })
+    // },
     /////////////////////////////// TEACHERS METHODS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
     createTeacher(name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses) {

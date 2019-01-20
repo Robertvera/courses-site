@@ -48,9 +48,9 @@ handleSubmit = (e) => {
 							this.setState({loading: false})
 							if (result.data.status === 'OK') {
 								Modals.PaymentOK()
-								.then(()=> {
-									Api.emailToStudent(email, thanks(name, surname, courseName, location, formatDate(date)) )
-								})
+								// .then(()=> {
+								// 	Api.emailToStudent(email, thanks(name, surname, courseName, location, formatDate(date)) )
+								// })
 								.then(()=> {
 									this.redirectToHome()
 								})
