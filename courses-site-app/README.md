@@ -1,1 +1,1 @@
-Just testing SSH config, and gitHub credentials.
+Just testing SSH config, and gitHub credentialss.
