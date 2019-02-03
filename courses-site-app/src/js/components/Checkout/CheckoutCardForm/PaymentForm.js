@@ -20,7 +20,7 @@ class PaymentForm extends React.Component {
 redirectToHome = () => {
 	return this.props.history.push(`/`)
 }
-  
+
 handleSubmit = (e) => {
 	e.preventDefault();
 	const dataCheck = validateData(this.props.dataForm)
@@ -48,9 +48,9 @@ handleSubmit = (e) => {
 							this.setState({loading: false})
 							if (result.data.status === 'OK') {
 								Modals.PaymentOK()
-								// .then(()=> {
-								// 	Api.emailToStudent(email, thanks(name, surname, courseName, location, formatDate(date)) )
-								// })
+								.then(()=> {
+									Api.emailToStudent(email, thanks(name, surname, courseName, location, formatDate(date)) )
+								})
 								.then(()=> {
 									this.redirectToHome()
 								})
@@ -89,7 +89,7 @@ handleSubmit = (e) => {
 }
 
   render() {
-	  const { loading } = this.state
+	const { loading } = this.state
 	return (
 		<div>
 			<form onSubmit={this.handleSubmit}>

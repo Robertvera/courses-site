@@ -86,6 +86,10 @@ module.exports = {
             .then((student)=> {
                 if (student) {
                     return Utils.addCourseToStudent(documentId, courses)
+                    .then(()=> {
+                        return Students.findOne({ documentId }, {__v: 0})
+                    })
+                    .then((_student)=>_student)
                 }
 
                 return Students.create({ name, surname, documentId, address, cp, city, email, phoneNumber, courses })
@@ -126,49 +130,26 @@ module.exports = {
     },
     removeStudent(documentId) {
         return Promise.resolve()
-        .then(() => {
-            return Students.findOne({ documentId })
-        })
-        .then(student => {
-            if (!student) throw Error('student does not exist')
-
-                return Students.deleteOne({ documentId })
+            .then(() => {
+                return Students.findOne({ documentId })
+            })
+            .then(student => {
+                if (!student) throw Error('student does not exist')
+    
+                const coursesToBePulled = student.courses.toString().split(',')
+                const studentMongoId = student._id.toString()
+    
+                async function updateStudentInCourses (coursesToBePulled, studentMongoId) {
+                    for (const item in coursesToBePulled) {
+                        await Courses.findByIdAndUpdate(coursesToBePulled[item], { $pull: {'students': studentMongoId}}, {'new': true})
+                    }
+    
+                    return Students.deleteOne({ documentId })
+                }
+    
+                return updateStudentInCourses (coursesToBePulled, studentMongoId)
             })
     },
-
-    // removeStudent(documentId) {
-    //     return Promise.resolve()
-    //     .then(() => {
-    //         return Students.findOne({ documentId })
-    //     })
-    //     .then(student => {
-    //         if (!student) throw Error('student does not exist')
-
-    //         const coursesToBePulled = student.courses.toString().split(',')
-    //         const studentMongoId = student._id.toString()
-
-    //         const pullStudentFromCourse = (courseId, studentId) => {
-    //             return Courses.findOne( {_id: courseId} )
-    //             .then((course) => {
-    //                 const studentIndex = course.students.indexOf(studentId)
-    //                 course.students.splice(studentIndex, 1)
-
-    //                 return course.save()
-    //             })
-
-    //         }
-
-    //         async function updateStudentInCourses (coursesToBePulled, studentMongoId) {
-    //             for (const item in coursesToBePulled) {
-    //                 await pullStudentFromCourse(coursesToBePulled[item], studentMongoId)
-    //             }
-
-    //             return Students.deleteOne({ documentId })
-    //         }
-
-    //         return updateStudentInCourses (coursesToBePulled, studentMongoId)
-    //     })
-    // },
     /////////////////////////////// TEACHERS METHODS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
     createTeacher(name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses) {
