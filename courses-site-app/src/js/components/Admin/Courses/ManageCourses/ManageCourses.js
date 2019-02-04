@@ -3,6 +3,7 @@ import swal from "sweetalert2";
 import firebase from "firebase";
 import { withRouter } from "react-router-dom";
 import Api from "../../../../../api/vmApi";
+import StudentsList from "../../Students/StudentsList"
 
 class ManageCourses extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class ManageCourses extends Component {
       location: "",
       date: "",
       teacher: "",
+      students: [],
       teacherToFind: "",
       teachersList: [],
       uploadValuePDF: "",
@@ -39,6 +41,7 @@ class ManageCourses extends Component {
       location: "",
       date: "",
       teacher: "",
+      students:[],
       teacherToFind: "",
       teachersList: [],
       uploadValuePDF: "",
@@ -97,6 +100,7 @@ class ManageCourses extends Component {
         location: courseToEdit.location || "",
         date: courseToEdit.date || "",
         teacher: courseToEdit.teachers[0] || "",
+        students: courseToEdit.students || "",
         editingCourse: true,
         uploadValuePDF: courseToEdit.pdf.length ? 100 : "",
         uploadValueIMG: courseToEdit.pdf.length ? 100 : ""
@@ -269,7 +273,7 @@ class ManageCourses extends Component {
   };
 
   render() {
-    const { editingCourse, login } = this.state;
+    const { editingCourse, login, students } = this.state;
     return (
       <React.Fragment>
         {
@@ -436,6 +440,7 @@ class ManageCourses extends Component {
                   </form>
                 </div>
               </div>
+              <StudentsList students={students} />
             </div>
             :
             ''

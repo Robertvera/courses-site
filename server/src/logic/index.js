@@ -36,7 +36,7 @@ module.exports = {
     retrieveCourse(name) {
         return Promise.resolve()
             .then(() => {
-                return Courses.find({ name })
+                return Courses.find({ name }).populate('students')
             })
             .then(courses => {
                 if (!courses) throw Error('course does not exist')
