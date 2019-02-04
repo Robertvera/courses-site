@@ -112,7 +112,6 @@ class Students extends Component {
                       <th>Teléfono</th>
                       <th>E-mail</th>
                       <th>DNI</th>
-                      <th>Cursos</th>
                       <th></th>
                     </tr>
                   </thead>
@@ -124,7 +123,6 @@ class Students extends Component {
                           <td>{student.phoneNumber}</td>
                           <td>{student.email}</td>
                           <td>{student.documentId}</td>
-                          <td>{student.courses.map(course => `${course.name}\n`)}</td>
                           <td>
                             <DeleteButton
                               onClick={() => this.handleDelete(student.documentId, student.name, student.surname)} />
