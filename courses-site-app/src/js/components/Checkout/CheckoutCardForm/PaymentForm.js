@@ -20,7 +20,7 @@ class PaymentForm extends React.Component {
 redirectToHome = () => {
 	return this.props.history.push(`/`)
 }
-  
+
 handleSubmit = (e) => {
 	e.preventDefault();
 	const dataCheck = validateData(this.props.dataForm)
@@ -89,7 +89,7 @@ handleSubmit = (e) => {
 }
 
   render() {
-	  const { loading } = this.state
+	const { loading } = this.state
 	return (
 		<div>
 			<form onSubmit={this.handleSubmit}>

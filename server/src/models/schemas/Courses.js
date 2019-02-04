@@ -11,7 +11,7 @@ module.exports = new Schema({
     },
 
     excerpt: {
-        type: String      
+        type: String
     },
 
     price: {

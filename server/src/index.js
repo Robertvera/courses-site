@@ -5,17 +5,6 @@ const routes = require('./routes')
 const mongoose = require('mongoose')
 const cors = require('cors')
 
-/* const mongo = {
-
-    vmbFormacionDB: process.env.MONGO_HOST
-
-}
-
-with(mongo) {
-    // mongoose.connect(`mongodb://${host}:${port}/${database}`)
-    mongoose.connect(`mongodb://${vmbFormacionDB}`)
-} */
-
 const host = process.env.MONGO_HOST
 const MongoPort = process.env.MONGO_PORT
 const database = process.env.MONGO_DB

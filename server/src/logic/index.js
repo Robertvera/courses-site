@@ -2,6 +2,7 @@ const { Bills } = require('../models/index')
 const { Courses } = require('../models/index')
 const { Students } = require('../models/index')
 const { Teachers } = require('../models/index')
+const Utils = require('./utils')
 
 module.exports = {
     /////////////////////////////// COURSES METHODS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -35,7 +36,7 @@ module.exports = {
     retrieveCourse(name) {
         return Promise.resolve()
             .then(() => {
-                return Courses.find({ name })
+                return Courses.find({ name }).populate('students')
             })
             .then(courses => {
                 if (!courses) throw Error('course does not exist')
@@ -83,7 +84,13 @@ module.exports = {
                 return Students.findOne({documentId})
             })
             .then((student)=> {
-                if (student) throw Error('Student already exists')
+                if (student) {
+                    return Utils.addCourseToStudent(documentId, courses)
+                    .then(()=> {
+                        return Students.findOne({ documentId }, {__v: 0})
+                    })
+                    .then((_student)=>_student)
+                }
 
                 return Students.create({ name, surname, documentId, address, cp, city, email, phoneNumber, courses })
                     .then((student) => student
@@ -95,7 +102,7 @@ module.exports = {
         if (query) {
             return Students.find({  name: new RegExp(query, 'i') }, { __v: 0 })
         }
-        return Students.find({}, { __v: 0 }).sort({name: 1})
+        return Students.find({}, { __v: 0 }).sort({name: 1}).populate('courses')
     },
 
     updateStudent(name, surname, documentId, address, cp, city, email, phoneNumber, courses) {
@@ -121,7 +128,6 @@ module.exports = {
                 return student
             })
     },
-
     removeStudent(documentId) {
         return Promise.resolve()
             .then(() => {
@@ -129,9 +135,19 @@ module.exports = {
             })
             .then(student => {
                 if (!student) throw Error('student does not exist')
-
-                return Students.deleteOne({ documentId })
-                    .then(() => documentId)
+    
+                const coursesToBePulled = student.courses.toString().split(',')
+                const studentMongoId = student._id.toString()
+    
+                async function updateStudentInCourses (coursesToBePulled, studentMongoId) {
+                    for (const item in coursesToBePulled) {
+                        await Courses.findByIdAndUpdate(coursesToBePulled[item], { $pull: {'students': studentMongoId}}, {'new': true})
+                    }
+    
+                    return Students.deleteOne({ documentId })
+                }
+    
+                return updateStudentInCourses (coursesToBePulled, studentMongoId)
             })
     },
     /////////////////////////////// TEACHERS METHODS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
