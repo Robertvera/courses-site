@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import firebase from 'firebase'
 import * as firebase from 'firebase/app';
 import 'firebase/auth'
 import { NavLink, withRouter } from "react-router-dom"
