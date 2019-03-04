@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { NavLink, withRouter } from 'react-router-dom'
 import './AdminFrame.scss'
 import Login from '../Login/Login'
-import firebase from 'firebase'
+import * as firebase from 'firebase/app';
+import 'firebase/auth'
 
 class AdminFrame extends Component {
   constructor() {

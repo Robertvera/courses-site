@@ -1,5 +1,8 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-module.exports = {
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+module.exports = {  
+  mode: 'production',
   module: {
     rules: [
       {
@@ -29,8 +32,8 @@ module.exports = {
         test: /\.scss$/,
         use: [
           "style-loader",
-          "css-loader",
-          "sass-loader"
+          { loader: 'css-loader', options: { minimize: true } },
+          { loader: 'sass-loader', options: { minimize: true } }
         ]
       },
       { 
@@ -49,4 +52,18 @@ module.exports = {
     })
   ],
   devtool: 'inline-source-map',
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
+    namedModules: false,
+    namedChunks: false,
+    nodeEnv: 'production',
+    flagIncludedChunks: true,
+    occurrenceOrder: true,
+    sideEffects: true,
+    usedExports: true,
+    concatenateModules: true,
+    noEmitOnErrors: true,
+    checkWasmTypes: true,
+    minimize: true,
+},
 };

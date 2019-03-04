@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import './Login.scss'
 import Modals from '../../utils/modals'
-import firebase from 'firebase'
-
-
-import { Link, withRouter } from 'react-router-dom';
+import * as firebase from 'firebase/app';
+import 'firebase/auth'
+import { withRouter } from 'react-router-dom';
 
 
 class Login extends Component {

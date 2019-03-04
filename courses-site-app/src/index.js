@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from "./App";
-import firebase from 'firebase'
+import * as firebase from 'firebase/app';
+import 'firebase/auth'
 
 firebase.initializeApp({
     apiKey: "AIzaSyAI5LPmuB1jXqOShVA0FBKdPFn6vOxnWSY",

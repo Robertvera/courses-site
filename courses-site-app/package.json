@@ -24,6 +24,7 @@
     "babel-eslint": "^8.2.6",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-imports": "^1.5.1",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
@@ -44,7 +45,9 @@
     "react-router-dom": "^4.3.1",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
+    "uglifyjs-webpack-plugin": "^2.1.1",
     "webpack": "^4.10.2",
+    "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.4"
   },
