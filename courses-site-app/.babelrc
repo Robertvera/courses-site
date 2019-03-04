@@ -1,6 +1,12 @@
 {
     "presets": ["env", "react"],
     "plugins": [
-      "transform-class-properties"
+      "transform-class-properties",
+      ["transform-imports", {
+        "lodash": {
+            "transform": "lodash/${member}",
+            "preventFullImport": true
+        }
+    }]
     ]
   }
