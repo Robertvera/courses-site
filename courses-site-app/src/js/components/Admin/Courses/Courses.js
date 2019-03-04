@@ -4,7 +4,9 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import firebase from 'firebase'
+// import firebase from 'firebase'
+import * as firebase from 'firebase/app';
+import 'firebase/auth'
 import './Courses.scss'
 import swal from 'sweetalert2';
 import Api from '../../../../api/vmApi';

@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import swal from "sweetalert2";
-import firebase from "firebase";
+// import firebase from "firebase";
+import * as firebase from 'firebase/app';
+import 'firebase/auth'
+import 'firebase/firestore'
 import { withRouter } from "react-router-dom";
 import Api from "../../../../../api/vmApi";
 import StudentsList from "../../Students/StudentsList"
