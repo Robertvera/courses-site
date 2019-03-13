@@ -52,6 +52,7 @@
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
+    "@firebase/storage": "^0.2.10",
     "api-client": "file:../api-client",
     "firebase": "^5.5.0",
     "react-ga": "^2.5.6",

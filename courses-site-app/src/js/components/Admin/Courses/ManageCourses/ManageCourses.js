@@ -3,6 +3,7 @@ import swal from "sweetalert2";
 import * as firebase from 'firebase/app';
 import 'firebase/auth'
 import 'firebase/firestore'
+import '@firebase/storage'
 import { withRouter } from "react-router-dom";
 import Api from "../../../../../api/vmApi";
 import StudentsList from "../../Students/StudentsList"
