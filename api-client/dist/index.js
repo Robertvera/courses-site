@@ -4,7 +4,7 @@ var axios = require('axios');
 
 var vmApi = {
     _url: function _url() {
-        return 'http://localhost:5000/api';
+        return 'http://www.vmbformacion.com/api';
     },
 
 
