@@ -315,7 +315,7 @@ class Home extends Component {
                     <div className="space" data-my="60px" />
                     </div>
                 </div>
-                {lastCourses.length >0 ?
+                {lastCourses.length >= 3 ?
                 <div className="row row-post-masonry">
                     <div className="col-md-4 post-item">
 

@@ -4,8 +4,7 @@ var axios = require('axios');
 
 var vmApi = {
     _url: function _url() {
-        return 'https://vmb-server-test.appspot.com/api';
-        // return 'http://localhost:5000/api'
+        return 'http://localhost:5000/api';
     },
 
 
