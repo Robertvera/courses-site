@@ -3,7 +3,7 @@ const axios = require('axios')
 const vmApi = {
 
     _url() {
-        return 'http://www.vmbformacion.com/api'
+        return 'https://www.vmbformacion.com/api'
     },
 
     // TEACHERS ROUTES
