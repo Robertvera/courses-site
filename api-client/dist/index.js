@@ -4,7 +4,8 @@ var axios = require('axios');
 
 var vmApi = {
     _url: function _url() {
-        return 'https://www.vmbformacion.com/api';
+        // return 'https://www.vmbformacion.com/api'
+        return 'http://localhost:5000/api';
     },
 
 
@@ -92,6 +93,11 @@ var vmApi = {
 
     emailToStudent: function emailToStudent(to, content) {
         return axios.post(this._url() + '/mailing', { to: to, content: content });
+    },
+
+    //AUTH ROUTE
+    authenticateUser: function authenticateUser() {
+        return axios.get(this._url() + '/authenticate');
     }
 };
 

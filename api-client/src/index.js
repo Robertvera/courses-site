@@ -3,13 +3,18 @@ const axios = require('axios')
 const vmApi = {
 
     _url() {
-        return 'https://www.vmbformacion.com/api'
+        // return 'https://www.vmbformacion.com/api'
+        return 'http://localhost:5000/api'
     },
 
     // TEACHERS ROUTES
 
-    listTeachers: function (query) {
-        return axios.get(`${this._url()}/teachers/${query}`)
+    listTeachers: function (query, token) {
+        return axios.get(`${this._url()}/teachers/${query}`, {
+            headers: {
+                authorization: token
+            }
+        })
     },
 
     createTeacher: function (name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses) {
@@ -90,7 +95,13 @@ const vmApi = {
 
     emailToStudent: function(to, content) {
         return axios.post(`${this._url()}/mailing`, { to, content })
+    },
+
+    //AUTH ROUTE
+    authenticateUser() {
+        return axios.get(`${this._url()}/authenticate`)
     }
+    
 }
 
 module.exports = vmApi
