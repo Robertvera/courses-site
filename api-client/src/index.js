@@ -9,7 +9,7 @@ const vmApi = {
 
     // TEACHERS ROUTES
 
-    listTeachers: function (query, token) {
+    listTeachers: function (token, query) {
         return axios.get(`${this._url()}/teachers/${query}`, {
             headers: {
                 authorization: token

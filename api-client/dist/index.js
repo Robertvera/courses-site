@@ -11,8 +11,12 @@ var vmApi = {
 
     // TEACHERS ROUTES
 
-    listTeachers: function listTeachers(query) {
-        return axios.get(this._url() + '/teachers/' + query);
+    listTeachers: function listTeachers(token, query) {
+        return axios.get(this._url() + '/teachers/' + query, {
+            headers: {
+                authorization: token
+            }
+        });
     },
 
     createTeacher: function createTeacher(name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses) {

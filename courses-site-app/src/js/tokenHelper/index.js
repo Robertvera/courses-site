@@ -10,7 +10,11 @@ const tokenHelper={
 
 	logOutUser() {
         this.__userApiToken__ = null
-    }
+	},
+	
+	listTeachers(query) {
+		return Api.listTeachers(this.__userApiToken__, query)
+	}
 }
 
 

@@ -7,6 +7,7 @@ import swal from 'sweetalert2'
 import EditButton from '../../Buttons/editButton'
 import DeleteButton from '../../Buttons/deleteButton'
 import './Teachers.scss'
+import tokenHelper from '../../../tokenHelper'
 
 class Teachers extends Component {
   constructor() {
@@ -35,7 +36,7 @@ class Teachers extends Component {
 	}
 
 	listTeachers = () => {
-		Api.listTeachers('')
+		tokenHelper.listTeachers('')
 			.then(teachers => {
 				this.setState({
 					teachers: teachers.data.data
@@ -79,7 +80,7 @@ class Teachers extends Component {
   }
 
   listTeachersByQuery = (e) => {
-		Api.listTeachers(e.target.value.trim()).then(students=> {
+		tokenHelper.listTeachers(e.target.value.trim()).then(students=> {
       this.setState({
         teachers: students.data.data
       })

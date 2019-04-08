@@ -7,6 +7,7 @@ import '@firebase/storage'
 import { withRouter } from "react-router-dom";
 import Api from "../../../../../api/vmApi";
 import StudentsList from "../../Students/StudentsList"
+import tokenHelper from '../../../../tokenHelper'
 
 class ManageCourses extends Component {
   constructor(props) {
@@ -248,7 +249,7 @@ class ManageCourses extends Component {
   handleTeachers = e => {
     this.setState({ teacherToFind: e.target.value.trim() });
     if (this.state.teacherToFind.length >= 2) {
-      Api.listTeachers(this.state.teacherToFind).then(_teachers => {
+      tokenHelper.listTeachers(this.state.teacherToFind).then(_teachers => {
         this.setState({ teachersList: _teachers.data.data });
       });
     }

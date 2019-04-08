@@ -31,6 +31,9 @@ class Login extends Component {
 		firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
 			.then(() =>{
 				firebase.auth().signInWithEmailAndPassword(email, password)
+					.then(()=> {
+						tokenHelper.authenticateUser()
+					})
 					.catch(function (error) {
 						const errorCode = error.code;
 						if (errorCode === 'auth/wrong-password') {
@@ -41,14 +44,7 @@ class Login extends Component {
 					})
 			})
 			.then((res) => {
-				console.log(res)
-				tokenHelper.authenticateUser()
-					.then(()=> {
-						this.props.onCheckForLogin()
-					})
-					.catch((error)=> {
-						console.error(error)
-					})
+				this.props.onCheckForLogin()
 			})
 			.catch(function(error) {
 				const errorCode = error.code;
