@@ -32,7 +32,7 @@ class Login extends Component {
 			.then(() =>{
 				firebase.auth().signInWithEmailAndPassword(email, password)
 					.then(()=> {
-						tokenHelper.authenticateUser()
+						tokenHelper.authenticateUser(email, password)
 					})
 					.catch(function (error) {
 						const errorCode = error.code;

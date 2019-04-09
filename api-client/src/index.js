@@ -7,14 +7,18 @@ const vmApi = {
         return 'http://localhost:5000/api'
     },
 
-    // TEACHERS ROUTES
-
-    listTeachers: function (token, query) {
-        return axios.get(`${this._url()}/teachers/${query}`, {
+    _tokenBearer(token) {
+        return {
             headers: {
                 authorization: token
             }
-        })
+        }
+    },
+
+    // TEACHERS ROUTES
+
+    listTeachers: function (token, query) {
+        return axios.get(`${this._url()}/teachers/${query}`, this._tokenBearer(token))
     },
 
     createTeacher: function (name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses) {
@@ -98,8 +102,8 @@ const vmApi = {
     },
 
     //AUTH ROUTE
-    authenticateUser() {
-        return axios.get(`${this._url()}/authenticate`)
+    authenticateUser(email, password) {
+        return axios.post(`${this._url()}/authenticate`, { email, password })
     }
     
 }

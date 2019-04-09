@@ -7,16 +7,19 @@ var vmApi = {
         // return 'https://www.vmbformacion.com/api'
         return 'http://localhost:5000/api';
     },
+    _tokenBearer: function _tokenBearer(token) {
+        return {
+            headers: {
+                authorization: token
+            }
+        };
+    },
 
 
     // TEACHERS ROUTES
 
     listTeachers: function listTeachers(token, query) {
-        return axios.get(this._url() + '/teachers/' + query, {
-            headers: {
-                authorization: token
-            }
-        });
+        return axios.get(this._url() + '/teachers/' + query, this._tokenBearer(token));
     },
 
     createTeacher: function createTeacher(name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses) {
@@ -100,8 +103,8 @@ var vmApi = {
     },
 
     //AUTH ROUTE
-    authenticateUser: function authenticateUser() {
-        return axios.get(this._url() + '/authenticate');
+    authenticateUser: function authenticateUser(email, password) {
+        return axios.post(this._url() + '/authenticate', { email: email, password: password });
     }
 };
 

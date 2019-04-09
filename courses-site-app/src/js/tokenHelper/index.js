@@ -3,8 +3,8 @@ import Api from '../../api/vmApi';
 const tokenHelper={
 	__userApiToken__: null,
 
-	authenticateUser() {
-		return Api.authenticateUser()
+	authenticateUser(email, password) {
+		return Api.authenticateUser(email, password)
 			.then((userToken) => this.__userApiToken__ = userToken.data.data);
 	},
 
