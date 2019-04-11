@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom"
 import Api from '../../../api/vmApi'
 import './index.scss'
 import { formatDate, formatText } from "../utils/utils"
+import tokenHelper from '../../tokenHelper'
 
 class CourseView extends Component {
   constructor() {
@@ -33,7 +34,7 @@ componentDidMount = () => {
       
       const course = this.props.match.params.course
 
-      Api.retrieveCourse(course).then(_course => {
+      tokenHelper.retrieveCourse(course).then(_course => {
         if (_course.data.status === 'OK') {
           const courseToShow = _course.data.data[0]
           const descriptionFormated = courseToShow.description.split('\n').map((item, key) => {
@@ -63,7 +64,7 @@ componentDidMount = () => {
           })
         }
       }).then(() => {
-        Api.retrieveTeacher(this.state.teacher).then(_teacher => {
+        tokenHelper.retrieveTeacher(this.state.teacher).then(_teacher => {
           if(_teacher.data.data.status = 'OK') {
             this.setState({teacherData: _teacher.data.data})
           } else {

@@ -21,20 +21,20 @@ const vmApi = {
         return axios.get(`${this._url()}/teachers/${query}`, this._tokenBearer(token))
     },
 
-    createTeacher: function (name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses) {
-        return axios.post(`${this._url()}/create-teacher`, { name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses})
+    createTeacher: function (token, name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses) {
+        return axios.post(`${this._url()}/create-teacher`, { name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses}, this._tokenBearer(token))
     },
 
-    editTeacher: function (name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses) {
-        return axios.put(`${this._url()}/edit-teacher/${documentId}`, { name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses})
+    editTeacher: function (token, name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses) {
+        return axios.put(`${this._url()}/edit-teacher/${documentId}`, { name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses}, this._tokenBearer(token))
     },
 
-    retrieveTeacher: function(documentId) {
-        return axios.get(`${this._url()}/teacher/${documentId}`)
+    retrieveTeacher: function(token, documentId) {
+        return axios.get(`${this._url()}/teacher/${documentId}`, this._tokenBearer(token))
     },
 
-    deleteTeacher: function(documentId) {
-        return axios.delete(`${this._url()}/teacher/${documentId}`)
+    deleteTeacher: function(token, documentId) {
+        return axios.delete(`${this._url()}/teacher/${documentId}`, this._tokenBearer(token))
     },
 
     // STUDENTS ROUTES

@@ -265,7 +265,7 @@ class ManageCourses extends Component {
 
   findTeacherName = () => {
     if (this.state.teacher.length) {
-      Api.retrieveTeacher(this.state.teacher).then(_teacher => {
+      tokenHelper.retrieveTeacher(this.state.teacher).then(_teacher => {
         if ((_teacher.data.data.status = "OK")) {
           const teacherName = `${_teacher.data.data.name} ${_teacher.data.data.surname}`;
           this.setState({ teacherToFind: teacherName });

@@ -7,6 +7,7 @@ import swal from 'sweetalert2'
 import EditButton from '../../Buttons/editButton'
 import DeleteButton from '../../Buttons/deleteButton'
 import './Teachers.scss'
+import Modals from '../../utils/modals'
 import tokenHelper from '../../../tokenHelper'
 
 class Teachers extends Component {
@@ -56,17 +57,9 @@ class Teachers extends Component {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-          Api.deleteTeacher(documentId)
+          tokenHelper.deleteTeacher(documentId)
               .then(() => {
-                  swal({
-                      title: '¡Profesor eliminado!',
-                      type: 'success',
-                      showConfirmButton: false,
-                      timer: 1500,
-                      onOpen: () => {
-                          swal.showLoading()
-                      }
-                  })
+                  Modals.TeacherOK('eliminado')
                   .then(() => {
                     this.listTeachers()
                   })

@@ -22,20 +22,20 @@ var vmApi = {
         return axios.get(this._url() + '/teachers/' + query, this._tokenBearer(token));
     },
 
-    createTeacher: function createTeacher(name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses) {
-        return axios.post(this._url() + '/create-teacher', { name: name, surname: surname, documentId: documentId, occupation: occupation, titles: titles, email: email, twitter: twitter, linkedin: linkedin, phoneNumber: phoneNumber, courses: courses });
+    createTeacher: function createTeacher(token, name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses) {
+        return axios.post(this._url() + '/create-teacher', { name: name, surname: surname, documentId: documentId, occupation: occupation, titles: titles, email: email, twitter: twitter, linkedin: linkedin, phoneNumber: phoneNumber, courses: courses }, this._tokenBearer(token));
     },
 
-    editTeacher: function editTeacher(name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses) {
-        return axios.put(this._url() + '/edit-teacher/' + documentId, { name: name, surname: surname, documentId: documentId, occupation: occupation, titles: titles, email: email, twitter: twitter, linkedin: linkedin, phoneNumber: phoneNumber, courses: courses });
+    editTeacher: function editTeacher(token, name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses) {
+        return axios.put(this._url() + '/edit-teacher/' + documentId, { name: name, surname: surname, documentId: documentId, occupation: occupation, titles: titles, email: email, twitter: twitter, linkedin: linkedin, phoneNumber: phoneNumber, courses: courses }, this._tokenBearer(token));
     },
 
-    retrieveTeacher: function retrieveTeacher(documentId) {
-        return axios.get(this._url() + '/teacher/' + documentId);
+    retrieveTeacher: function retrieveTeacher(token, documentId) {
+        return axios.get(this._url() + '/teacher/' + documentId, this._tokenBearer(token));
     },
 
-    deleteTeacher: function deleteTeacher(documentId) {
-        return axios.delete(this._url() + '/teacher/' + documentId);
+    deleteTeacher: function deleteTeacher(token, documentId) {
+        return axios.delete(this._url() + '/teacher/' + documentId, this._tokenBearer(token));
     },
 
     // STUDENTS ROUTES

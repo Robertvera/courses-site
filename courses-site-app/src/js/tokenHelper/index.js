@@ -14,6 +14,22 @@ const tokenHelper={
 	
 	listTeachers(query) {
 		return Api.listTeachers(this.__userApiToken__, query)
+	},
+
+	createTeacher(name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber) {
+		return Api.createTeacher(this.__userApiToken__, name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber)
+	},
+
+	editTeacher(name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses) {
+		return Api.editTeacher(this.__userApiToken__, name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses)
+	},
+
+	retrieveTeacher(documentId) {
+		return Api.retrieveTeacher(this.__userApiToken__, documentId)
+	},
+
+	deleteTeacher(documentId) {
+		return Api.deleteTeacher(this.__userApiToken__, documentId)
 	}
 }
 

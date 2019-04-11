@@ -75,6 +75,25 @@ const Modals = {
             showConfirmButton: false,
             timer: 2500
         })
+    },
+    TeacherOK: function (action) {
+        return swal({
+            title: `Profesor ${action}!`,
+            type: 'success',
+            showConfirmButton: false,
+            timer: 2000,
+            onOpen: () => {
+                swal.showLoading()
+            }
+          })
+    },
+    TeacherKO: function (action) {
+        return swal({
+            type: 'error',
+            title: `Error ${action} el profesor`,
+            showConfirmButton: true,
+            timer: 2000
+          })
     }
 
 }
