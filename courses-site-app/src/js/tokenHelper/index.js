@@ -9,7 +9,7 @@ const tokenHelper={
 	},
 
 	logOutUser() {
-        this.__userApiToken__ = null
+		this.__userApiToken__ = null
 	},
 	
 	listTeachers(query) {
@@ -24,13 +24,34 @@ const tokenHelper={
 		return Api.editTeacher(this.__userApiToken__, name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses)
 	},
 
-	retrieveTeacher(documentId) {
-		return Api.retrieveTeacher(this.__userApiToken__, documentId)
-	},
-
 	deleteTeacher(documentId) {
 		return Api.deleteTeacher(this.__userApiToken__, documentId)
+	},
+
+	listStudents(query) {
+		return Api.listStudents(this.__userApiToken__, query)
+	},
+
+	deleteStudent(documentId) {
+		return Api.deleteStudents(this.__userApiToken__, documentId)
+	},
+	
+	retrieveStudent(documentId) {
+		return Api.retrieveStudent(this.__userApiToken__, documentId)
+	},
+
+	editStudent(name, surname, documentId, address, cp, city, email, phoneNumber, courses) {
+		return Api.editStudent(this.__userApiToken__, name, surname, documentId, address, cp, city, email, phoneNumber, courses)
+	},
+
+	createCourse(name, description, excerpt, price, image, pdf, capacity, location, date, teacher, students) {
+		return Api.createCourse(this.__userApiToken__, name, description, excerpt, price, image, pdf, capacity, location, date, teacher, students)
+	},
+
+	deleteCourse(name) {
+		return Api.deleteCourse(this.__userApiToken__, name)
 	}
+	
 }
 
 

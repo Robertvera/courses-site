@@ -7,6 +7,7 @@ import swal from 'sweetalert2'
 import EditButton from '../../Buttons/editButton'
 import DeleteButton from '../../Buttons/deleteButton'
 import './Students.scss'
+import tokenHelper from '../../../tokenHelper'
 
 class Students extends Component {
   constructor() {
@@ -19,7 +20,7 @@ class Students extends Component {
 
   componentDidMount = () => {
     this.checkForLogin();
-    Api.listStudents('')
+    tokenHelper.listStudents('')
     .then(students=> {
       this.setState({
         students: students.data.data
@@ -51,7 +52,7 @@ class Students extends Component {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-          Api.deleteStudent(documentId)
+          tokenHelper.deleteStudent(documentId)
               .then(() => {
                   swal({
                       title: '¡Estudiante eliminado!',
@@ -63,7 +64,7 @@ class Students extends Component {
                       }
                   })
                   .then(() => {
-                    Api.listStudents('')
+                    tokenHelper.listStudents('')
                     .then(students => {
                       this.setState({
                         students: students.data.data
@@ -80,7 +81,7 @@ class Students extends Component {
   }
 
   listStudentsByQuery = (e) => {
-		Api.listStudents(e.target.value.trim()).then(students=> {
+		tokenHelper.listStudents(e.target.value.trim()).then(students=> {
       this.setState({
         students: students.data.data
       })

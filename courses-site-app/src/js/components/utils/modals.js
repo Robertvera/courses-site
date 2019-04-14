@@ -76,9 +76,9 @@ const Modals = {
             timer: 2500
         })
     },
-    TeacherOK: function (action) {
+    OK: function (type, action) {
         return swal({
-            title: `Profesor ${action}!`,
+            title: `${type} ${action}!`,
             type: 'success',
             showConfirmButton: false,
             timer: 2000,
@@ -87,13 +87,26 @@ const Modals = {
             }
           })
     },
-    TeacherKO: function (action) {
+    KO: function (type, action) {
         return swal({
             type: 'error',
-            title: `Error ${action} el profesor`,
+            title: `Error ${action} el ${type}`,
             showConfirmButton: true,
             timer: 2000
           })
+    },
+    AreYouSure: function (course) {
+        return swal({
+			title: `¿Estás seguro de que quieres eliminar ${ course }?`,
+			text: 'Una vez eliminado, no podrás recuperarlo',
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Sí, lo quiero eliminar',
+			cancelButtonText: 'Cancelar',
+			buttonsStyling: false
+		})
     }
 
 }

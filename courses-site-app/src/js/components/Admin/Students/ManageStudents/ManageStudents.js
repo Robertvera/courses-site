@@ -3,8 +3,8 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth'
 import 'firebase/firestore'
 import { withRouter } from "react-router-dom"
-import Api from "../../../../../api/vmApi"
 import swal from 'sweetalert2'
+import tokenHelper from "../../../../tokenHelper";
 
 class ManageStudents extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class ManageStudents extends Component {
 
   componentDidMount = () => {
     this.checkForLogin()
-    Api.retrieveStudent(this.props.match.params.student)
+    tokenHelper.retrieveStudent(this.props.match.params.student)
     .then(student => {
       const {name, surname, documentId, address, cp, city, email, phoneNumber, courses} = student.data.data
       this.setState({
@@ -62,7 +62,7 @@ class ManageStudents extends Component {
     e.preventDefault()
     const { name, surname, documentId, address, cp, city, email, phoneNumber, courses }  = this.state
 
-    Api.editStudent(name, surname, documentId, address, cp, city, email, phoneNumber, courses)
+    tokenHelper.editStudent(name, surname, documentId, address, cp, city, email, phoneNumber, courses)
     .then(student => {
       student.data.status === 'OK' ?
         swal({

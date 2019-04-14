@@ -3,8 +3,6 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth'
 import 'firebase/firestore'
 import { withRouter } from "react-router-dom"
-import Api from "../../../../../api/vmApi"
-import swal from 'sweetalert2'
 import Modals from '../../../../components/utils/modals'
 import tokenHelper from '../../../../tokenHelper'
 
@@ -69,10 +67,10 @@ class ManageTeachers extends Component {
     tokenHelper.editTeacher(name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses)
     .then(teacher => {
       teacher.data.status === 'OK' ?
-      Modals.TeacherOK('modificado')
+      Modals.OK('Profesor', 'modificado')
         .then(this.props.history.push(`/admin/teachers/`))
         :
-        Modals.TeacherKO('modificando')
+        Modals.KO('profesor', 'modificando')
     }
     )
   }
@@ -84,10 +82,10 @@ class ManageTeachers extends Component {
     tokenHelper.createTeacher(name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber)
     .then(teacher => {
       teacher.data.status === 'OK' ?
-      Modals.TeacherOK('creado')
+      Modals.OK('Profesor', 'creado')
       .then(this.props.history.push(`/admin/teachers/`))
       :
-      Modals.TeacherKO('creando')
+      Modals.KO('profesor', 'creando')
     })
 
   }

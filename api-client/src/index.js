@@ -29,8 +29,8 @@ const vmApi = {
         return axios.put(`${this._url()}/edit-teacher/${documentId}`, { name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses}, this._tokenBearer(token))
     },
 
-    retrieveTeacher: function(token, documentId) {
-        return axios.get(`${this._url()}/teacher/${documentId}`, this._tokenBearer(token))
+    retrieveTeacher: function(documentId) {
+        return axios.get(`${this._url()}/teacher/${documentId}`)
     },
 
     deleteTeacher: function(token, documentId) {
@@ -39,20 +39,20 @@ const vmApi = {
 
     // STUDENTS ROUTES
 
-    listStudents: function (query) {
-        return axios.get(`${this._url()}/students/${query}`)
+    listStudents: function (token, query) {
+        return axios.get(`${this._url()}/students/${query}`, this._tokenBearer(token))
     },
 
     createStudent: function (name, surname, documentId, address, cp, city, email, phoneNumber, courses) {
         return axios.post(`${this._url()}/create-student`, { name, surname, documentId, address, cp, city, email, phoneNumber, courses})
     },
 
-    editStudent: function (name, surname, documentId, address, cp, city, email, phoneNumber, courses) {
-        return axios.put(`${this._url()}/edit-student/${documentId}`, { name, surname, documentId, address, cp, city, email, phoneNumber, courses})
+    editStudent: function (token, name, surname, documentId, address, cp, city, email, phoneNumber, courses) {
+        return axios.put(`${this._url()}/edit-student/${documentId}`, { name, surname, documentId, address, cp, city, email, phoneNumber, courses}, this._tokenBearer(token))
     },
 
-    retrieveStudent: function(documentId) {
-        return axios.get(`${this._url()}/student/${documentId}`)
+    retrieveStudent: function(token, documentId) {
+        return axios.get(`${this._url()}/student/${documentId}`, this._tokenBearer(token))
     },
 
     deleteStudent: function(documentId) {
@@ -65,8 +65,8 @@ const vmApi = {
         return axios.get(`${this._url()}/courses/${skip}`)
     },
 
-    createCourse: function(name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students) {
-        return axios.post(`${this._url()}/create-course`, { name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students })
+    createCourse: function(token, name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students) {
+        return axios.post(`${this._url()}/create-course`, { name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students }, this._tokenBearer(token))
     },
 
     editCourse: function(name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students) {
@@ -85,8 +85,8 @@ const vmApi = {
         return axios.get(`${this._url()}/courses/query/${query}`)
     },
 
-    deleteCourse: function(name) {
-        return axios.delete(`${this._url()}/course/${name}`)
+    deleteCourse: function(token, name) {
+        return axios.delete(`${this._url()}/course/${name}`, this._tokenBearer(token))
     },
 
     //PAYMENT ROUTES

@@ -212,7 +212,7 @@ class ManageCourses extends Component {
     e.preventDefault();
     const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher } = this.state;
 
-    Api.createCourse(
+    tokenHelper.createCourse(
       name.trim().toLowerCase(),
       description,
       excerpt,

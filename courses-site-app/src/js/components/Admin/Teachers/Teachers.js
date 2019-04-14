@@ -59,7 +59,7 @@ class Teachers extends Component {
       if (result.value) {
           tokenHelper.deleteTeacher(documentId)
               .then(() => {
-                  Modals.TeacherOK('eliminado')
+                  Modals.OK('Profesor', 'eliminado')
                   .then(() => {
                     this.listTeachers()
                   })

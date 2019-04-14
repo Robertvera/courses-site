@@ -7,9 +7,10 @@ import { withRouter } from 'react-router-dom';
 import * as firebase from 'firebase/app';
 import 'firebase/auth'
 import './Courses.scss'
-import swal from 'sweetalert2';
 import Api from '../../../../api/vmApi';
 import ShowMoreButton from '../../Buttons/ShowMoreButton';
+import Modals from '../../utils/modals'
+import tokenHelper from '../../../tokenHelper';
 
 class Courses extends Component {
 	constructor() {
@@ -94,28 +95,12 @@ class Courses extends Component {
 
 	deleteCourse = (e, course) => {
 		e.preventDefault();
-		swal({
-			title: `¿Estás seguro de que quieres eliminar ${ course }?`,
-			text: 'Una vez eliminado, no podrás recuperarlo',
-			type: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#3085d6',withRouter,
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Sí, lo quiero eliminar',
-			cancelButtonText: 'Cancelar',
-			buttonsStyling: false
-		}).then((result) => {
+		Modals.AreYouSure(course)
+		.then((result) => {
 			if (result.value) {
-				Api.deleteCourse(course).then(() => {
-					swal({
-						title: '¡Curso eliminado!',
-						type: 'success',
-						showConfirmButton: false,
-						timer: 1500,
-						onOpen: () => {
-							swal.showLoading();
-						}
-					}).then(this.getCourses('remove'));
+				tokenHelper.deleteCourse(course).then(() => {
+					Modals.OK('Curso', 'eliminado')
+					.then(this.getCourses('remove'));
 				});
 			}
 		});
