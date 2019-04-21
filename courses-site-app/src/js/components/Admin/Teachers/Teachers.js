@@ -7,6 +7,8 @@ import swal from 'sweetalert2'
 import EditButton from '../../Buttons/editButton'
 import DeleteButton from '../../Buttons/deleteButton'
 import './Teachers.scss'
+import Modals from '../../utils/modals'
+import tokenHelper from '../../../tokenHelper'
 
 class Teachers extends Component {
   constructor() {
@@ -35,7 +37,7 @@ class Teachers extends Component {
 	}
 
 	listTeachers = () => {
-		Api.listTeachers('')
+		tokenHelper.listTeachers('')
 			.then(teachers => {
 				this.setState({
 					teachers: teachers.data.data
@@ -55,17 +57,9 @@ class Teachers extends Component {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.value) {
-          Api.deleteTeacher(documentId)
+          tokenHelper.deleteTeacher(documentId)
               .then(() => {
-                  swal({
-                      title: '¡Profesor eliminado!',
-                      type: 'success',
-                      showConfirmButton: false,
-                      timer: 1500,
-                      onOpen: () => {
-                          swal.showLoading()
-                      }
-                  })
+                  Modals.OK('Profesor', 'eliminado')
                   .then(() => {
                     this.listTeachers()
                   })
@@ -79,7 +73,7 @@ class Teachers extends Component {
   }
 
   listTeachersByQuery = (e) => {
-		Api.listTeachers(e.target.value.trim()).then(students=> {
+		tokenHelper.listTeachers(e.target.value.trim()).then(students=> {
       this.setState({
         teachers: students.data.data
       })
