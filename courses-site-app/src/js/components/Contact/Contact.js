@@ -27,7 +27,7 @@ class Contact extends Component {
       e.preventDefault();
       const { name, email, message, phone } = this.state
       if (name && email) {
-          Api.emailToStudent('vmbformacion@gmail.com', contactUs(name, email, message, phone))
+          Api.contactUs('vmbformacion@gmail.com', contactUs(name, email, message, phone))
           .then ((data)=> {
               MessageSent()
               .then(()=> {

@@ -33,7 +33,7 @@ const tokenHelper={
 	},
 
 	deleteStudent(documentId) {
-		return Api.deleteStudents(this.__userApiToken__, documentId)
+		return Api.deleteStudent(this.__userApiToken__, documentId)
 	},
 	
 	retrieveStudent(documentId) {
@@ -44,12 +44,20 @@ const tokenHelper={
 		return Api.editStudent(this.__userApiToken__, name, surname, documentId, address, cp, city, email, phoneNumber, courses)
 	},
 
+	createStudent(name, surname, documentId, address, cp, city, email, phoneNumber, courses) {
+		return Api.createStudent(this.__userApiToken__, name, surname, documentId, address, cp, city, email, phoneNumber, courses)
+	},
+
 	createCourse(name, description, excerpt, price, image, pdf, capacity, location, date, teacher, students) {
 		return Api.createCourse(this.__userApiToken__, name, description, excerpt, price, image, pdf, capacity, location, date, teacher, students)
 	},
 
 	deleteCourse(name) {
 		return Api.deleteCourse(this.__userApiToken__, name)
+	},
+	
+	editCourse(name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students) {
+		return Api.editCourse(this.__userApiToken__, name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students)
 	}
 	
 }

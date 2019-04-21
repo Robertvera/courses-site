@@ -44,8 +44,8 @@ var vmApi = {
         return axios.get(this._url() + '/students/' + query, this._tokenBearer(token));
     },
 
-    createStudent: function createStudent(name, surname, documentId, address, cp, city, email, phoneNumber, courses) {
-        return axios.post(this._url() + '/create-student', { name: name, surname: surname, documentId: documentId, address: address, cp: cp, city: city, email: email, phoneNumber: phoneNumber, courses: courses });
+    createStudent: function createStudent(token, name, surname, documentId, address, cp, city, email, phoneNumber, courses) {
+        return axios.post(this._url() + '/create-student', { name: name, surname: surname, documentId: documentId, address: address, cp: cp, city: city, email: email, phoneNumber: phoneNumber, courses: courses }, this._tokenBearer(token));
     },
 
     editStudent: function editStudent(token, name, surname, documentId, address, cp, city, email, phoneNumber, courses) {
@@ -56,8 +56,8 @@ var vmApi = {
         return axios.get(this._url() + '/student/' + documentId, this._tokenBearer(token));
     },
 
-    deleteStudent: function deleteStudent(documentId) {
-        return axios.delete(this._url() + '/student/' + documentId);
+    deleteStudent: function deleteStudent(token, documentId) {
+        return axios.delete(this._url() + '/student/' + documentId, this._tokenBearer(token));
     },
 
     // COURSES ROUTES
@@ -70,8 +70,8 @@ var vmApi = {
         return axios.post(this._url() + '/create-course', { name: name, description: description, excerpt: excerpt, price: price, image: image, pdf: pdf, capacity: capacity, location: location, date: date, teachers: teachers, students: students }, this._tokenBearer(token));
     },
 
-    editCourse: function editCourse(name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students) {
-        return axios.put(this._url() + '/course/' + name, { name: name, description: description, excerpt: excerpt, price: price, image: image, pdf: pdf, capacity: capacity, location: location, date: date, teachers: teachers, students: students });
+    editCourse: function editCourse(token, name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students) {
+        return axios.put(this._url() + '/course/' + name, { name: name, description: description, excerpt: excerpt, price: price, image: image, pdf: pdf, capacity: capacity, location: location, date: date, teachers: teachers, students: students }, this._tokenBearer(token));
     },
 
     retrieveCourse: function retrieveCourse(name) {
@@ -98,7 +98,7 @@ var vmApi = {
 
     //MAILING ROUTES
 
-    emailToStudent: function emailToStudent(to, content) {
+    contactUs: function contactUs(to, content) {
         return axios.post(this._url() + '/mailing', { to: to, content: content });
     },
 

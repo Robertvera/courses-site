@@ -4,7 +4,6 @@ import Modals from '../../utils/modals'
 import * as firebase from 'firebase/app';
 import 'firebase/auth'
 import { withRouter } from 'react-router-dom';
-import Api from "../../../../api/vmApi";
 import tokenHelper from '../../../tokenHelper';
 
 
@@ -57,7 +56,7 @@ class Login extends Component {
 	render() {
 		return (
 			<div className="wrapper">
-				<section className="module-cover parallax fullscreen text-center" data-background="assets/images/module-5.jpg" data-overlay="0.65" data-gradient>
+				<section className="module-cover parallax fullscreen text-center" data-overlay="0.65" data-gradient>
 					<div className="container">
 						<div className="row">
 							<div className="col-lg-4 col-md-6 m-auto">

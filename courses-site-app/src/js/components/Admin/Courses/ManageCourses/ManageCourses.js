@@ -178,7 +178,7 @@ class ManageCourses extends Component {
     e.preventDefault();
     const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher } = this.state;
 
-    Api.editCourse(
+    tokenHelper.editCourse(
       name.trim().toLowerCase(),
       description,
       excerpt,
@@ -265,7 +265,7 @@ class ManageCourses extends Component {
 
   findTeacherName = () => {
     if (this.state.teacher.length) {
-      tokenHelper.retrieveTeacher(this.state.teacher).then(_teacher => {
+      Api.retrieveTeacher(this.state.teacher).then(_teacher => {
         if ((_teacher.data.data.status = "OK")) {
           const teacherName = `${_teacher.data.data.name} ${_teacher.data.data.surname}`;
           this.setState({ teacherToFind: teacherName });
@@ -410,6 +410,7 @@ class ManageCourses extends Component {
                                     className="list-group-item bg-light text-secondary teachers-list"
                                     type="button"
                                     onClick={e => this.selectTeacherFromSuggested(e, { teacher })}
+                                    key={teacher.name}
                                   >
                                     {teacher.name} {teacher.surname}
                                   </button>

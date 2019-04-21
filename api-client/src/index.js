@@ -43,8 +43,8 @@ const vmApi = {
         return axios.get(`${this._url()}/students/${query}`, this._tokenBearer(token))
     },
 
-    createStudent: function (name, surname, documentId, address, cp, city, email, phoneNumber, courses) {
-        return axios.post(`${this._url()}/create-student`, { name, surname, documentId, address, cp, city, email, phoneNumber, courses})
+    createStudent: function (token, name, surname, documentId, address, cp, city, email, phoneNumber, courses) {
+        return axios.post(`${this._url()}/create-student`, { name, surname, documentId, address, cp, city, email, phoneNumber, courses}, this._tokenBearer(token))
     },
 
     editStudent: function (token, name, surname, documentId, address, cp, city, email, phoneNumber, courses) {
@@ -55,8 +55,8 @@ const vmApi = {
         return axios.get(`${this._url()}/student/${documentId}`, this._tokenBearer(token))
     },
 
-    deleteStudent: function(documentId) {
-        return axios.delete(`${this._url()}/student/${documentId}`)
+    deleteStudent: function(token, documentId) {
+        return axios.delete(`${this._url()}/student/${documentId}`, this._tokenBearer(token))
     },
 
     // COURSES ROUTES
@@ -69,8 +69,8 @@ const vmApi = {
         return axios.post(`${this._url()}/create-course`, { name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students }, this._tokenBearer(token))
     },
 
-    editCourse: function(name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students) {
-        return axios.put(`${this._url()}/course/${name}`, { name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students })
+    editCourse: function(token, name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students) {
+        return axios.put(`${this._url()}/course/${name}`, { name, description, excerpt, price, image, pdf, capacity, location, date, teachers, students }, this._tokenBearer(token))
     },
 
     retrieveCourse: function(name) {
@@ -97,7 +97,7 @@ const vmApi = {
 
     //MAILING ROUTES
 
-    emailToStudent: function(to, content) {
+    contactUs: function(to, content) {
         return axios.post(`${this._url()}/mailing`, { to, content })
     },
 
