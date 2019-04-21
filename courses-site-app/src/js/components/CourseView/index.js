@@ -6,7 +6,6 @@ import { withRouter } from "react-router-dom"
 import Api from '../../../api/vmApi'
 import './index.scss'
 import { formatDate, formatText } from "../utils/utils"
-import tokenHelper from '../../tokenHelper'
 
 class CourseView extends Component {
   constructor() {
@@ -36,7 +35,6 @@ componentDidMount = () => {
 
       Api.retrieveCourse(course).then(_course => {
         if (_course.data.status === 'OK') {
-          console.log(_course.data.data)
           const courseToShow = _course.data.data[0]
           const descriptionFormated = courseToShow.description.split('\n').map((item, key) => {
             return <p key={key}>{item}</p>
