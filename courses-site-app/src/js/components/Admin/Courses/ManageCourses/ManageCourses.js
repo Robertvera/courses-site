@@ -7,6 +7,7 @@ import '@firebase/storage'
 import { withRouter } from "react-router-dom";
 import Api from "../../../../../api/vmApi";
 import StudentsList from "../../Students/StudentsList"
+import tokenHelper from '../../../../tokenHelper'
 
 class ManageCourses extends Component {
   constructor(props) {
@@ -177,7 +178,7 @@ class ManageCourses extends Component {
     e.preventDefault();
     const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher } = this.state;
 
-    Api.editCourse(
+    tokenHelper.editCourse(
       name.trim().toLowerCase(),
       description,
       excerpt,
@@ -211,7 +212,7 @@ class ManageCourses extends Component {
     e.preventDefault();
     const { name, description, excerpt, price, image, pdf, capacity, location, date, teacher } = this.state;
 
-    Api.createCourse(
+    tokenHelper.createCourse(
       name.trim().toLowerCase(),
       description,
       excerpt,
@@ -248,7 +249,7 @@ class ManageCourses extends Component {
   handleTeachers = e => {
     this.setState({ teacherToFind: e.target.value.trim() });
     if (this.state.teacherToFind.length >= 2) {
-      Api.listTeachers(this.state.teacherToFind).then(_teachers => {
+      tokenHelper.listTeachers(this.state.teacherToFind).then(_teachers => {
         this.setState({ teachersList: _teachers.data.data });
       });
     }
@@ -409,6 +410,7 @@ class ManageCourses extends Component {
                                     className="list-group-item bg-light text-secondary teachers-list"
                                     type="button"
                                     onClick={e => this.selectTeacherFromSuggested(e, { teacher })}
+                                    key={teacher.name}
                                   >
                                     {teacher.name} {teacher.surname}
                                   </button>

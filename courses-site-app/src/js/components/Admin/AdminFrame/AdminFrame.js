@@ -4,6 +4,7 @@ import './AdminFrame.scss'
 import Login from '../Login/Login'
 import * as firebase from 'firebase/app';
 import 'firebase/auth'
+import tokenHelper from '../../../tokenHelper';
 
 class AdminFrame extends Component {
   constructor() {
@@ -31,6 +32,8 @@ class AdminFrame extends Component {
 
   logoutUser = (ev) => {
     ev.preventDefault()
+    tokenHelper.logOutUser()
+    sessionStorage.clear()
     firebase.auth().signOut()
     .then(() => {
       this.checkForLogin()

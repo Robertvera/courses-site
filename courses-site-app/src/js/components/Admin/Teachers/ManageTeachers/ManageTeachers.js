@@ -3,8 +3,8 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth'
 import 'firebase/firestore'
 import { withRouter } from "react-router-dom"
-import Api from "../../../../../api/vmApi"
-import swal from 'sweetalert2'
+import Modals from '../../../../components/utils/modals'
+import tokenHelper from '../../../../tokenHelper'
 
 class ManageTeachers extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class ManageTeachers extends Component {
   componentDidMount = () => {
     this.checkForLogin();
     if (this.props.match.params.teacher) {
-      Api.retrieveTeacher(this.props.match.params.teacher)
+      tokenHelper.retrieveTeacher(this.props.match.params.teacher)
       .then(teacher => {
         const {name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses} = teacher.data.data
         this.setState({
@@ -64,46 +64,28 @@ class ManageTeachers extends Component {
     e.preventDefault()
     const { name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses }  = this.state
 
-    Api.editTeacher(name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses)
+    tokenHelper.editTeacher(name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses)
     .then(teacher => {
       teacher.data.status === 'OK' ?
-        swal({
-          title: 'Profesor modificado!',
-          showConfirmButton: true,
-          timer: 1500
-        })
+      Modals.OK('Profesor', 'modificado')
         .then(this.props.history.push(`/admin/teachers/`))
         :
-        swal({
-          type: 'error',
-          title: 'Error modificando el profesor',
-          showConfirmButton: true,
-          timer: 2000
-        })
+        Modals.KO('profesor', 'modificando')
     }
-    )    
+    )
   }
 
   handleSubmit = e => {
     e.preventDefault()
     const { name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber, courses }  = this.state
 
-    Api.createTeacher(name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber)
+    tokenHelper.createTeacher(name, surname, documentId, occupation, titles, email, twitter, linkedin, phoneNumber)
     .then(teacher => {
       teacher.data.status === 'OK' ?
-      swal({
-        title: 'Profesor creado!',
-        showConfirmButton: true,
-        timer: 1500
-      })
+      Modals.OK('Profesor', 'creado')
       .then(this.props.history.push(`/admin/teachers/`))
       :
-      swal({
-        type: 'error',
-        title: 'Error creando el profesor',
-        showConfirmButton: true,
-        timer: 2000
-      })
+      Modals.KO('profesor', 'creando')
     })
 
   }

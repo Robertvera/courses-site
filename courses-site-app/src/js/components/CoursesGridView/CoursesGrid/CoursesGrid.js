@@ -23,7 +23,7 @@ class CoursesGrid extends Component {
   getCourses = () => {
     const { skipResults } = this.state 
     Api.listCourses(skipResults).then(courses => {
-      this.setState({ courses: [ ...this.state.courses, ...courses.data.data ] })
+			this.setState({ courses: [ ...this.state.courses, ...courses.data.data ] })
     })
   }
 
