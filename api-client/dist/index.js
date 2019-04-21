@@ -4,8 +4,7 @@ var axios = require('axios');
 
 var vmApi = {
     _url: function _url() {
-        // return 'https://www.vmbformacion.com/api'
-        return 'http://localhost:5000/api';
+        return 'https://www.vmbformacion.com/api';
     },
     _tokenBearer: function _tokenBearer(token) {
         return {
